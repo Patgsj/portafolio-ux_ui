@@ -1006,7 +1006,7 @@ function Footer() {
       {/* Big name */}
       <div className="max-w-[1400px] mx-auto px-7 md:px-14 py-10">
         <div
-          className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.02em] text-foreground select-none text-[clamp(4rem,14vw,13rem)]"
+          className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.02em] text-foreground select-none text-[clamp(3rem,10vw,9rem)]"
         >
           Patgsj<span className="text-muted-foreground">.</span>
         </div>
