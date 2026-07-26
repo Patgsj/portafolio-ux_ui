@@ -1033,7 +1033,7 @@ function Footer() {
           <div className="flex flex-col items-start gap-2.5">
             {[
               { label: "WhatsApp", href: "https://wa.me/56966640562" },
-              { label: "Email", href: "mailto:patgsj@email.com" },
+              { label: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=patricio.gsj@gmail.com" },
               { label: "LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
               { label: "GitHub", href: "https://github.com/Patgsj" },
               { label: "Dribbble", href: "https://dribbble.com/PatGsj" },
