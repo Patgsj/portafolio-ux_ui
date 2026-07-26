@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&amp;display=swap');
+      text { font-family: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif; }
+    </style>
+  </defs>
+  <rect width="32" height="32" fill="#ffffff"/>
+  <text x="16" y="24" text-anchor="middle" font-weight="900" font-size="25" letter-spacing="-0.5" fill="#0d0d0d">P.</text>
+</svg>

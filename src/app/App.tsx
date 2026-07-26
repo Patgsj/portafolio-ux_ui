@@ -978,7 +978,7 @@ function CTA() {
             <div className="flex gap-6 pt-1">
               {[
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
-                { label: "GitHub", href: "#" },
+                { label: "GitHub", href: "https://github.com/Patgsj" },
                 { label: "Dribbble", href: "https://dribbble.com/PatGsj" },
               ].map(({ label, href }) => (
                 <a
@@ -1009,6 +1009,46 @@ function Footer() {
           className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.02em] text-foreground select-none text-[clamp(4rem,14vw,13rem)]"
         >
           Patgsj<span className="text-muted-foreground">.</span>
+        </div>
+      </div>
+
+      {/* Navigation + contact */}
+      <div className="border-t border-border max-w-[1400px] mx-auto px-7 md:px-14 py-14 grid grid-cols-2 gap-10">
+        <div>
+          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">Navegación</p>
+          <div className="flex flex-col items-start gap-2.5">
+            {NAV_ITEMS.map(([label, id]) => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className="font-['Barlow'] font-300 text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-200"
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">Contacto</p>
+          <div className="flex flex-col items-start gap-2.5">
+            {[
+              { label: "WhatsApp", href: "https://wa.me/56966640562" },
+              { label: "Email", href: "mailto:patgsj@email.com" },
+              { label: "LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
+              { label: "GitHub", href: "https://github.com/Patgsj" },
+              { label: "Dribbble", href: "https://dribbble.com/PatGsj" },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="font-['Barlow'] font-300 text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-200"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
