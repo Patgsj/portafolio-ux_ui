@@ -816,18 +816,18 @@ function About() {
 
             <div className="space-y-5 max-w-md">
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-foreground">
-                Soy Patgsj (Patricio Soto). Ayudo a empresas y emprendimientos a transformar problemas de usabilidad e ideas de negocio en experiencias digitales intuitivas, atractivas y centradas en las personas.
+                Soy Patgsj (Patricio Soto). Diseño interfaces, no solo las dibujo: formación en UX/UI (AIEP) y más de 10 años en comunicación visual, hoy aplicados a resolver problemas reales de producto.
               </p>
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                Mi foco principal es el Diseño de Producto y la Experiencia de Usuario (UX/UI), respaldado por un Diplomado en la disciplina (AIEP) y más de 10 años en comunicación visual. A esta base de diseño le sumo un diferencial clave: estudios en Ingeniería en Informática y formación previa en topografía, lo que me aporta un pensamiento analítico, rigor metodológico y una alta precisión en cada entregable.
+                Estudio Ingeniería en Informática, lo que me da algo poco común en diseño: pensamiento lógico y estructurado. Ese orden también viene de la topografía, donde trabajé antes — ahí aprendí que un error de medición se paga caro, y ese mismo rigor lo aplico hoy a cada flujo, cada estado de un componente, cada detalle de una interfaz.
               </p>
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                Para llevar mis diseños más allá de Figma, utilizo herramientas como Claude Code y workflows modernos de desarrollo. Esto me permite traducir maquetas visuales en prototipos funcionales con gran agilidad, facilitando la validación temprana de usabilidad y asegurando que cada propuesta sea no solo estéticamente impecable, sino también viable y lista para construcción.
+                No me quedo en Figma: uso Figma Make y flujos de desarrollo asistido por IA (Claude Code) para llevar mis diseños a código real — React, Tailwind, TypeScript — y probarlos como productos funcionales, no como maquetas estáticas.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-2 pt-2">
-              {["Figma", "Adobe Creative Suite", "Comunicación Visual", "Investigación UX", "HTML / CSS", "React (en formación)", "Claude Code (AI-Assisted Dev)"].map((t) => (
+              {["Figma", "Figma Make", "React", "Tailwind CSS", "TypeScript", "Comunicación Visual", "Claude Code (AI-Assisted Dev)"].map((t) => (
                 <span
                   key={t}
                   className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-all duration-200"
