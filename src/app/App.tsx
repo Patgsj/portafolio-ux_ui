@@ -112,9 +112,16 @@ function Nav() {
             <button
               key={id}
               onClick={() => { scrollTo(id); setOpen(false); }}
-              className="block font-['Barlow_Condensed'] font-800 text-4xl uppercase text-foreground w-full text-left"
+              className={`flex items-center gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-left transition-colors duration-200 ${
+                active === id ? "text-foreground" : "text-muted-foreground"
+              }`}
             >
               {label}
+              <span
+                className={`inline-block w-2 h-2 bg-foreground transition-[opacity,transform] duration-300 ease-out ${
+                  active === id ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                }`}
+              />
             </button>
           ))}
           <button
