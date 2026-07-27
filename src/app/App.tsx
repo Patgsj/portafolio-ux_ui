@@ -179,9 +179,21 @@ function Hero() {
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
           }`}
         >
-          <div className="flex flex-col items-center text-center gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
+            {/* Big type */}
+            <div>
+              <h1
+                className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4.5rem,20vw,18rem)] whitespace-nowrap"
+              >
+                Patgsj<span className="text-muted-foreground">.</span>
+              </h1>
+              <p className="font-['Barlow'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5">
+                Diseñador Gráfico &amp; UX/UI
+              </p>
+            </div>
+
             {/* Descriptor */}
-            <div className="space-y-6 max-w-[420px]">
+            <div className="space-y-7 md:pb-4 max-w-xs">
               <div className="space-y-4">
                 <p className="font-['Barlow'] font-300 text-sm leading-[1.8] text-muted-foreground">
                   Diseño interfaces funcionales y las llevo a código real.
@@ -197,18 +209,6 @@ function Hero() {
                 <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
                 Ver trabajo
               </button>
-            </div>
-
-            {/* Big type */}
-            <div>
-              <h1
-                className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4.5rem,20vw,18rem)] whitespace-nowrap"
-              >
-                Patgsj<span className="text-muted-foreground">.</span>
-              </h1>
-              <p className="font-['Barlow'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5">
-                Diseñador Gráfico &amp; UX/UI
-              </p>
             </div>
           </div>
         </div>
