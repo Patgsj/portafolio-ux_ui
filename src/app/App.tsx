@@ -1047,29 +1047,29 @@ function Footer() {
   return (
     <footer
       ref={ref}
-      className={`border-t border-border transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+      className={`border-t border-border bg-foreground text-background transition-[opacity,transform] duration-[800ms] ease-[ease] ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
       }`}
     >
       {/* Big name */}
       <div className="max-w-[1400px] mx-auto px-7 md:px-14 py-10">
         <div
-          className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.02em] text-foreground select-none text-[clamp(3rem,10vw,9rem)]"
+          className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.02em] text-background select-none text-[clamp(3rem,10vw,9rem)]"
         >
-          Patgsj<span className="text-muted-foreground">.</span>
+          Patgsj<span className="text-background/40">.</span>
         </div>
       </div>
 
       {/* Navigation + contact */}
-      <div className="border-t border-border max-w-[1400px] mx-auto px-7 md:px-14 py-14 grid grid-cols-2 gap-10">
+      <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-14 grid grid-cols-2 gap-10">
         <div>
-          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">Navegación</p>
+          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/40 mb-4">Navegación</p>
           <div className="flex flex-col items-start gap-2.5">
             {NAV_ITEMS.map(([label, id]) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="font-['Barlow'] font-300 text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200"
               >
                 {label}
               </button>
@@ -1077,7 +1077,7 @@ function Footer() {
           </div>
         </div>
         <div>
-          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">Contacto</p>
+          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/40 mb-4">Contacto</p>
           <div className="flex flex-col items-start gap-2.5">
             {[
               { label: "WhatsApp", href: "https://wa.me/56966640562" },
@@ -1091,7 +1091,7 @@ function Footer() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="font-['Barlow'] font-300 text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200"
               >
                 {label}
               </a>
@@ -1101,16 +1101,16 @@ function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border max-w-[1400px] mx-auto px-7 md:px-14 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+      <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/40">
           © 2026 Patgsj.
         </p>
-        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/40">
           San Carlos, Ñuble, Chile
         </p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition-colors"
+          className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/40 hover:text-background transition-colors"
         >
           ↑ Inicio
         </button>
