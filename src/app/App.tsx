@@ -268,32 +268,32 @@ function PillarCell({ n, title, desc, why }: { n: string; title: string; desc: s
 
 const CASE_SHOTS = [
   {
-    img: "/case-ferreteria/dashboard.png",
+    img: "/case-ferreteria/dashboard.webp",
     title: "Dashboard de negocio",
     desc: "Ventas y utilidad del día, valor total de inventario, alertas de stock, tendencia de 7 días y emisión de documentos (boletas vs. facturas).",
   },
   {
-    img: "/case-ferreteria/pos.png",
+    img: "/case-ferreteria/pos.webp",
     title: "Punto de venta (POS)",
     desc: "Flujo de caja optimizado para velocidad: escaneo de código de barras, atajo cantidad*código, boleta o factura y método de pago en la misma pantalla.",
   },
   {
-    img: "/case-ferreteria/catalogo.png",
+    img: "/case-ferreteria/catalogo.webp",
     title: "Catálogo público",
     desc: "Vitrina de productos con búsqueda por nombre, código de barras o código corto, y carrito de compra — accesible sin login.",
   },
   {
-    img: "/case-ferreteria/inventario.png",
+    img: "/case-ferreteria/inventario.webp",
     title: "Gestión de inventario",
     desc: "Búsqueda instantánea, edición en línea, control de stock crítico y categorías de producto — sincronizado en tiempo real entre dispositivos.",
   },
   {
-    img: "/case-ferreteria/historial.png",
+    img: "/case-ferreteria/historial.webp",
     title: "Historial de ventas",
     desc: "Registro completo desde Supabase con búsqueda por folio, método de pago u origen, y exportación de reporte mensual para el contador.",
   },
   {
-    img: "/case-ferreteria/login.png",
+    img: "/case-ferreteria/login.webp",
     title: "Acceso restringido",
     desc: "El panel de administración vive detrás de autenticación Supabase; el catálogo permanece público.",
   },
