@@ -456,10 +456,16 @@ function Work() {
   const navLightbox = useCallback((dir: 1 | -1) => {
     setLightboxIndex((cur) => (cur === null ? cur : (cur + dir + CASE_SHOTS.length) % CASE_SHOTS.length));
   }, []);
+  const { ref, visible } = useInView(0.1);
 
   return (
     <section id="work" className="border-t border-border py-20 md:py-32">
-      <div className="max-w-[1400px] mx-auto px-7 md:px-14">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
+        }`}
+      >
         {/* Case intro */}
         <div className="mb-10 max-w-2xl">
           <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
@@ -716,10 +722,16 @@ function Design() {
   const navLightbox = useCallback((dir: 1 | -1) => {
     setLightboxIndex((cur) => (cur === null ? cur : (cur + dir + DRIBBBLE_SHOTS.length) % DRIBBBLE_SHOTS.length));
   }, []);
+  const { ref, visible } = useInView(0.1);
 
   return (
     <section id="design" className="border-t border-border py-20 md:py-32">
-      <div className="max-w-[1400px] mx-auto px-7 md:px-14">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
+        }`}
+      >
         <div className="flex items-baseline justify-between mb-8">
           <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
             Diseño UI
@@ -919,9 +931,16 @@ const EXP_DATA = [
 ];
 
 function Experience() {
+  const { ref, visible } = useInView(0.1);
+
   return (
     <section id="experience" className="border-t border-border bg-foreground text-background py-20 md:py-32">
-      <div className="max-w-[1400px] mx-auto px-7 md:px-14">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
+        }`}
+      >
         {/* Header */}
         <div className="flex items-baseline justify-between mb-16">
           <h2
@@ -956,9 +975,16 @@ function Experience() {
 
 // ─── CTA ──────────────────────────────────────────────────────────────────────
 function CTA() {
+  const { ref, visible } = useInView(0.1);
+
   return (
     <section id="contact" className="border-t border-border py-24 md:py-36">
-      <div className="max-w-[1400px] mx-auto px-7 md:px-14">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
+        }`}
+      >
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
           <div>
             <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">Disponible para proyectos</p>
@@ -1008,8 +1034,15 @@ function CTA() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
+  const { ref, visible } = useInView(0.1);
+
   return (
-    <footer className="border-t border-border">
+    <footer
+      ref={ref}
+      className={`border-t border-border transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
+      }`}
+    >
       {/* Big name */}
       <div className="max-w-[1400px] mx-auto px-7 md:px-14 py-10">
         <div
