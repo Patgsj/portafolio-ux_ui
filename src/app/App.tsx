@@ -24,7 +24,7 @@ function useInView(threshold = 0.1) {
 }
 
 // ─── Nav ─────────────────────────────────────────────────────────────────────
-const NAV_ITEMS: [string, string][] = [["Trabajo", "work"], ["Diseño", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
+const NAV_ITEMS: [string, string][] = [["Trabajo", "work"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
 
 function Nav() {
   const [pinned, setPinned] = useState(false);
@@ -84,8 +84,8 @@ function Nav() {
             >
               {label}
               <span
-                className={`inline-block w-[5px] h-[5px] bg-foreground ml-1.5 align-middle transition-[opacity,transform] duration-300 ease-out ${
-                  active === id ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                className={`inline-block w-[5px] h-[5px] bg-foreground ml-1.5 align-middle transition-opacity duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                  active === id ? "opacity-100" : "opacity-0"
                 }`}
               />
             </button>
@@ -107,32 +107,48 @@ function Nav() {
         </button>
       </div>
 
-      {open && (
-        <div className="md:hidden bg-background px-7 pb-10 pt-6 space-y-5 border-t border-border">
-          {NAV_ITEMS.map(([label, id]) => (
-            <button
-              key={id}
-              onClick={() => { scrollTo(id); setOpen(false); }}
-              className={`flex items-center gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-left transition-colors duration-200 ${
-                active === id ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              {label}
-              <span
-                className={`inline-block w-2 h-2 bg-foreground transition-[opacity,transform] duration-300 ease-out ${
-                  active === id ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                }`}
-              />
-            </button>
-          ))}
-          <button
-            onClick={() => { scrollTo("contact"); setOpen(false); }}
-            className="inline-block mt-4 font-['Barlow'] text-xs uppercase tracking-widest bg-foreground text-background px-5 py-3"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            className="md:hidden overflow-hidden bg-background border-t border-border"
           >
-            Contactame
-          </button>
-        </div>
-      )}
+            <div className="px-7 pb-10 pt-6 space-y-5 flex flex-col items-end">
+              {NAV_ITEMS.map(([label, id], i) => (
+                <motion.button
+                  key={id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.05 + i * 0.04, ease: "easeOut" }}
+                  onClick={() => { setOpen(false); setTimeout(() => scrollTo(id), 0); }}
+                  className={`flex items-center justify-end gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-right transition-colors duration-200 ${
+                    active === id ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  {label}
+                  <span
+                    className={`inline-block w-2 h-2 bg-foreground transition-opacity duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                      active === id ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                </motion.button>
+              ))}
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.05 + NAV_ITEMS.length * 0.04, ease: "easeOut" }}
+                onClick={() => { setOpen(false); setTimeout(() => scrollTo("contact"), 0); }}
+                className="inline-block mt-4 font-['Barlow'] text-xs uppercase tracking-widest bg-foreground text-background px-5 py-3"
+              >
+                Contactame
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
