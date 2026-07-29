@@ -1032,9 +1032,9 @@ function CTA() {
               href="https://wa.me/56966640562"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 font-['Barlow'] font-600 text-[13px] uppercase tracking-[0.12em] bg-foreground text-background px-7 py-4 hover:opacity-75 transition-opacity duration-200"
+              className="group inline-flex items-center gap-2.5 font-['Barlow'] font-600 text-[13px] uppercase tracking-[0.12em] border border-foreground bg-foreground text-background px-7 py-4 hover:bg-transparent hover:text-foreground transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
             >
-              Escribime <ArrowUpRight size={14} />
+              Escribime <ArrowUpRight size={14} className="transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
             <div className="flex gap-6 pt-1">
               {[
