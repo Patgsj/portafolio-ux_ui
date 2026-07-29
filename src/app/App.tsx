@@ -499,9 +499,9 @@ function Work() {
           <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
             Caso de estudio 01 — Software a medida, en construcción
           </p>
-          <h3 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-4 text-[clamp(2.2rem,5vw,4rem)]">
+          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-4 text-[clamp(2.2rem,5vw,4rem)]">
             Ferretería CTM
-          </h3>
+          </h2>
           <p className="inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-5">
             <span className="w-1.5 h-1.5 bg-foreground inline-block animate-pulse" />
             En desarrollo activo — iteración constante junto al cliente
@@ -838,7 +838,7 @@ function About() {
           <div className="relative">
             <img
               src="/yo.webp"
-              alt="Patgsj — retrato"
+              alt="Patricio Soto (Patgsj), diseñador UX/UI — retrato"
               className="w-full object-cover aspect-[5/6] object-top"
             />
             {/* floating label */}
@@ -1144,12 +1144,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Nav />
-      <Hero />
-      <Work />
-      <Design />
-      <About />
-      <Experience />
-      <CTA />
+      <main>
+        <Hero />
+        <Work />
+        <Design />
+        <About />
+        <Experience />
+        <CTA />
+      </main>
       <Footer />
     </div>
   );
