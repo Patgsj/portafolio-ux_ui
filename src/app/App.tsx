@@ -32,8 +32,8 @@ function Nav() {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const sections = NAV_ITEMS
-      .map(([, id]) => document.getElementById(id))
+    const sections = [...NAV_ITEMS.map(([, id]) => id), "contact"]
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
 
     const NAV_EYE_LINE = 160; // px from top of viewport used to pick the "current" section
@@ -94,7 +94,9 @@ function Nav() {
 
         <button
           onClick={() => scrollTo("contact")}
-          className="hidden md:inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase bg-foreground text-background px-5 py-2.5 hover:opacity-80 transition-opacity duration-200"
+          className={`hidden md:inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+            active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
+          }`}
         >
           Contactame
         </button>
