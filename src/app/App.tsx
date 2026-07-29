@@ -73,33 +73,35 @@ function Nav() {
           Patgsj<span className="text-muted-foreground">.</span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-10">
-          {NAV_ITEMS.map(([label, id]) => (
-            <button
-              key={id}
-              onClick={() => scrollTo(id)}
-              className={`font-['Barlow'] font-400 text-[11px] tracking-[0.14em] uppercase hover:text-foreground transition-colors duration-200 ${
-                active === id ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              {label}
-              <span
-                className={`inline-block w-[5px] h-[5px] bg-foreground ml-1.5 align-middle transition-opacity duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
-                  active === id ? "opacity-100" : "opacity-0"
+        <div className="hidden md:flex items-center gap-10">
+          <nav className="flex items-center gap-10">
+            {NAV_ITEMS.map(([label, id]) => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className={`font-['Barlow'] font-400 text-[11px] tracking-[0.14em] uppercase hover:text-foreground transition-colors duration-200 ${
+                  active === id ? "text-foreground" : "text-muted-foreground"
                 }`}
-              />
-            </button>
-          ))}
-        </nav>
+              >
+                {label}
+                <span
+                  className={`inline-block w-[5px] h-[5px] bg-foreground ml-1.5 align-middle transition-opacity duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                    active === id ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              </button>
+            ))}
+          </nav>
 
-        <button
-          onClick={() => scrollTo("contact")}
-          className={`hidden md:inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
-            active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
-          }`}
-        >
-          Contactame
-        </button>
+          <button
+            onClick={() => scrollTo("contact")}
+            className={`inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+              active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
+            }`}
+          >
+            Contactame
+          </button>
+        </div>
 
         <button
           className="md:hidden font-['Barlow'] font-600 text-[11px] tracking-widest uppercase"
