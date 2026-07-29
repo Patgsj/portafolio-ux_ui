@@ -224,10 +224,10 @@ function Hero() {
             <div className="space-y-7 md:pb-4 max-w-xs">
               <div className="space-y-4">
                 <p className="font-['Barlow'] font-300 text-sm leading-[1.8] text-muted-foreground">
-                  Diseño interfaces funcionales y las llevo a código real.
+                  Diseño interfaces que funcionan de verdad — y después las llevo a código yo mismo.
                 </p>
                 <p className="font-['Barlow'] font-300 text-sm leading-[1.8] text-muted-foreground">
-                  Con formación en Diseño UX/UI, Diseño Gráfico e Ingeniería en Informática en curso, aporto un perfil híbrido enfocado en resolver problemas reales de negocio y usabilidad.
+                  Vengo del Diseño Gráfico, estudié UX/UI y ahora curso Ingeniería en Informática. Esa mezcla es la que uso para resolver problemas de negocio reales, no solo para que la pantalla se vea bien.
                 </p>
               </div>
               <button
@@ -539,7 +539,7 @@ function Work() {
           <div className="border-r border-b border-border px-8 py-10">
             <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Justificación de negocio</p>
             <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Independencia de suscripciones mensuales</h4>
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">El cliente —un negocio en etapa inicial— buscaba independizarse de softwares con suscripciones mensuales elevadas. Requería un sistema de pago único, a medida y sin costos fijos de infraestructura durante su etapa de despegue.</p>
+            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">El cliente venía pagando de más cada mes por softwares genéricos y quería cortar con eso. Un negocio recién despegando no puede cargar con cuotas fijas de infraestructura, así que la salida fue un sistema propio, de pago único.</p>
           </div>
           <div className="border-r border-b border-border px-8 py-10">
             <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Estrategia de diseño/UX</p>
@@ -775,7 +775,7 @@ function Design() {
         </div>
 
         <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-10">
-          Exploraciones de interfaz fuera de los proyectos de cliente — practicando patrones de UI a través del reto Daily UI. Hacé clic en cualquiera para verla más grande.
+          Esto es lo que hago fuera de los proyectos de cliente, sobre todo con el reto Daily UI — una forma de seguir practicando patrones de interfaz sin la presión de un brief real. Hacé clic en cualquiera para verla más grande.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -1026,7 +1026,7 @@ function CTA() {
 
           <div className="space-y-7 md:pb-4 max-w-xs">
             <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-              Transformemos problemas complejos en productos digitales reales. Estoy disponible para colaborar en diseño UX/UI y desarrollo frontend. Hablemos y llevemos tu idea desde el concepto hasta una solución funcional y escalable.
+              ¿Tienes una idea o un problema que resolver? Conversemos. Estoy disponible para proyectos de diseño UX/UI y desarrollo frontend, y me gusta meterme desde el primer boceto hasta el producto que la gente termina usando.
             </p>
             <a
               href="https://wa.me/56966640562"
