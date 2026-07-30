@@ -214,9 +214,10 @@ function Hero() {
                 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4.5rem,20vw,18rem)] whitespace-nowrap"
               >
                 Patgsj<span className="text-muted-foreground">.</span>
+                <span className="sr-only"> — Patricio Soto</span>
               </h1>
               <p className="font-['Barlow'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5">
-                Diseñador Gráfico &amp; UX/UI
+                Patricio Soto — Diseñador Gráfico &amp; UX/UI
               </p>
             </div>
 
