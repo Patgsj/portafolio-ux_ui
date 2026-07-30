@@ -145,7 +145,9 @@ function Nav() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.05 + NAV_ITEMS.length * 0.04, ease: "easeOut" }}
                 onClick={() => { setOpen(false); setTimeout(() => scrollTo("contact"), 0); }}
-                className="inline-block mt-4 font-['Barlow'] text-xs uppercase tracking-widest bg-foreground text-background px-5 py-3"
+                className={`inline-flex items-center gap-2 mt-4 font-['Barlow'] text-xs uppercase tracking-widest border border-foreground px-5 py-3 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                  active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
+                }`}
               >
                 Contactame
               </motion.button>
