@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { ArrowUpRight, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowUp, ArrowUpRight, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
@@ -1148,9 +1148,9 @@ function Footer() {
         </p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors"
+          className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors"
         >
-          ↑ Inicio
+          <ArrowUp size={12} /> Inicio
         </button>
       </div>
     </footer>
