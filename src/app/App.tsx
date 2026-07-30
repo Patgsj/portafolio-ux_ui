@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUpRight, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
 // ─── Scroll utility ──────────────────────────────────────────────────────────
 const scrollTo = (id: string) =>
@@ -85,6 +85,7 @@ function Nav() {
               >
                 {label}
                 <span
+                  aria-hidden
                   className={`inline-block w-[5px] h-[5px] bg-foreground ml-1.5 align-middle transition-opacity duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                     active === id ? "opacity-100" : "opacity-0"
                   }`}
@@ -106,6 +107,9 @@ function Nav() {
         <button
           className="md:hidden font-['Barlow'] font-600 text-[11px] tracking-widest uppercase"
           onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
         >
           {open ? "✕" : "Menu"}
         </button>
@@ -114,6 +118,7 @@ function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -134,6 +139,7 @@ function Nav() {
                 >
                   {label}
                   <span
+                    aria-hidden
                     className={`inline-block w-2 h-2 bg-foreground transition-opacity duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                       active === id ? "opacity-100" : "opacity-0"
                     }`}
@@ -352,6 +358,8 @@ function CaseCarousel({ onSelect }: { onSelect: (index: number) => void }) {
                 <img
                   src={s.img}
                   alt={s.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 transition-opacity duration-500" />
@@ -418,19 +426,22 @@ function Lightbox({
     >
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 md:top-10 md:right-10 w-10 h-10 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
+        aria-label="Cerrar"
+        className="absolute top-6 right-6 md:top-10 md:right-10 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
       >
         <X size={18} />
       </button>
       <button
         onClick={(e) => { e.stopPropagation(); onNav(-1); }}
-        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
+        aria-label="Anterior"
+        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
       >
         <ArrowLeft size={18} />
       </button>
       <button
         onClick={(e) => { e.stopPropagation(); onNav(1); }}
-        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
+        aria-label="Siguiente"
+        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
       >
         <ArrowRight size={18} />
       </button>
@@ -456,7 +467,7 @@ function Lightbox({
         </AnimatePresence>
         <div className="mt-6 flex items-end justify-between gap-6 flex-wrap">
           <div>
-            <p className="font-['DM_Mono'] text-[10px] text-background/40 mb-2">
+            <p className="font-['DM_Mono'] text-[10px] text-background/50 mb-2">
               {String(index + 1).padStart(2, "0")} / {String(shots.length).padStart(2, "0")}
             </p>
             <h4 className={`font-['Barlow_Condensed'] font-700 text-2xl uppercase tracking-tight text-background ${showDesc ? "mb-2" : ""}`}>{shot.title}</h4>
@@ -506,7 +517,7 @@ function Work() {
             Ferretería CTM
           </h2>
           <p className="inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-5">
-            <span className="w-1.5 h-1.5 bg-foreground inline-block animate-pulse" />
+            <span aria-hidden className="w-1.5 h-1.5 bg-foreground inline-block animate-pulse" />
             En desarrollo activo — iteración constante junto al cliente
           </p>
           <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl">
@@ -591,7 +602,7 @@ function Work() {
           ].map(({ n, l }) => (
             <div key={l} className="bg-foreground px-8 py-10 flex flex-col justify-end">
               <p className="font-['Barlow_Condensed'] font-900 tracking-tight text-background text-[clamp(2rem,4vw,3rem)]">{n}</p>
-              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.18em] text-background/40 mt-1">{l}</p>
+              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.18em] text-background/50 mt-1">{l}</p>
             </div>
           ))}
         </div>
@@ -791,6 +802,8 @@ function Design() {
               <img
                 src={s.img}
                 alt={s.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 transition-opacity duration-500" />
@@ -842,6 +855,8 @@ function About() {
             <img
               src="/yo.webp"
               alt="Patricio Soto (Patgsj), diseñador UX/UI — retrato"
+              loading="lazy"
+              decoding="async"
               className="w-full object-cover aspect-[5/6] object-top"
             />
             {/* floating label */}
@@ -979,22 +994,22 @@ function Experience() {
           >
             Experiencia
           </h2>
-          <span className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-background/40">Enfoque UX/UI desde 2023</span>
+          <span className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-background/50">Enfoque UX/UI desde 2023</span>
         </div>
 
         {/* Entries */}
         <div className="space-y-0 divide-y divide-background/10">
           {EXP_DATA.map(({ n, role, company, period, type, desc }) => (
             <div key={n} className="grid grid-cols-1 md:grid-cols-[60px_1fr_1fr_180px] gap-4 py-10 group hover:pl-2 transition-all duration-300">
-              <span className="font-['DM_Mono'] text-[10px] text-background/25 pt-1">{n}</span>
+              <span className="font-['DM_Mono'] text-[10px] text-background/50 pt-1">{n}</span>
               <div>
                 <h3 className="font-['Barlow_Condensed'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-background leading-tight">{role}</h3>
-                <p className="font-['Barlow'] font-300 text-[13px] text-background/40 mt-1">{company}</p>
+                <p className="font-['Barlow'] font-300 text-[13px] text-background/50 mt-1">{company}</p>
               </div>
               <p className="font-['Barlow'] font-300 text-[13px] leading-[1.9] text-background/55 max-w-sm">{desc}</p>
               <div className="flex md:flex-col md:items-end gap-3 md:gap-2">
-                <span className="font-['DM_Mono'] text-[10px] text-background/35 tracking-wide">{period}</span>
-                <span className="font-['DM_Mono'] text-[9px] uppercase tracking-[0.15em] border border-background/15 px-2.5 py-1 text-background/35">{type}</span>
+                <span className="font-['DM_Mono'] text-[10px] text-background/50 tracking-wide">{period}</span>
+                <span className="font-['DM_Mono'] text-[9px] uppercase tracking-[0.15em] border border-background/30 px-2.5 py-1 text-background/50">{type}</span>
               </div>
             </div>
           ))}
@@ -1086,7 +1101,7 @@ function Footer() {
       {/* Navigation + contact */}
       <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-14 grid grid-cols-2 gap-10">
         <div>
-          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/40 mb-4">Navegación</p>
+          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/50 mb-4">Navegación</p>
           <div className="flex flex-col items-start gap-2.5">
             {NAV_ITEMS.map(([label, id]) => (
               <button
@@ -1100,7 +1115,7 @@ function Footer() {
           </div>
         </div>
         <div>
-          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/40 mb-4">Contacto</p>
+          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/50 mb-4">Contacto</p>
           <div className="flex flex-col items-start gap-2.5">
             {[
               { label: "WhatsApp", href: "https://wa.me/56966640562" },
@@ -1125,15 +1140,15 @@ function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/40">
+        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
           © 2026 Patgsj.
         </p>
-        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/40">
+        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
           San Carlos, Ñuble, Chile
         </p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/40 hover:text-background transition-colors"
+          className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors"
         >
           ↑ Inicio
         </button>
@@ -1145,17 +1160,25 @@ function Footer() {
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Nav />
-      <main>
-        <Hero />
-        <Work />
-        <Design />
-        <About />
-        <Experience />
-        <CTA />
-      </main>
-      <Footer />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] font-['Barlow'] font-600 text-[11px] uppercase tracking-[0.12em] bg-foreground text-background px-5 py-3"
+        >
+          Saltar al contenido
+        </a>
+        <Nav />
+        <main id="main">
+          <Hero />
+          <Work />
+          <Design />
+          <About />
+          <Experience />
+          <CTA />
+        </main>
+        <Footer />
+      </div>
+    </MotionConfig>
   );
 }
