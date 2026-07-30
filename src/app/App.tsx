@@ -782,9 +782,9 @@ function Design() {
             href="https://dribbble.com/PatGsj"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors"
           >
-            Perfil en Dribbble ↗
+            Perfil en Dribbble <ArrowUpRight size={13} />
           </a>
         </div>
 
