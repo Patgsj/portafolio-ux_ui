@@ -5,8 +5,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
 // ─── Scroll utility ──────────────────────────────────────────────────────────
-const scrollTo = (id: string) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+const scrollTo = (id: string, behavior: ScrollBehavior = "smooth") =>
+  document.getElementById(id)?.scrollIntoView({ behavior });
 
 // ─── useInView ───────────────────────────────────────────────────────────────
 function useInView(threshold = 0.1) {
@@ -132,7 +132,7 @@ function Nav() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.05 + i * 0.04, ease: "easeOut" }}
-                  onClick={() => { scrollTo(id); setOpen(false); }}
+                  onClick={() => { scrollTo(id, "auto"); setOpen(false); }}
                   className={`flex items-center justify-end gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-right transition-colors duration-200 ${
                     active === id ? "text-foreground" : "text-muted-foreground"
                   }`}
@@ -150,7 +150,7 @@ function Nav() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.05 + NAV_ITEMS.length * 0.04, ease: "easeOut" }}
-                onClick={() => { scrollTo("contact"); setOpen(false); }}
+                onClick={() => { scrollTo("contact", "auto"); setOpen(false); }}
                 className={`inline-flex items-center gap-2 mt-4 font-['Barlow'] text-xs uppercase tracking-widest border border-foreground px-5 py-3 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                   active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
                 }`}
