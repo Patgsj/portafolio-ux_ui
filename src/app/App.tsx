@@ -868,9 +868,6 @@ function About() {
 
           {/* Right */}
           <div className="space-y-10">
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Sobre mí</p>
-            <p className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground -mt-6">Patricio Gustavo Soto Jofré</p>
-
             <h2
               className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.88] tracking-[-0.01em] text-foreground text-[clamp(3.5rem,7vw,6.5rem)]"
             >
@@ -878,6 +875,9 @@ function About() {
               orientado a<br />
               producto<span className="text-muted-foreground">.</span>
             </h2>
+
+            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground -mt-6">Sobre mí</p>
+            <p className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground -mt-6">Patricio Gustavo Soto Jofré</p>
 
             <div className="space-y-5 max-w-md">
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-foreground">
@@ -988,7 +988,7 @@ function Experience() {
         }`}
       >
         {/* Header */}
-        <div className="flex items-baseline justify-between mb-16">
+        <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between mb-16">
           <h2
             className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.01em] text-background text-[clamp(3rem,8vw,7rem)]"
           >
