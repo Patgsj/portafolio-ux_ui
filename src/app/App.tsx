@@ -774,7 +774,7 @@ function Design() {
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
         }`}
       >
-        <div className="flex items-baseline justify-between mb-8">
+        <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-8">
           <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
             Diseño UI
           </h2>
@@ -911,7 +911,7 @@ function About() {
             formacionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
           }`}
         >
-          <div className="flex items-baseline justify-between mb-12">
+          <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-12">
             <h3 className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
               Formación
             </h3>
