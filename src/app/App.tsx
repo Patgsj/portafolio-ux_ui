@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import type { ReactNode, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUp, ArrowUpRight, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 
 // ─── Scroll utility ──────────────────────────────────────────────────────────
-const scrollTo = (id: string, behavior: ScrollBehavior = "smooth") =>
-  document.getElementById(id)?.scrollIntoView({ behavior });
+const scrollTo = (id: string, behavior: ScrollBehavior = "smooth") => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.getElementById(id)?.scrollIntoView({ behavior: reduced ? "auto" : behavior });
+};
 
 // ─── useInView ───────────────────────────────────────────────────────────────
 function useInView(threshold = 0.1) {
@@ -24,7 +27,7 @@ function useInView(threshold = 0.1) {
 }
 
 // ─── Nav ─────────────────────────────────────────────────────────────────────
-const NAV_ITEMS: [string, string][] = [["Trabajo", "work"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
+const NAV_ITEMS: [string, string][] = [["Proyectos", "work"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
 
 function Nav() {
   const [pinned, setPinned] = useState(false);
@@ -79,7 +82,8 @@ function Nav() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className={`font-['Barlow'] font-400 text-[11px] tracking-[0.14em] uppercase hover:text-foreground transition-colors duration-200 ${
+                aria-current={active === id ? "page" : undefined}
+                className={`font-['Barlow'] font-400 text-[11px] tracking-[0.14em] uppercase hover:text-foreground transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
                   active === id ? "text-foreground" : "text-muted-foreground"
                 }`}
               >
@@ -96,16 +100,17 @@ function Nav() {
 
           <button
             onClick={() => scrollTo("contact")}
-            className={`inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+            aria-current={active === "contact" ? "page" : undefined}
+            className={`inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
               active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
             }`}
           >
-            Contactame
+            Contáctame
           </button>
         </div>
 
         <button
-          className="md:hidden font-['Barlow'] font-600 text-[11px] tracking-widest uppercase"
+          className="md:hidden font-['Barlow'] font-600 text-[11px] tracking-widest uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -133,7 +138,8 @@ function Nav() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.05 + i * 0.04, ease: "easeOut" }}
                   onClick={() => { scrollTo(id, "auto"); setOpen(false); }}
-                  className={`flex items-center justify-end gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-right transition-colors duration-200 ${
+                  aria-current={active === id ? "page" : undefined}
+                  className={`flex items-center justify-end gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-right transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
                     active === id ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
@@ -151,11 +157,12 @@ function Nav() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.05 + NAV_ITEMS.length * 0.04, ease: "easeOut" }}
                 onClick={() => { scrollTo("contact", "auto"); setOpen(false); }}
-                className={`inline-flex items-center gap-2 mt-4 font-['Barlow'] text-xs uppercase tracking-widest border border-foreground px-5 py-3 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                aria-current={active === "contact" ? "page" : undefined}
+                className={`inline-flex items-center gap-2 mt-4 font-['Barlow'] text-xs uppercase tracking-widest border border-foreground px-5 py-3 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
                   active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
                 }`}
               >
-                Contactame
+                Contáctame
               </motion.button>
             </div>
           </motion.div>
@@ -202,8 +209,9 @@ function Hero() {
 
       {/* Top stripe */}
       <div className="relative z-10 max-w-[1400px] mx-auto w-full px-7 md:px-14 flex items-center justify-end py-5">
-        <span className="font-['Barlow'] font-300 text-[11px] tracking-[0.16em] uppercase text-muted-foreground">
-          Disponible — 2026
+        <span className="font-['Barlow'] font-300 text-[11px] tracking-[0.16em] uppercase text-muted-foreground text-right">
+          <span className="md:hidden">Disponibilidad — 2026</span>
+          <span className="hidden md:inline">Disponible para nuevos proyectos</span>
         </span>
       </div>
 
@@ -225,26 +233,26 @@ function Hero() {
                 <span className="sr-only"> — Patricio Soto</span>
               </h1>
               <p className="font-['Barlow'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5">
-                Patricio Soto — Diseñador Gráfico &amp; UX/UI
+                Patricio Soto — Diseñador UX/UI &amp; Diseñador Gráfico
               </p>
             </div>
 
             {/* Descriptor */}
-            <div className="space-y-7 md:pb-4 max-w-xs">
+            <div className="space-y-7 md:pb-4 max-w-xs md:max-w-sm">
               <div className="space-y-4">
-                <p className="font-['Barlow'] font-300 text-sm leading-[1.8] text-muted-foreground">
-                  Diseño interfaces que funcionan de verdad — y después las llevo a código yo mismo.
+                <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
+                  Diseño interfaces digitales claras, funcionales y visualmente consistentes, desde la estructura inicial hasta el prototipo y su implementación.
                 </p>
-                <p className="font-['Barlow'] font-300 text-sm leading-[1.8] text-muted-foreground">
-                  Vengo del Diseño Gráfico, estudié UX/UI y ahora curso Ingeniería en Informática. Esa mezcla es la que uso para resolver problemas de negocio reales, no solo para que la pantalla se vea bien.
+                <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
+                  Mi formación en Diseño Gráfico, UX/UI e Informática me permite conectar las necesidades de las personas, los objetivos del negocio y la viabilidad técnica de cada solución.
                 </p>
               </div>
               <button
                 onClick={() => scrollTo("work")}
-                className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground"
+                className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
               >
                 <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
-                Ver trabajo
+                Ver proyectos
               </button>
             </div>
           </div>
@@ -258,45 +266,52 @@ function Hero() {
 const PILLARS_DATA = [
   {
     n: "01",
-    title: "Stack eficiente, costo $0 al inicio",
-    desc: "Uso estratégico de Supabase (Postgres + Auth + Realtime) y Vercel Functions en sus capas gratuitas para garantizar costo de operación $0 al inicio.",
-    why: "El cliente venía de pagar suscripciones mensuales elevadas; en la etapa de despegue del negocio, cada peso de costo fijo importa.",
+    title: "Costo operativo inicial cercano a $0",
+    desc: "Uso estratégico de Supabase (Postgres + Auth + Realtime) y Vercel Functions en sus capas gratuitas durante la etapa inicial del proyecto.",
+    why: "El cliente venía pagando varias suscripciones mensuales para resolver tareas sueltas; en el arranque de un negocio, cada costo fijo de infraestructura pesa. La arquitectura queda preparada para escalar a planes pagos cuando la operación lo requiera.",
   },
   {
     n: "02",
-    title: "Aislamiento de datos a nivel de base & arquitectura lista para multi-sucursal",
-    desc: "Row Level Security (RLS) en Postgres ejecutado vía RPC (set_config) a nivel de contexto de sesión. En lugar de confiar solo en la capa de la aplicación, el aislamiento se garantiza directamente en la base de datos.",
-    why: "Máxima seguridad de los datos ante manipulaciones en el cliente y escalabilidad garantizada: si la ferretería decide abrir una segunda sucursal o expandir su operación, el sistema está listo para separar inventarios y cajas sin necesidad de reescribir la base de datos ni la arquitectura.",
+    title: "Aislamiento de datos por organización (RLS)",
+    desc: "Row Level Security (RLS) en Postgres, aplicado a nivel de contexto de sesión vía RPC (set_config). El aislamiento de datos se garantiza en la base de datos, no solo en la aplicación.",
+    why: "Mayor seguridad ante manipulaciones desde el cliente y escalabilidad real: si el negocio abre una segunda sucursal, el sistema está preparado para separar inventarios y cajas sin rehacer la base de datos.",
   },
   {
     n: "03",
-    title: "Cumplimiento tributario seguro",
-    desc: "Integración con OpenFactura/Haulmer para DTEs (Boleta 39 / Factura 33), ejecutados vía Vercel Serverless.",
-    why: "Es un requisito legal, no un extra: mantener el token de API fuera del navegador evita que quede expuesto y comprometa la cuenta ante el SII.",
+    title: "Documentos tributarios electrónicos (DTE)",
+    desc: "Integración con OpenFactura/Haulmer para la emisión de boletas (39) y facturas (33) ante el SII, implementada como función serverless en Vercel. Actualmente a la espera de aprobación para conectar en producción.",
+    why: "Es un requisito legal, no un extra: mantener el token de la API fuera del navegador evita que quede expuesto y comprometa la cuenta ante el SII.",
   },
   {
     n: "04",
-    title: "Resiliencia operativa",
-    desc: "Cola de reintentos con backoff creciente para facturación fallida, y Service Worker PWA para ventas offline.",
-    why: "En un negocio de mesón la conexión no siempre es estable. La caja no puede depender de que internet funcione para cerrar una venta.",
+    title: "Resiliencia ante cortes de conexión",
+    desc: "Cola de reintentos con backoff creciente para la emisión de documentos, y Service Worker (PWA) para que la venta se pueda cerrar sin conexión.",
+    why: "En la operación de mesón la conexión no siempre es estable. La caja no puede depender de que internet funcione para cerrar una venta.",
   },
 ];
 
-function PillarCell({ n, title, desc, why }: { n: string; title: string; desc: string; why: string }) {
+function PillarCell({ n, title, desc, why }: { n: string; title: string; desc: string; why?: string }) {
   return (
     <div className="border-t border-l border-border px-8 py-10 [&:nth-child(2n)]:border-r [&:nth-child(-n+2)]:md:border-t-0">
       <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">{n}</p>
       <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">{title}</h4>
       <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{desc}</p>
-      <div className="mt-5 pt-5 border-t border-border">
-        <p className="font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] text-foreground/50 mb-1.5">Por qué</p>
-        <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-foreground">{why}</p>
-      </div>
+      {why && (
+        <div className="mt-5 pt-5 border-t border-border">
+          <p className="font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] text-foreground/50 mb-1.5">Por qué</p>
+          <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-foreground">{why}</p>
+        </div>
+      )}
     </div>
   );
 }
 
 const CASE_SHOTS = [
+  {
+    img: "/case-ferreteria/catalogo.webp",
+    title: "Catálogo público",
+    desc: "Vitrina de productos con búsqueda por nombre, código de barras o código corto, y carrito de compra — accesible sin login.",
+  },
   {
     img: "/case-ferreteria/dashboard.webp",
     title: "Dashboard de negocio",
@@ -308,24 +323,34 @@ const CASE_SHOTS = [
     desc: "Flujo de caja optimizado para velocidad: escaneo de código de barras, atajo cantidad*código, boleta o factura y método de pago en la misma pantalla.",
   },
   {
-    img: "/case-ferreteria/catalogo.webp",
-    title: "Catálogo público",
-    desc: "Vitrina de productos con búsqueda por nombre, código de barras o código corto, y carrito de compra — accesible sin login.",
-  },
-  {
     img: "/case-ferreteria/inventario.webp",
     title: "Gestión de inventario",
-    desc: "Búsqueda instantánea, edición en línea, control de stock crítico y categorías de producto — sincronizado en tiempo real entre dispositivos.",
+    desc: "Búsqueda instantánea, edición en línea, control de stock crítico y categorías de producto — sincronizado en tiempo real entre dispositivos. Las acciones de fila usan iconos circulares para una lectura más rápida de ver, editar y eliminar.",
   },
   {
     img: "/case-ferreteria/historial.webp",
     title: "Historial de ventas",
-    desc: "Registro completo desde Supabase con búsqueda por folio, método de pago u origen, y exportación de reporte mensual para el contador.",
+    desc: "Registro de ventas desde Supabase con búsqueda por folio, método de pago u origen, y un reporte mensual pensado para el contador del negocio.",
   },
   {
     img: "/case-ferreteria/login.webp",
     title: "Acceso restringido",
-    desc: "El panel de administración vive detrás de autenticación Supabase; el catálogo permanece público.",
+    desc: "El panel de administración vive detrás de autenticación Supabase; el catálogo permanece público y accesible sin cuenta.",
+  },
+  {
+    img: "/case-ferreteria/catalogo-oscuro.webp",
+    title: "Catálogo en modo oscuro",
+    desc: "Todas las pantallas del sistema tienen una versión en modo oscuro, con la misma jerarquía y contraste cuidado en ambos temas.",
+  },
+  {
+    img: "/case-ferreteria/dashboard-movil.webp",
+    title: "Dashboard en móvil",
+    desc: "El panel administrativo se reorganiza en una sola columna en pantallas angostas, manteniendo accesibles las métricas clave del día.",
+  },
+  {
+    img: "/case-ferreteria/movil-menu.webp",
+    title: "Menú móvil",
+    desc: "En pantallas angostas la navegación se colapsa en un menú lateral con estado de conexión, cambio de tema claro/oscuro y acceso al panel.",
   },
 ];
 
@@ -373,16 +398,16 @@ function CaseCarousel({ onSelect }: { onSelect: (index: number) => void }) {
       </div>
 
       <button
-        aria-label="Anterior"
+        aria-label="Proyecto anterior"
         onClick={() => emblaApi?.scrollPrev()}
-        className="hidden md:flex absolute left-[-56px] top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center text-foreground hover:opacity-60 transition-opacity"
+        className="hidden md:flex absolute left-[-56px] top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center text-foreground hover:opacity-60 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       >
         <ChevronLeft size={44} strokeWidth={1.5} />
       </button>
       <button
-        aria-label="Siguiente"
+        aria-label="Proyecto siguiente"
         onClick={() => emblaApi?.scrollNext()}
-        className="hidden md:flex absolute right-[-56px] top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center text-foreground hover:opacity-60 transition-opacity"
+        className="hidden md:flex absolute right-[-56px] top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center text-foreground hover:opacity-60 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       >
         <ChevronRight size={44} strokeWidth={1.5} />
       </button>
@@ -397,6 +422,8 @@ function Lightbox({
 }: {
   shots: LightboxShot[]; index: number; onClose: () => void; onNav: (dir: 1 | -1) => void; showDesc?: boolean;
 }) {
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -413,10 +440,19 @@ function Lightbox({
     return () => { document.body.style.overflow = prev; };
   }, []);
 
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeBtnRef.current?.focus();
+    return () => { previouslyFocused?.focus(); };
+  }, []);
+
   const shot = shots[index];
 
   return createPortal(
     <motion.div
+      role="dialog"
+      aria-modal="true"
+      aria-label={shot.title}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -425,23 +461,24 @@ function Lightbox({
       onClick={onClose}
     >
       <button
+        ref={closeBtnRef}
         onClick={onClose}
         aria-label="Cerrar"
-        className="absolute top-6 right-6 md:top-10 md:right-10 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
+        className="absolute top-6 right-6 md:top-10 md:right-10 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
       >
         <X size={18} />
       </button>
       <button
         onClick={(e) => { e.stopPropagation(); onNav(-1); }}
-        aria-label="Anterior"
-        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
+        aria-label="Proyecto anterior"
+        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
       >
         <ArrowLeft size={18} />
       </button>
       <button
         onClick={(e) => { e.stopPropagation(); onNav(1); }}
-        aria-label="Siguiente"
-        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity"
+        aria-label="Proyecto siguiente"
+        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center bg-background text-foreground hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
       >
         <ArrowRight size={18} />
       </button>
@@ -462,7 +499,7 @@ function Lightbox({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full h-auto object-contain bg-muted"
+            className="max-w-full h-auto object-contain bg-muted mx-auto block"
           />
         </AnimatePresence>
         <div className="mt-6 flex items-end justify-between gap-6 flex-wrap">
@@ -493,8 +530,187 @@ function Lightbox({
   );
 }
 
+const USER_TASKS = [
+  {
+    title: "Personal de mesón",
+    tasks: [
+      "Buscar productos rápidamente.",
+      "Consultar precio y disponibilidad.",
+      "Añadir productos a una venta.",
+      "Cerrar una operación sin pasos innecesarios.",
+      "Continuar trabajando ante interrupciones de conexión.",
+    ],
+  },
+  {
+    title: "Administración",
+    tasks: [
+      "Crear y actualizar productos.",
+      "Controlar stock.",
+      "Revisar ventas.",
+      "Gestionar información operativa.",
+      "Mantener la documentación tributaria correspondiente.",
+    ],
+  },
+];
+
+const PROBLEMS_DATA = [
+  { n: "01", title: "Búsqueda y atención rápida", desc: "La operación de mesón exige encontrar productos, confirmar disponibilidad y avanzar a la venta sin navegación innecesaria." },
+  { n: "02", title: "Información centralizada", desc: "Catálogo, inventario, ventas y documentos tributarios deben mantenerse conectados para reducir errores y tareas duplicadas." },
+  { n: "03", title: "Conectividad variable", desc: "La operación no puede depender completamente de una conexión estable para realizar tareas críticas." },
+  { n: "04", title: "Escalabilidad operativa", desc: "La estructura debe permitir incorporar nuevas sucursales o separar operaciones sin reconstruir todo el producto." },
+];
+
+const DESIGN_GOALS = [
+  "Reducir pasos durante la atención de mesón.",
+  "Facilitar la búsqueda y reconocimiento de productos.",
+  "Mantener acciones y estados visualmente consistentes.",
+  "Dar visibilidad inmediata al stock.",
+  "Evitar que funciones críticas dependan de navegación compleja.",
+  "Diseñar componentes reutilizables.",
+  "Preparar una interfaz responsive y técnicamente viable.",
+  "Considerar accesibilidad desde la jerarquía, el contraste y la interacción.",
+];
+
+const FLOWS_DATA = [
+  { title: "Flujo de venta", steps: ["Buscar producto", "Revisar precio y stock", "Añadir a la venta", "Confirmar operación", "Emitir documento tributario"] },
+  { title: "Flujo administrativo", steps: ["Iniciar sesión", "Gestionar productos", "Actualizar precio o stock", "Guardar cambios", "Verificar actualización"] },
+  { title: "Flujo ante interrupción de conexión", steps: ["Registrar venta", "Detectar fallo de conexión", "Mantener operación pendiente", "Reintentar sincronización"] },
+];
+
+const UX_DECISIONS = [
+  { title: "Velocidad de atención en mesón", desc: "Se priorizó una navegación directa, búsqueda visible, acciones frecuentes claramente identificadas y reducción de pasos durante la venta." },
+  { title: "Visibilidad del inventario", desc: "El stock y la información esencial del producto deben poder consultarse sin entrar en múltiples niveles de navegación." },
+  { title: "Sistema de diseño consistente", desc: "Paleta de marca, tipografía e iconografía SVG unificadas en catálogo, panel administrativo y dashboard, evitando emojis como iconos funcionales y manteniendo botones y tarjetas con un mismo lenguaje visual." },
+  { title: "Consistencia entre modo claro y oscuro", desc: "Auditoría dedicada de la interfaz para detectar colores que solo funcionaban en un tema, tintes de marca invisibles sobre fondo claro y anillos de foco mal alineados entre temas, corrigiendo cada caso encontrado." },
+  { title: "Estados y resiliencia del sistema", desc: "Las operaciones comunican estados de carga, confirmación, error y reintento, contemplando que algunas queden pendientes y se sincronicen cuando vuelva la conexión." },
+  { title: "Microinteracciones ajustadas con el cliente", desc: "Las animaciones de entrada del catálogo y las transiciones entre vistas del panel se refinaron después de que el cliente sintiera una animación de tabla como demasiado brusca." },
+];
+
+const ITERATION_STEPS = [
+  "Revisión de requerimientos.",
+  "Presentación de propuestas.",
+  "Ajustes de flujo e interfaz.",
+  "Implementación.",
+  "Nueva revisión con el cliente.",
+];
+
+const ACCESSIBILITY_COMMITMENTS = [
+  "Contraste suficiente entre texto y fondo.",
+  "Estados de foco visibles.",
+  "Navegación mediante teclado.",
+  "Tamaños de área interactiva adecuados.",
+  "Etiquetas claras.",
+  "No depender exclusivamente del color.",
+  "Jerarquía semántica correcta.",
+  "Estados de error comprensibles.",
+  "Formularios con labels asociados.",
+  "Uso de aria-live para mensajes importantes, cuando corresponde.",
+];
+
+function SectionKicker({ index, title }: { index?: string; title: string }) {
+  return (
+    <div className="flex items-baseline gap-3 mb-6 pb-4 border-b border-border">
+      {index && <span className="font-['DM_Mono'] text-[10px] text-muted-foreground">{index}</span>}
+      <h3 className="font-['Barlow_Condensed'] font-800 text-xl md:text-2xl uppercase tracking-tight text-foreground">{title}</h3>
+    </div>
+  );
+}
+
+const PROJECT_PHASES = ["Levantamiento", "Diseño UX/UI", "Implementación", "Iteración con el cliente"];
+const CURRENT_PHASE_INDEX = 3;
+
+function PhaseStepper() {
+  return (
+    <div role="list" aria-label={`Fase actual del proyecto: ${PROJECT_PHASES[CURRENT_PHASE_INDEX]}`} className="flex items-center mb-12 overflow-x-auto">
+      {PROJECT_PHASES.map((phase, i) => (
+        <div key={phase} className="flex items-center flex-1 last:flex-none">
+          <div className="flex items-center gap-2 shrink-0">
+            <span aria-hidden className={`w-2 h-2 shrink-0 ${i <= CURRENT_PHASE_INDEX ? "bg-foreground" : "bg-border"}`} />
+            <span
+              className={`font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.12em] whitespace-nowrap ${
+                i === CURRENT_PHASE_INDEX ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
+              {phase}
+              {i === CURRENT_PHASE_INDEX && <span className="sr-only"> — fase actual</span>}
+            </span>
+          </div>
+          {i < PROJECT_PHASES.length - 1 && <span aria-hidden className="flex-1 h-px bg-border mx-3 min-w-4" />}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const CASE_TABS = ["El negocio", "Usuarios y problema", "Proceso y decisiones", "Pantallas y cliente", "Técnico"];
+
+function CaseTabs({ active, onChange }: { active: number; onChange: (i: number) => void }) {
+  const onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "ArrowRight") onChange((active + 1) % CASE_TABS.length);
+    if (e.key === "ArrowLeft") onChange((active - 1 + CASE_TABS.length) % CASE_TABS.length);
+  };
+
+  return (
+    <div role="tablist" aria-label="Secciones del caso de estudio" onKeyDown={onKeyDown} className="flex flex-wrap gap-2 mb-12">
+      {CASE_TABS.map((t, i) => (
+        <button
+          key={t}
+          role="tab"
+          id={`case-tab-${i}`}
+          aria-selected={active === i}
+          aria-controls={`case-panel-${i}`}
+          tabIndex={active === i ? 0 : -1}
+          onClick={() => onChange(i)}
+          className={`font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.12em] px-4 py-2.5 border transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+            active === i
+              ? "bg-foreground text-background border-foreground"
+              : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
+          }`}
+        >
+          {t}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TabPanel({ index, active, children }: { index: number; active: number; children: ReactNode }) {
+  if (active !== index) return null;
+  return (
+    <div role="tabpanel" id={`case-panel-${index}`} aria-labelledby={`case-tab-${index}`} className="space-y-14">
+      {children}
+    </div>
+  );
+}
+
+function InfoCell({ kicker, title, children }: { kicker: string; title: string; children: ReactNode }) {
+  return (
+    <div className="border-r border-b border-border px-8 py-10">
+      <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">{kicker}</p>
+      <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">{title}</h4>
+      <div className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{children}</div>
+    </div>
+  );
+}
+
+function StepList({ steps }: { steps: string[] }) {
+  return (
+    <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
+      {steps.map((s, i) => (
+        <li key={s} className="flex items-center gap-2">
+          <span className="font-['Barlow'] font-300 text-[13px] text-muted-foreground border border-border px-3 py-2">
+            {s}
+          </span>
+          {i < steps.length - 1 && <ArrowRight aria-hidden size={14} className="text-muted-foreground shrink-0" />}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function Work() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState(0);
   const navLightbox = useCallback((dir: 1 | -1) => {
     setLightboxIndex((cur) => (cur === null ? cur : (cur + dir + CASE_SHOTS.length) % CASE_SHOTS.length));
   }, []);
@@ -508,12 +724,12 @@ function Work() {
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
         }`}
       >
-        {/* Case intro */}
-        <div className="mb-10 max-w-2xl">
+        {/* Resumen del proyecto */}
+        <div className="mb-12 max-w-2xl">
           <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
             Caso de estudio 01 — Software a medida, en construcción
           </p>
-          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-4 text-[clamp(2.2rem,5vw,4rem)]">
+          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-5 text-[clamp(2.2rem,5vw,4rem)]">
             Ferretería CTM
           </h2>
           <p className="inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-5">
@@ -521,133 +737,214 @@ function Work() {
             En desarrollo activo — iteración constante junto al cliente
           </p>
           <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl">
-            SaaS de punto de venta y facturación electrónica ante el SII, construido de punta a punta para que un negocio real se independice de suscripciones externas: catálogo público, caja, inventario y cumplimiento tributario chileno — sin atajos.
+            Sistema de punto de venta, inventario y facturación electrónica desarrollado para una ferretería real. El producto integra catálogo público, gestión administrativa, caja, inventario y documentos tributarios en una solución adaptada a la operación diaria del negocio.
           </p>
         </div>
 
-        {/* Screenshot carousel */}
-        <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
-          Capturas reales — hacé clic para ampliar
-        </p>
-        <CaseCarousel onSelect={setLightboxIndex} />
-        {lightboxIndex !== null && (
-          <Lightbox shots={CASE_SHOTS} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} />
-        )}
+        <PhaseStepper />
+        <CaseTabs active={activeTab} onChange={setActiveTab} />
 
-        {/* Role / Scope */}
-        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border mb-14">
-          <div className="border-r border-b border-border px-8 py-10">
-            <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Rol</p>
-            <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Desarrollo full-stack, en solitario</h4>
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">Arquitectura, base de datos y RLS, frontend e integración con el SII — de punta a punta.</p>
+        {/* Tab 0 — El negocio */}
+        <TabPanel index={0} active={activeTab}>
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
+            <InfoCell kicker="Contexto del negocio" title="Reducir dependencias y centralizar la operación">
+              El negocio utilizaba distintos servicios y suscripciones para resolver tareas operativas. El objetivo fue concentrar catálogo, inventario, ventas y facturación en una solución propia, reduciendo dependencias externas y adaptando el producto al funcionamiento real de la ferretería.
+            </InfoCell>
+            <InfoCell kicker="Estado actual" title="Estado actual y próximos pasos">
+              El producto está en desarrollo activo. Los próximos pasos incluyen afianzar la sincronización en escenarios de conexión inestable, ampliar los reportes para administración y dejar la arquitectura lista para una eventual segunda sucursal.
+            </InfoCell>
           </div>
-          <div className="border-r border-b border-border px-8 py-10">
-            <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Alcance</p>
-            <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">4 apps, 1 negocio real</h4>
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">Catálogo público, panel administrativo, dashboard y login — para un negocio real, no una maqueta.</p>
-          </div>
-        </div>
-
-        {/* Business problem & UX strategy */}
-        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border mb-14">
-          <div className="border-r border-b border-border px-8 py-10">
-            <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Justificación de negocio</p>
-            <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Independencia de suscripciones mensuales</h4>
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">El cliente venía pagando de más cada mes por softwares genéricos y quería cortar con eso. Un negocio recién despegando no puede cargar con cuotas fijas de infraestructura, así que la salida fue un sistema propio, de pago único.</p>
-          </div>
-          <div className="border-r border-b border-border px-8 py-10">
-            <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Estrategia de diseño/UX</p>
-            <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Velocidad de atención en mesón</h4>
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">Interfaz de venta rápida con soporte para escáner QR, atajos de teclado, navegación fluida y resiliencia ante cortes de internet (operación offline-first).</p>
-          </div>
-        </div>
-
-        {/* Problem pillars */}
-        <div className="mb-14">
-          <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">
-            Decisiones de arquitectura — costo $0 y escalabilidad real
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 border-r border-b border-border">
-            {PILLARS_DATA.map((p) => (
-              <PillarCell key={p.n} {...p} />
-            ))}
-          </div>
-        </div>
-
-        {/* Stack */}
-        <div className="flex flex-wrap gap-2 mb-14">
-          {["Vite 6", "JavaScript (ES Modules)", "Tailwind CSS 4", "Supabase (Postgres, Auth, Realtime, RLS)", "RPCs (set_config)", "Vercel (hosting + serverless + cron)", "OpenFactura / Haulmer API", "Chart.js", "jsPDF", "html5-qrcode", "Vitest"].map((t) => (
-            <span
-              key={t}
-              className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.1em] border border-border px-3 py-2 text-muted-foreground"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Case study outcome bar */}
-        <div className="bg-foreground text-background grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-px bg-white/10 overflow-hidden">
-          <div className="bg-foreground px-8 py-10">
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-background/50 mb-4">Caso de estudio — Ferretería CTM</p>
-            <p className="font-['Barlow'] font-300 text-sm leading-relaxed text-background/70 max-w-sm">
-              La venta se cierra al instante; el documento tributario (boleta o factura) se emite después, en segundo plano, vía función serverless — el token de API nunca toca el navegador. Todo corriendo sobre las capas gratuitas de Supabase y Vercel.
-            </p>
-          </div>
-          {[
-            { n: "$0", l: "Costo de operación al inicio" },
-            { n: "RLS", l: "Multi-tenant, aislado por organización" },
-            { n: "SII", l: "Boletas y facturas reales" },
-            { n: "PWA", l: "Instalable y funciona offline" },
-          ].map(({ n, l }) => (
-            <div key={l} className="bg-foreground px-8 py-10 flex flex-col justify-end">
-              <p className="font-['Barlow_Condensed'] font-900 tracking-tight text-background text-[clamp(2rem,4vw,3rem)]">{n}</p>
-              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.18em] text-background/50 mt-1">{l}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
+            <div className="border-r border-b border-border px-8 py-10">
+              <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Rol</p>
+              <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Diseño UX/UI y desarrollo de producto</h4>
+              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground mb-4">Levantamiento de necesidades, definición de flujos, diseño de interfaces, prototipado, validación iterativa con el cliente e implementación del producto.</p>
+              <span className="inline-block font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-1.5 text-muted-foreground">Proyecto independiente</span>
             </div>
-          ))}
-        </div>
+            <div className="border-r border-b border-border px-8 py-10">
+              <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Alcance</p>
+              <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">4 módulos principales</h4>
+              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">Catálogo público, administración, inventario y operación de caja integrados en una solución para un negocio real.</p>
+            </div>
+          </div>
+        </TabPanel>
+
+        {/* Tab 1 — Usuarios y problema */}
+        <TabPanel index={1} active={activeTab}>
+          <div>
+            <SectionKicker title="Usuarios y tareas principales" />
+            <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
+              {USER_TASKS.map((u) => (
+                <div key={u.title} className="border-r border-b border-border px-8 py-10">
+                  <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-4">{u.title}</h4>
+                  <ul className="space-y-2.5">
+                    {u.tasks.map((t) => (
+                      <li key={t} className="flex items-start gap-3 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                        <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <SectionKicker title="Problemas que el producto debía resolver" />
+            <div className="grid grid-cols-1 md:grid-cols-2 border-r border-b border-border">
+              {PROBLEMS_DATA.map((p) => (
+                <PillarCell key={p.n} {...p} />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <SectionKicker title="Objetivos de diseño" />
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+              {DESIGN_GOALS.map((g) => (
+                <li key={g} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
+                  <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
+                  {g}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </TabPanel>
+
+        {/* Tab 2 — Proceso y decisiones */}
+        <TabPanel index={2} active={activeTab}>
+          <div>
+            <SectionKicker title="Flujos principales" />
+            <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
+              {FLOWS_DATA.map((f, i) => (
+                <div
+                  key={f.title}
+                  className={`border-r border-b border-border px-8 py-10 ${i === FLOWS_DATA.length - 1 ? "md:col-span-2" : ""}`}
+                >
+                  <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">{f.title}</p>
+                  <StepList steps={f.steps} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
+            <InfoCell kicker="Wireframes y prototipado" title="De la estructura a la interfaz">
+              <p className="mb-4">
+                Las primeras decisiones se concentraron en organizar las tareas críticas de catálogo, inventario y venta. El proyecto ha evolucionado mediante revisiones periódicas con el cliente, ajustando jerarquías, acciones y estados de acuerdo con las necesidades reales de operación.
+              </p>
+              <p className="text-[11px] uppercase tracking-[0.12em] border border-dashed border-border px-4 py-3">
+                Espacio reservado para incorporar capturas de iteraciones anteriores.
+              </p>
+            </InfoCell>
+            <InfoCell kicker="Validación e iteración" title="Iteración con el cliente">
+              <p className="mb-5">
+                El producto se ha desarrollado mediante revisiones periódicas con el cliente. Estas conversaciones permiten ajustar flujos, prioridades, terminología y comportamiento de las pantallas según la operación real del negocio.
+              </p>
+              <StepList steps={ITERATION_STEPS} />
+            </InfoCell>
+          </div>
+
+          <div>
+            <SectionKicker title="Decisiones de UX/UI" />
+            <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
+              {UX_DECISIONS.map((d) => (
+                <div key={d.title} className="border-r border-b border-border px-8 py-10">
+                  <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">{d.title}</h4>
+                  <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{d.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </TabPanel>
+
+        {/* Tab 3 — Pantallas y cliente */}
+        <TabPanel index={3} active={activeTab}>
+          <div>
+            <SectionKicker title="Pantallas finales" />
+            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
+              Capturas reales — haz clic para ampliar
+            </p>
+            <CaseCarousel onSelect={setLightboxIndex} />
+            {lightboxIndex !== null && (
+              <Lightbox shots={CASE_SHOTS} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} />
+            )}
+          </div>
+
+          <div>
+            <SectionKicker title="Accesibilidad y consistencia" />
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+              {ACCESSIBILITY_COMMITMENTS.map((a) => (
+                <li key={a} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
+                  <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </TabPanel>
+
+        {/* Tab 4 — Técnico */}
+        <TabPanel index={4} active={activeTab}>
+          <div>
+            <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-8">
+              El producto corre sobre Supabase (base de datos, autenticación y sincronización en tiempo real) y Vercel (hosting y funciones serverless), con aislamiento de datos por organización a nivel de base de datos. La emisión de documentos tributarios electrónicos ante el SII está implementada y a la espera de aprobación para conectar con la API de OpenFactura en producción.
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-10">
+              {["Vite 6", "JavaScript (ES Modules)", "Tailwind CSS 4", "Supabase (Postgres, Auth, Realtime, RLS)", "RPCs (set_config)", "Vercel (hosting + serverless + cron)", "OpenFactura / Haulmer API", "Chart.js", "jsPDF", "html5-qrcode", "Vitest"].map((t) => (
+                <span
+                  key={t}
+                  className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.1em] border border-border px-3 py-2 text-muted-foreground"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border mb-10">
+              {PILLARS_DATA.map((p) => (
+                <PillarCell key={p.n} {...p} />
+              ))}
+            </div>
+
+            <div className="bg-foreground text-background grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-px bg-white/10 overflow-hidden">
+              <div className="bg-foreground px-8 py-10">
+                <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-background/50 mb-4">Caso de estudio — Ferretería CTM</p>
+                <p className="font-['Barlow'] font-300 text-sm leading-relaxed text-background/70 max-w-sm">
+                  La venta se cierra al instante; el documento tributario (boleta o factura) está diseñado para emitirse después, en segundo plano, vía función serverless — el token de API nunca toca el navegador. La conexión con el SII está a la espera de aprobación; mientras tanto, se aprovecharon capas gratuitas de infraestructura durante la etapa inicial.
+                </p>
+              </div>
+              {[
+                { n: "~$0", l: "Costo operativo inicial" },
+                { n: "RLS", l: "Datos aislados por organización" },
+                { n: "DTE", l: "Integración lista, en espera de aprobación SII" },
+                { n: "PWA", l: "Instalable y funciona sin conexión" },
+              ].map(({ n, l }) => (
+                <div key={l} className="bg-foreground px-8 py-10 flex flex-col justify-end">
+                  <p className="font-['Barlow_Condensed'] font-900 tracking-tight text-background text-[clamp(1.6rem,3vw,2.5rem)]">{n}</p>
+                  <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.18em] text-background/50 mt-1">{l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </TabPanel>
       </div>
     </section>
   );
 }
 
 // ─── Design ───────────────────────────────────────────────────────────────────
+// Ordenados con los destacados primero: dashboards, analítica, transaccional,
+// ubicación, reservas, onboarding y mensajería al frente; el resto queda
+// disponible detrás de "Ver más ejercicios".
 const DRIBBBLE_SHOTS: LightboxShot[] = [
-  {
-    img: "https://cdn.dribbble.com/userupload/13902756/file/original-a58b51d3e797d69ac72f43f68b99e10e.png",
-    title: "Daily UI 023 — Onboarding",
-    desc: "Flujo de onboarding para una app de fitness: carrusel de tarjetas con imagen a página completa y CTA claro en cada paso.",
-    href: "https://dribbble.com/shots/23938922-Daily-UI-023-Onboarding",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/13186247/file/original-8fbe1eccf4ef8102bc5799bf6b892350.jpg",
-    title: "Daily UI 022 — Search",
-    desc: "Pantalla de búsqueda con foco en el estado del input y sugerencias contextuales sobre un fondo ilustrado.",
-    href: "https://dribbble.com/shots/23688627--DailyUI-022-Search",
-  },
   {
     img: "https://cdn.dribbble.com/userupload/13093471/file/original-95ddb6674818e7f0f3b2be3fb28849ab.jpg",
     title: "Daily UI 021 — Home Monitoring",
     desc: "Dashboard de monitoreo para smart home, con control circular de temperatura y accesos rápidos por habitación.",
     href: "https://dribbble.com/shots/23656753-Daily-UI-021-Home-Monitoring-Dashboard",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12948966/file/original-16a3f6838fd5382721e55729f9c9ea59.jpg",
-    title: "App Ticket Cine",
-    desc: "App de compra de entradas de cine, con selección de asientos, horarios y confirmación de reserva.",
-    href: "https://dribbble.com/shots/23607309-App-Ticket-Cine",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12883246/file/original-a44c2142aaa5511f2d33729e775f678a.jpg",
-    title: "Daily UI 020 — Location Tracker",
-    desc: "Interfaz de rastreo de ubicación en tiempo real sobre un mapa, con tarjeta de estado flotante.",
-    href: "https://dribbble.com/shots/23584148-DailyUI-020-Location-Tracker",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12859002/file/original-e759d7b10e19c78b41ab3c984c7b496e.jpg",
-    title: "Daily UI 019 — Leaderboard",
-    desc: "Tabla de posiciones gamificada, con ranking, avatares y puntaje destacado para el primer lugar.",
-    href: "https://dribbble.com/shots/23575917-Daily-UI-019-LEADERBOARD",
   },
   {
     img: "https://cdn.dribbble.com/userupload/12686920/file/original-deaa0fbe6bdb6dd69529e465719dc647.jpg",
@@ -656,10 +953,64 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     href: "https://dribbble.com/shots/23516410-Daily-UI-018-Analytics-Chart",
   },
   {
+    img: "https://cdn.dribbble.com/userupload/11519616/file/original-ca0b34287992efd36891f778353a8d38.jpg",
+    title: "Daily UI 003 — Safe Bank",
+    desc: "Landing page de banca online, con hero de gran formato y llamado a abrir cuenta.",
+    href: "https://dribbble.com/shots/23097117-Landing-page-Daily-UI-003-100uichallenge-dailyui",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/11431967/file/original-20563c9839f90343bda0eb8e96b42af0.jpg",
+    title: "Credit Card Checkout",
+    desc: "Pantalla de checkout con formulario de tarjeta y tarjeta visual del producto.",
+    href: "https://dribbble.com/shots/23065326-Credit-Card-Checkoutor-Daily-UI-100uichallenge-dailyui",
+  },
+  {
     img: "https://cdn.dribbble.com/userupload/12246714/file/original-6b94e09236ef6e5dd62f0b7e04d40d9f.jpg",
     title: "Daily UI 017 — Purchase Receipt",
     desc: "Boleta de compra digital con desglose de ítems, totales y confirmación de pago.",
     href: "https://dribbble.com/shots/23360851-Reto-UI-de-100-di-as-DailyUI-017-PURCHASE-RECEIPT",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/11944881/file/original-987d7527000349a7dd6558030e55d755.jpg",
+    title: "Daily UI 012 — E-commerce Shop",
+    desc: "Catálogo de tienda online con grilla de productos y filtros.",
+    href: "https://dribbble.com/shots/23252077-Reto-UI-de-100-d-as-DailyUI-012-E-commerce-Shop",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/12883246/file/original-a44c2142aaa5511f2d33729e775f678a.jpg",
+    title: "Daily UI 020 — Location Tracker",
+    desc: "Interfaz de rastreo de ubicación en tiempo real sobre un mapa, con tarjeta de estado flotante.",
+    href: "https://dribbble.com/shots/23584148-DailyUI-020-Location-Tracker",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/12948966/file/original-16a3f6838fd5382721e55729f9c9ea59.jpg",
+    title: "App Ticket Cine",
+    desc: "App de compra de entradas de cine, con selección de asientos, horarios y confirmación de reserva.",
+    href: "https://dribbble.com/shots/23607309-App-Ticket-Cine",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/13902756/file/original-a58b51d3e797d69ac72f43f68b99e10e.png",
+    title: "Daily UI 023 — Onboarding",
+    desc: "Flujo de onboarding para una app de fitness: carrusel de tarjetas con imagen a página completa y CTA claro en cada paso.",
+    href: "https://dribbble.com/shots/23938922-Daily-UI-023-Onboarding",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/12027216/file/original-269490e535af57b8a04a787073acd148.jpg",
+    title: "Daily UI 013 — Direct Message",
+    desc: "Bandeja de mensajería directa con lista de conversaciones y vista de chat activo.",
+    href: "https://dribbble.com/shots/23282244-Reto-UI-de-100-d-as-DailyUI-013-Direct-Message",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/13186247/file/original-8fbe1eccf4ef8102bc5799bf6b892350.jpg",
+    title: "Daily UI 022 — Search",
+    desc: "Pantalla de búsqueda con foco en el estado del input y sugerencias contextuales sobre un fondo ilustrado.",
+    href: "https://dribbble.com/shots/23688627--DailyUI-022-Search",
+  },
+  {
+    img: "https://cdn.dribbble.com/userupload/12859002/file/original-e759d7b10e19c78b41ab3c984c7b496e.jpg",
+    title: "Daily UI 019 — Leaderboard",
+    desc: "Tabla de posiciones gamificada, con ranking, avatares y puntaje destacado para el primer lugar.",
+    href: "https://dribbble.com/shots/23575917-Daily-UI-019-LEADERBOARD",
   },
   {
     img: "https://cdn.dribbble.com/userupload/12161792/file/original-b98536159473c787d89b50539a9691ce.jpg",
@@ -678,18 +1029,6 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     title: "Daily UI 014 — Countdown Timer",
     desc: "Temporizador de cuenta regresiva sobre una interfaz mobile de estilo oscuro.",
     href: "https://dribbble.com/shots/23304450-Reto-UI-de-100-d-as-DailyUI-014-Countdown-Timer",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12027216/file/original-269490e535af57b8a04a787073acd148.jpg",
-    title: "Daily UI 013 — Direct Message",
-    desc: "Bandeja de mensajería directa con lista de conversaciones y vista de chat activo.",
-    href: "https://dribbble.com/shots/23282244-Reto-UI-de-100-d-as-DailyUI-013-Direct-Message",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11944881/file/original-987d7527000349a7dd6558030e55d755.jpg",
-    title: "Daily UI 012 — E-commerce Shop",
-    desc: "Catálogo de tienda online con grilla de productos y filtros.",
-    href: "https://dribbble.com/shots/23252077-Reto-UI-de-100-d-as-DailyUI-012-E-commerce-Shop",
   },
   {
     img: "https://cdn.dribbble.com/userupload/11902113/file/original-03ae52debb14defd79bc7f83fd9e87df.jpg",
@@ -740,18 +1079,6 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     href: "https://dribbble.com/shots/23097648-Calculadora-Daily-UI-004",
   },
   {
-    img: "https://cdn.dribbble.com/userupload/11519616/file/original-ca0b34287992efd36891f778353a8d38.jpg",
-    title: "Daily UI 003 — Safe Bank",
-    desc: "Landing page de banca online, con hero de gran formato y llamado a abrir cuenta.",
-    href: "https://dribbble.com/shots/23097117-Landing-page-Daily-UI-003-100uichallenge-dailyui",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11431967/file/original-20563c9839f90343bda0eb8e96b42af0.jpg",
-    title: "Credit Card Checkout",
-    desc: "Pantalla de checkout con formulario de tarjeta y tarjeta visual del producto.",
-    href: "https://dribbble.com/shots/23065326-Credit-Card-Checkoutor-Daily-UI-100uichallenge-dailyui",
-  },
-  {
     img: "https://cdn.dribbble.com/userupload/11429428/file/original-6c2efb888e82276173d0e1a40a4ee414.jpg",
     title: "Daily UI 001 — Sign Up",
     desc: "Modal de registro de usuario, primer ejercicio del reto de 100 días de UI.",
@@ -759,12 +1086,16 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
   },
 ];
 
+const FEATURED_SHOTS_COUNT = 10;
+
 function Design() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState(false);
   const navLightbox = useCallback((dir: 1 | -1) => {
     setLightboxIndex((cur) => (cur === null ? cur : (cur + dir + DRIBBBLE_SHOTS.length) % DRIBBBLE_SHOTS.length));
   }, []);
   const { ref, visible } = useInView(0.1);
+  const visibleShots = expanded ? DRIBBBLE_SHOTS : DRIBBBLE_SHOTS.slice(0, FEATURED_SHOTS_COUNT);
 
   return (
     <section id="design" className="border-t border-border py-20 md:py-32">
@@ -775,47 +1106,69 @@ function Design() {
         }`}
       >
         <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-8">
-          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
-            Diseño UI
-          </h2>
+          <div>
+            <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
+              Diseño UI
+            </h2>
+            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
+              Exploraciones visuales
+            </p>
+          </div>
           <a
             href="https://dribbble.com/PatGsj"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           >
             Perfil en Dribbble <ArrowUpRight size={13} />
           </a>
         </div>
 
         <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-10">
-          Esto es lo que hago fuera de los proyectos de cliente, sobre todo con el reto Daily UI — una forma de seguir practicando patrones de interfaz sin la presión de un brief real. Hacé clic en cualquiera para verla más grande.
+          Selección de ejercicios de exploración visual y diseño de interfaces desarrollados para practicar composición, jerarquía, patrones de interacción y distintos contextos de producto. Haz clic en cualquiera para verla más grande.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {DRIBBBLE_SHOTS.map((s, i) => (
-            <button
+          {visibleShots.map((s, i) => (
+            <motion.button
               key={s.img}
               onClick={() => setLightboxIndex(i)}
-              className="group relative aspect-square overflow-hidden bg-muted border border-border cursor-pointer text-left"
+              initial={i >= FEATURED_SHOTS_COUNT ? { opacity: 0, y: 16 } : false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: Math.min(Math.max(i - FEATURED_SHOTS_COUNT, 0) * 0.05, 0.4), ease: [0.25, 0.1, 0.25, 1] }}
+              className="group relative aspect-square overflow-hidden bg-muted border border-border cursor-pointer text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
             >
               <img
                 src={s.img}
                 alt={s.title}
                 loading="lazy"
                 decoding="async"
+                width={600}
+                height={600}
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 transition-opacity duration-500" />
               <div className="absolute inset-0 flex items-center justify-center px-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <p className="font-['Barlow_Condensed'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-background leading-none">{s.title}</p>
               </div>
-            </button>
+            </motion.button>
           ))}
         </div>
 
+        {!expanded && DRIBBBLE_SHOTS.length > FEATURED_SHOTS_COUNT && (
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={() => setExpanded(true)}
+              className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+            >
+              <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
+              Ver más ejercicios
+            </button>
+          </div>
+        )}
+
         {lightboxIndex !== null && (
-          <Lightbox shots={DRIBBBLE_SHOTS} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} showDesc={false} />
+          <Lightbox shots={visibleShots} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} showDesc={false} />
         )}
       </div>
     </section>
@@ -831,10 +1184,11 @@ const CERTIFICATIONS_DATA = [
 ];
 
 const TOOLS_DATA = [
-  { cat: "Diseño", items: ["Figma", "Photoshop", "Illustrator", "InDesign"] },
-  { cat: "Audiovisual", items: ["Premiere Pro", "After Effects", "Audition"] },
-  { cat: "Desarrollo", items: ["HTML / CSS", "React (en formación)", "Python (en formación)"] },
-  { cat: "IA & Productividad", items: ["Claude Code (AI-Assisted Dev)", "Prompt Engineering", "Figma", "Tailwind CSS", "JavaScript/React", "Supabase"] },
+  { cat: "Diseño y prototipado", items: ["Figma", "Auto Layout", "Componentes y variantes", "Prototipos interactivos", "Wireframes", "Photoshop", "Illustrator", "InDesign"] },
+  { cat: "UX/UI y producto", items: ["Flujos de usuario", "Arquitectura de información", "Diseño responsive", "Sistemas de diseño", "Handoff a desarrollo", "Principios de usabilidad", "Fundamentos de accesibilidad"] },
+  { cat: "Desarrollo web", items: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "Supabase", "PostgreSQL", "Vercel", "React — en formación", "TypeScript — en formación", "Python — en formación"] },
+  { cat: "Comunicación visual", items: ["Branding", "Diseño editorial", "Comunicación gráfica", "Producción audiovisual"] },
+  { cat: "IA y productividad", items: ["Desarrollo asistido por IA", "Automatización de tareas", "Documentación y exploración técnica"] },
 ];
 
 function About() {
@@ -867,32 +1221,57 @@ function About() {
           </div>
 
           {/* Right */}
-          <div className="space-y-10">
-            <h2
-              className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.88] tracking-[-0.01em] text-foreground text-[clamp(3.5rem,7vw,6.5rem)]"
-            >
-              Diseño UX/UI<br />
-              orientado a<br />
-              producto<span className="text-muted-foreground">.</span>
-            </h2>
-
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground -mt-6">Sobre mí</p>
-            <p className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground -mt-6">Patricio Gustavo Soto Jofré</p>
+          <div className="space-y-8">
+            <div className="space-y-3">
+              <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Sobre mí</p>
+              <h2
+                className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.94] tracking-[-0.01em] text-foreground text-[clamp(2.5rem,5.5vw,4.25rem)]"
+              >
+                Diseño de interfaces<br />
+                orientado a producto<span className="text-muted-foreground">.</span>
+              </h2>
+              <p className="font-['Barlow_Condensed'] font-700 text-lg uppercase tracking-tight text-muted-foreground">Patricio Gustavo Soto Jofré</p>
+            </div>
 
             <div className="space-y-5 max-w-md">
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-foreground">
-                Soy Patgsj (Patricio Soto). Diseño interfaces, no solo las dibujo: formación en UX/UI (AIEP) y más de 10 años en comunicación visual, hoy aplicados a resolver problemas reales de producto.
+                Diseño interfaces con criterio visual, funcional y de producto. Soy Patricio Soto (Patgsj), diseñador gráfico con formación en Diseño de Productos UX/UI y más de diez años de experiencia en comunicación visual. Mi principal fortaleza está en transformar necesidades de negocio en interfaces claras, consistentes y técnicamente viables.
               </p>
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                Estudio Ingeniería en Informática, lo que me da algo poco común en diseño: pensamiento lógico y estructurado. Ese orden también viene de la topografía, donde trabajé antes — ahí aprendí que un error de medición se paga caro, y ese mismo rigor lo aplico hoy a cada flujo, cada estado de un componente, cada detalle de una interfaz.
+                Actualmente complemento mi perfil con estudios de Ingeniería en Informática, lo que me permite colaborar con equipos de desarrollo, comprender restricciones técnicas y llevar decisiones de diseño a productos funcionales.
               </p>
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                No me quedo en Figma: uso Figma Make y flujos de desarrollo asistido por IA (Claude Code) para llevar mis diseños a código real — React, Tailwind, TypeScript — y probarlos como productos funcionales, no como maquetas estáticas.
+                Mi experiencia más sólida está en diseño visual, UI, prototipado y construcción de interfaces. En UX he trabajado principalmente en levantamiento de necesidades, definición de flujos, organización de información e iteración con clientes.
               </p>
             </div>
 
+            <div>
+              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                Mi aporte a un equipo de producto
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 max-w-md">
+                {[
+                  "Criterio visual y atención al detalle.",
+                  "Diseño de interfaces y prototipos.",
+                  "Comprensión de componentes y sistemas de diseño.",
+                  "Comunicación con perfiles técnicos.",
+                  "Capacidad de llevar una propuesta hasta su implementación.",
+                  "Aprendizaje continuo y adaptación.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                    <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.8] text-muted-foreground max-w-md border-t border-border pt-5">
+              Utilizo herramientas de desarrollo asistido por IA para acelerar tareas técnicas, manteniendo bajo mi responsabilidad las decisiones de diseño, arquitectura e implementación.
+            </p>
+
             <div className="flex flex-wrap gap-2 pt-2">
-              {["Figma", "Figma Make", "React", "Tailwind CSS", "TypeScript", "Comunicación Visual", "Claude Code (AI-Assisted Dev)"].map((t) => (
+              {["Figma", "Prototipado", "Sistemas de diseño", "Tailwind CSS", "Comunicación Visual"].map((t) => (
                 <span
                   key={t}
                   className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-all duration-200"
@@ -971,9 +1350,9 @@ function About() {
 
 // ─── Experience ───────────────────────────────────────────────────────────────
 const EXP_DATA = [
-  { n: "01", role: "Diseñador UX/UI & Desarrollador Full-Stack Independiente", company: "Proyectos propios", period: "2024–Presente", type: "Independiente", desc: "Investigación, diseño de interfaz y desarrollo end-to-end de aplicaciones web y PWAs para clientes reales. Proyecto estrella: Ferretería CTM — SaaS POS con arquitectura multi-tenant, emisión de DTEs ante el SII y modo offline." },
-  { n: "02", role: "Diplomado en Diseño de Productos UX/UI", company: "AIEP", period: "2023", type: "Formación", desc: "Formación especializada en investigación con usuarios, diseño de interacción, arquitectura de información, alineamiento de negocio e interfaces interactivas en Figma." },
-  { n: "03", role: "Comunicación Visual, Diseño Gráfico & Precisión", company: "Branding & dirección de arte", period: "Trayectoria técnica y visual", type: "Freelance", desc: "Más de 10 años aplicando diseño de comunicación visual, branding y dirección de arte. Rigor metodológico y manejo de datos de alta precisión heredados del ejercicio técnico e ingeniería." },
+  { n: "01", role: "Diseñador UX/UI y Desarrollador de Producto Independiente", company: "Proyectos independientes y clientes", period: "2024 — Presente", type: "Independiente", desc: "Diseño e implementación de soluciones digitales para proyectos propios y clientes. Levantamiento de necesidades, definición de flujos, diseño de interfaces, prototipado, iteración con clientes y desarrollo de productos web funcionales." },
+  { n: "02", role: "Diseñador Gráfico y Comunicador Visual", company: "Branding y comunicación visual", period: "Trayectoria profesional", type: "Freelance", desc: "Más de diez años de experiencia en comunicación visual, diseño gráfico, branding y producción de piezas para distintos contextos y proyectos." },
+  { n: "03", role: "Técnico Topógrafo", company: "Medición y datos territoriales", period: "2015 — 2017", type: "Complementario", desc: "Experiencia en medición, representación de información territorial y trabajo con datos de precisión, fortaleciendo una metodología rigurosa y atención al detalle." },
 ];
 
 function Experience() {
@@ -1044,19 +1423,19 @@ function CTA() {
 
           <div className="space-y-7 md:pb-4 max-w-xs">
             <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-              ¿Tienes una idea o un problema que resolver? Conversemos. Estoy disponible para proyectos de diseño UX/UI y desarrollo frontend, y me gusta meterme desde el primer boceto hasta el producto que la gente termina usando.
+              ¿Tienes una idea o un problema que resolver? Conversemos. Estoy disponible para oportunidades en diseño UX/UI y productos digitales, y me gusta meterme desde el primer boceto hasta el producto que la gente termina usando.
             </p>
             <a
               href="https://wa.me/56966640562"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 font-['Barlow'] font-600 text-[13px] uppercase tracking-[0.12em] border border-foreground bg-foreground text-background px-7 py-4 hover:bg-transparent hover:text-foreground transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+              className="group inline-flex items-center gap-2.5 font-['Barlow'] font-600 text-[13px] uppercase tracking-[0.12em] border border-foreground bg-foreground text-background px-7 py-4 hover:bg-transparent hover:text-foreground transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
             >
-              Escribime <ArrowUpRight size={14} className="transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              Escribirme <ArrowUpRight size={14} className="transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
             <div className="flex gap-6 pt-1">
               {[
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
+                { label: "Ver LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
                 { label: "GitHub", href: "https://github.com/Patgsj" },
                 { label: "Dribbble", href: "https://dribbble.com/PatGsj" },
               ].map(({ label, href }) => (
@@ -1065,7 +1444,7 @@ function CTA() {
                   href={href}
                   target={href !== "#" ? "_blank" : undefined}
                   rel={href !== "#" ? "noopener noreferrer" : undefined}
-                  className="font-['Barlow'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  className="font-['Barlow'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
                   {label}
                 </a>
@@ -1107,7 +1486,7 @@ function Footer() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200"
+                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
               >
                 {label}
               </button>
@@ -1129,7 +1508,7 @@ function Footer() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200"
+                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
               >
                 {label}
               </a>
@@ -1141,14 +1520,14 @@ function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
-          © 2026 Patgsj.
+          © 2026 Patricio Soto. Diseño y desarrollo propio.
         </p>
         <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
           San Carlos, Ñuble, Chile
         </p>
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors"
+          onClick={() => scrollTo("hero")}
+          className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
         >
           <ArrowUp size={12} /> Inicio
         </button>
