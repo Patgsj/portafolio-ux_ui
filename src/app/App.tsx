@@ -211,7 +211,7 @@ function Hero() {
       <div className="relative z-10 max-w-[1400px] mx-auto w-full px-7 md:px-14 flex items-center justify-end py-5">
         <span className="font-['Barlow'] font-300 text-[11px] tracking-[0.16em] uppercase text-muted-foreground text-right">
           <span className="md:hidden">Disponibilidad — 2026</span>
-          <span className="hidden md:inline">Disponible para nuevos proyectos</span>
+          <span className="hidden md:inline">Disponible para oportunidades UX/UI</span>
         </span>
       </div>
 
@@ -241,7 +241,10 @@ function Hero() {
             <div className="space-y-7 md:pb-4 max-w-xs md:max-w-sm">
               <div className="space-y-4">
                 <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
-                  Diseño interfaces traduciendo necesidades de negocio en flujos y pantallas claras, aplicando al diseño de producto un criterio visual afinado en más de diez años de comunicación gráfica — mientras profundizo mi formación en UX/UI e Ingeniería en Informática.
+                  Diseño interfaces digitales a partir de necesidades reales de negocio, organizándolas en flujos, jerarquías de información y prototipos claros.
+                </p>
+                <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
+                  Aporto más de diez años de experiencia en comunicación visual y, desde 2023, estoy desarrollando mi práctica profesional en UX/UI junto con estudios de Ingeniería en Informática.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -472,7 +475,7 @@ function Lightbox({
           <motion.img
             key={shot.img}
             src={shot.img}
-            alt={shot.title}
+            alt={shot.desc}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -646,7 +649,7 @@ function SectionKicker({ index, title }: { index?: string; title: string }) {
   );
 }
 
-const PROJECT_PHASES = ["Problema", "Levantamiento", "Arquitectura", "Wireframes", "UI", "Prototipo", "Iteración"];
+const PROJECT_PHASES = ["Problema", "Levantamiento", "Arquitectura de información", "Wireframes", "Diseño de interfaz", "Prototipo", "Iteración"];
 const CURRENT_PHASE_INDEX = 6;
 
 function PhaseStepper() {
@@ -657,12 +660,12 @@ function PhaseStepper() {
           <div className="flex items-center gap-2 shrink-0">
             <span aria-hidden className={`w-2 h-2 shrink-0 ${i <= CURRENT_PHASE_INDEX ? "bg-foreground" : "bg-border"}`} />
             <span
+              aria-label={i === CURRENT_PHASE_INDEX ? `${phase} — fase actual` : undefined}
               className={`font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.12em] whitespace-nowrap ${
                 i === CURRENT_PHASE_INDEX ? "text-foreground" : "text-muted-foreground"
               }`}
             >
               {phase}
-              {i === CURRENT_PHASE_INDEX && <span className="sr-only"> — fase actual</span>}
             </span>
           </div>
           {i < PROJECT_PHASES.length - 1 && <span aria-hidden className="flex-1 h-px bg-border mx-3 min-w-4" />}
@@ -766,7 +769,7 @@ function Work() {
             Ferretería CTM
           </p>
           <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl">
-            Centraliza la consulta de productos y parte de la operación de un negocio que recién comienza: catálogo autoservicio pensado para un tótem, gestión de productos y stock, y apoyo al registro de ventas, ganancias y métodos de pago.
+            Busca centralizar la consulta de productos y parte de la operación de un negocio que recién comienza: catálogo autoservicio pensado para un tótem, gestión de productos y stock, y apoyo al registro de ventas, ganancias y métodos de pago.
           </p>
         </div>
 
@@ -787,7 +790,7 @@ function Work() {
         <TabPanel index={0} active={activeTab}>
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
             <InfoCell kicker="Contexto" title="Un negocio que recién comienza">
-              La ferretería está comenzando y compite con la atención informal de un mesón tradicional. Necesita un catálogo autoservicio pensado para un tótem que resuelva consultas de producto sin depender de que siempre haya alguien disponible para atender, además de apoyo para gestionar productos, controlar stock y registrar ventas, ganancias y métodos de pago.
+              La ferretería está comenzando y actualmente depende principalmente de la atención directa en mesón. El proyecto busca complementar esa atención con un catálogo autoservicio para consultar productos, precios y disponibilidad sin depender siempre de una persona. Además, contempla herramientas iniciales para gestionar productos, controlar stock y apoyar el registro de ventas, ganancias y métodos de pago.
             </InfoCell>
             <InfoCell kicker="Alcance" title="Catálogo y gestión, no un sistema completo">
               El proyecto cubre catálogo público, panel de administración de productos e inventario, y una pantalla de registro de venta. No incluye facturación electrónica, funcionamiento sin conexión garantizado ni gestión de múltiples sucursales.
@@ -819,7 +822,7 @@ function Work() {
               <span className="inline-block font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-1.5 text-muted-foreground">Proyecto independiente</span>
             </div>
             <InfoCell kicker="Cómo trabajamos" title="Conversación con el cliente, no investigación con usuarios">
-              Las conversaciones con el dueño sirvieron para levantar requerimientos, ordenar prioridades y ajustar decisiones de diseño. Esa conversación es distinta de una validación con usuarios finales, y esa distinción se mantiene a lo largo de todo este caso.
+              Las conversaciones con el dueño permitieron levantar requerimientos, ordenar prioridades y revisar decisiones de diseño. Esta instancia no reemplaza la validación con usuarios finales.
             </InfoCell>
           </div>
         </TabPanel>
@@ -1227,7 +1230,7 @@ function Design() {
             >
               <img
                 src={s.img}
-                alt={s.title}
+                alt=""
                 loading="lazy"
                 decoding="async"
                 width={600}
@@ -1322,7 +1325,10 @@ function About() {
 
             <div className="space-y-5 max-w-md">
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-foreground">
-                Diseñador gráfico con más de diez años en comunicación visual, hoy en transición hacia UX/UI. Mi trabajo es traducir necesidades de negocio en flujos, jerarquías de información y prototipos claros — y sigo profundizando en validación con usuarios, accesibilidad y sistemas de diseño.
+                Soy diseñador gráfico con más de diez años de experiencia en comunicación visual y desde 2023 estoy orientando mi carrera profesional hacia UX/UI.
+              </p>
+              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
+                Mi fortaleza está en organizar información, construir jerarquías visuales y traducir necesidades de negocio en flujos, interfaces y prototipos. Actualmente complemento mi experiencia con formación en diseño de productos digitales y estudios de Ingeniería en Informática, mientras profundizo en validación con usuarios, accesibilidad y sistemas de diseño.
               </p>
             </div>
 
@@ -1350,7 +1356,7 @@ function About() {
             </div>
 
             <div className="flex flex-wrap gap-2 pt-2">
-              {["Figma", "Prototipado", "Fundamentos de sistemas de diseño", "Tailwind CSS", "Comunicación Visual"].map((t) => (
+              {["Figma", "Prototipado", "Arquitectura de información", "Fundamentos de sistemas de diseño", "Comunicación visual"].map((t) => (
                 <span
                   key={t}
                   className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-all duration-200"
@@ -1430,7 +1436,7 @@ function About() {
 // ─── Experience ───────────────────────────────────────────────────────────────
 const EXP_DATA = [
   { n: "01", role: "Diseñador UX/UI independiente", company: "Proyecto con cliente y exploraciones propias", period: "2024 — Presente", type: "Independiente", desc: "Participación en un proyecto con cliente y en exploraciones propias, realizando levantamiento de necesidades, definición de flujos, diseño de interfaces, prototipado y construcción de demostraciones funcionales." },
-  { n: "02", role: "Diseñador Gráfico y Comunicador Visual", company: "Branding y comunicación visual", period: "Trayectoria profesional", type: "Freelance", desc: "Más de diez años construyendo jerarquía visual, tipografía y consistencia de marca para distintos contextos y proyectos — la base de criterio visual que hoy aplico al diseño de interfaces." },
+  { n: "02", role: "Diseñador Gráfico y Comunicador Visual", company: "Branding y comunicación visual", period: "Trayectoria profesional", type: "Freelance", desc: "Más de diez años trabajando con jerarquía visual, tipografía, composición y consistencia de marca en distintos contextos. Esta trayectoria constituye la base visual que actualmente aplico al diseño de interfaces." },
   { n: "03", role: "Comunicación visual para seguridad industrial", company: "Teck Quebrada Blanca", period: "Colaboración puntual", type: "Habilidad transferible", desc: "Trabajé con profesionales de seguridad para transformar información técnica sobre incidentes y prevención en piezas visuales claras, alineadas con lineamientos corporativos. Por confidencialidad no puedo publicar esas piezas; la experiencia fortaleció mi capacidad para comprender información compleja, colaborar con especialistas y comunicarla de forma visual y precisa." },
   { n: "04", role: "Técnico Topógrafo", company: "Medición y datos territoriales", period: "2015 — 2017", type: "Complementario", desc: "Experiencia en medición, representación de información territorial y trabajo con datos de precisión, fortaleciendo una metodología rigurosa y atención al detalle." },
 ];
@@ -1492,18 +1498,18 @@ function CTA() {
       >
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
           <div>
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">Disponible para proyectos</p>
+            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">Disponible para oportunidades UX/UI</p>
             <h2
-              className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4rem,14vw,13rem)]"
+              className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.94] tracking-[-0.01em] text-foreground text-[clamp(1.9rem,8vw,7.5rem)] max-w-3xl"
             >
-              Hablemos<br />de tu<br />
-              <em className="not-italic text-muted-foreground">producto.</em>
+              Conversemos<br />sobre cómo puedo<br />
+              <em className="not-italic text-muted-foreground">aportar a tu equipo.</em>
             </h2>
           </div>
 
           <div className="space-y-7 md:pb-4 max-w-xs">
             <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-              Busco un rol de UX/UI donde mi criterio visual y mi forma de resolver problemas de interfaz aporten valor a un equipo de producto, mientras sigo creciendo en investigación, validación y sistemas de diseño.
+              Busco integrarme a un equipo de producto donde pueda aportar mi experiencia visual, mi capacidad para organizar información y mi formación en UX/UI, mientras continúo creciendo en validación, accesibilidad y sistemas de diseño.
             </p>
             <a
               href="https://wa.me/56966640562"
