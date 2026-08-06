@@ -233,7 +233,7 @@ function Hero() {
                 <span className="sr-only"> — Patricio Soto</span>
               </h1>
               <p className="font-['Barlow'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5">
-                Patricio Soto — Diseñador UX/UI &amp; Diseñador Gráfico
+                Diseñador UX/UI con trayectoria en comunicación visual
               </p>
             </div>
 
@@ -241,19 +241,24 @@ function Hero() {
             <div className="space-y-7 md:pb-4 max-w-xs md:max-w-sm">
               <div className="space-y-4">
                 <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
-                  Diseño interfaces digitales claras, funcionales y visualmente consistentes, desde la estructura inicial hasta el prototipo y su implementación.
-                </p>
-                <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
-                  Mi formación en Diseño Gráfico, UX/UI e Informática me permite conectar las necesidades de las personas, los objetivos del negocio y la viabilidad técnica de cada solución.
+                  Diseño interfaces traduciendo necesidades de negocio en flujos y pantallas claras, aplicando al diseño de producto un criterio visual afinado en más de diez años de comunicación gráfica — mientras profundizo mi formación en UX/UI e Ingeniería en Informática.
                 </p>
               </div>
-              <button
-                onClick={() => scrollTo("work")}
-                className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-              >
-                <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
-                Ver proyectos
-              </button>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <button
+                  onClick={() => scrollTo("work")}
+                  className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                >
+                  <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
+                  Ver caso de estudio
+                </button>
+                <button
+                  onClick={() => scrollTo("experience")}
+                  className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors duration-200 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                >
+                  Conocer mi experiencia
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -263,33 +268,6 @@ function Hero() {
 }
 
 // ─── Work ─────────────────────────────────────────────────────────────────────
-const PILLARS_DATA = [
-  {
-    n: "01",
-    title: "Costo operativo inicial cercano a $0",
-    desc: "Uso estratégico de Supabase (Postgres + Auth + Realtime) y Vercel Functions en sus capas gratuitas durante la etapa inicial del proyecto.",
-    why: "El cliente venía pagando varias suscripciones mensuales para resolver tareas sueltas; en el arranque de un negocio, cada costo fijo de infraestructura pesa. La arquitectura queda preparada para escalar a planes pagos cuando la operación lo requiera.",
-  },
-  {
-    n: "02",
-    title: "Aislamiento de datos por organización (RLS)",
-    desc: "Row Level Security (RLS) en Postgres, aplicado a nivel de contexto de sesión vía RPC (set_config). El aislamiento de datos se garantiza en la base de datos, no solo en la aplicación.",
-    why: "Mayor seguridad ante manipulaciones desde el cliente y escalabilidad real: si el negocio abre una segunda sucursal, el sistema está preparado para separar inventarios y cajas sin rehacer la base de datos.",
-  },
-  {
-    n: "03",
-    title: "Documentos tributarios electrónicos (DTE)",
-    desc: "Integración con OpenFactura/Haulmer para la emisión de boletas (39) y facturas (33) ante el SII, implementada como función serverless en Vercel. Actualmente a la espera de aprobación para conectar en producción.",
-    why: "Es un requisito legal, no un extra: mantener el token de la API fuera del navegador evita que quede expuesto y comprometa la cuenta ante el SII.",
-  },
-  {
-    n: "04",
-    title: "Resiliencia ante cortes de conexión",
-    desc: "Cola de reintentos con backoff creciente para la emisión de documentos, y Service Worker (PWA) para que la venta se pueda cerrar sin conexión.",
-    why: "En la operación de mesón la conexión no siempre es estable. La caja no puede depender de que internet funcione para cerrar una venta.",
-  },
-];
-
 function PillarCell({ n, title, desc, why }: { n: string; title: string; desc: string; why?: string }) {
   return (
     <div className="border-t border-l border-border px-8 py-10 [&:nth-child(2n)]:border-r [&:nth-child(-n+2)]:md:border-t-0">
@@ -315,32 +293,32 @@ const CASE_SHOTS = [
   {
     img: "/case-ferreteria/dashboard.webp",
     title: "Dashboard de negocio",
-    desc: "Ventas y utilidad del día, valor total de inventario, alertas de stock, tendencia de 7 días y emisión de documentos (boletas vs. facturas).",
+    desc: "Panel administrativo con ventas y utilidad del día, valor de inventario y alertas de stock bajo, pensado para que el dueño revise el estado del negocio de un vistazo.",
   },
   {
     img: "/case-ferreteria/pos.webp",
-    title: "Punto de venta (POS)",
-    desc: "Flujo de caja optimizado para velocidad: escaneo de código de barras, atajo cantidad*código, boleta o factura y método de pago en la misma pantalla.",
+    title: "Registro de venta",
+    desc: "Pantalla de venta pensada para velocidad de mesón: búsqueda de producto, cantidad y método de pago en una misma vista.",
   },
   {
     img: "/case-ferreteria/inventario.webp",
     title: "Gestión de inventario",
-    desc: "Búsqueda instantánea, edición en línea, control de stock crítico y categorías de producto — sincronizado en tiempo real entre dispositivos. Las acciones de fila usan iconos circulares para una lectura más rápida de ver, editar y eliminar.",
+    desc: "Búsqueda de productos, edición en línea y control de stock por categoría. Las acciones de fila usan iconos circulares para una lectura más rápida de ver, editar y eliminar.",
   },
   {
     img: "/case-ferreteria/historial.webp",
     title: "Historial de ventas",
-    desc: "Registro de ventas desde Supabase con búsqueda por folio, método de pago u origen, y un reporte mensual pensado para el contador del negocio.",
+    desc: "Registro de ventas con búsqueda por folio y método de pago, pensado como apoyo para que el dueño lleve el control mensual del negocio.",
   },
   {
     img: "/case-ferreteria/login.webp",
     title: "Acceso restringido",
-    desc: "El panel de administración vive detrás de autenticación Supabase; el catálogo permanece público y accesible sin cuenta.",
+    desc: "El panel de administración queda detrás de un inicio de sesión; el catálogo permanece público y accesible sin cuenta.",
   },
   {
     img: "/case-ferreteria/catalogo-oscuro.webp",
     title: "Catálogo en modo oscuro",
-    desc: "Todas las pantallas del sistema tienen una versión en modo oscuro, con la misma jerarquía y contraste cuidado en ambos temas.",
+    desc: "Versión en modo oscuro del catálogo, cuidando la misma jerarquía y contraste que la versión en modo claro.",
   },
   {
     img: "/case-ferreteria/dashboard-movil.webp",
@@ -350,7 +328,7 @@ const CASE_SHOTS = [
   {
     img: "/case-ferreteria/movil-menu.webp",
     title: "Menú móvil",
-    desc: "En pantallas angostas la navegación se colapsa en un menú lateral con estado de conexión, cambio de tema claro/oscuro y acceso al panel.",
+    desc: "En pantallas angostas la navegación se colapsa en un menú lateral con cambio de tema claro/oscuro y acceso al panel administrativo.",
   },
 ];
 
@@ -538,7 +516,6 @@ const USER_TASKS = [
       "Consultar precio y disponibilidad.",
       "Añadir productos a una venta.",
       "Cerrar una operación sin pasos innecesarios.",
-      "Continuar trabajando ante interrupciones de conexión.",
     ],
   },
   {
@@ -546,44 +523,71 @@ const USER_TASKS = [
     tasks: [
       "Crear y actualizar productos.",
       "Controlar stock.",
-      "Revisar ventas.",
-      "Gestionar información operativa.",
-      "Mantener la documentación tributaria correspondiente.",
+      "Revisar ventas y método de pago.",
+      "Gestionar información operativa básica del negocio.",
     ],
   },
 ];
 
 const PROBLEMS_DATA = [
-  { n: "01", title: "Búsqueda y atención rápida", desc: "La operación de mesón exige encontrar productos, confirmar disponibilidad y avanzar a la venta sin navegación innecesaria." },
-  { n: "02", title: "Información centralizada", desc: "Catálogo, inventario, ventas y documentos tributarios deben mantenerse conectados para reducir errores y tareas duplicadas." },
-  { n: "03", title: "Conectividad variable", desc: "La operación no puede depender completamente de una conexión estable para realizar tareas críticas." },
-  { n: "04", title: "Escalabilidad operativa", desc: "La estructura debe permitir incorporar nuevas sucursales o separar operaciones sin reconstruir todo el producto." },
+  { n: "01", title: "Autoservicio sin fricción", desc: "En un tótem, una persona debe encontrar un producto y comprender su nombre, precio y disponibilidad sin ayuda ni navegación compleja." },
+  { n: "02", title: "Búsqueda y atención rápida", desc: "La operación de mesón exige encontrar productos, confirmar disponibilidad y avanzar a la venta sin pasos innecesarios." },
+  { n: "03", title: "Información centralizada", desc: "Catálogo, inventario y ventas deben mantenerse conectados para reducir errores y tareas duplicadas entre pantallas." },
 ];
 
 const DESIGN_GOALS = [
   "Reducir pasos durante la atención de mesón.",
-  "Facilitar la búsqueda y reconocimiento de productos.",
+  "Facilitar la búsqueda y el reconocimiento de productos.",
   "Mantener acciones y estados visualmente consistentes.",
   "Dar visibilidad inmediata al stock.",
   "Evitar que funciones críticas dependan de navegación compleja.",
-  "Diseñar componentes reutilizables.",
-  "Preparar una interfaz responsive y técnicamente viable.",
+  "Diseñar componentes reutilizables para facilitar futuras iteraciones.",
+  "Preparar una base responsive para el catálogo y el panel.",
   "Considerar accesibilidad desde la jerarquía, el contraste y la interacción.",
 ];
 
 const FLOWS_DATA = [
-  { title: "Flujo de venta", steps: ["Buscar producto", "Revisar precio y stock", "Añadir a la venta", "Confirmar operación", "Emitir documento tributario"] },
+  { title: "Flujo de venta", steps: ["Buscar producto", "Revisar precio y stock", "Añadir a la venta", "Confirmar operación"] },
   { title: "Flujo administrativo", steps: ["Iniciar sesión", "Gestionar productos", "Actualizar precio o stock", "Guardar cambios", "Verificar actualización"] },
-  { title: "Flujo ante interrupción de conexión", steps: ["Registrar venta", "Detectar fallo de conexión", "Mantener operación pendiente", "Reintentar sincronización"] },
 ];
 
 const UX_DECISIONS = [
-  { title: "Velocidad de atención en mesón", desc: "Se priorizó una navegación directa, búsqueda visible, acciones frecuentes claramente identificadas y reducción de pasos durante la venta." },
-  { title: "Visibilidad del inventario", desc: "El stock y la información esencial del producto deben poder consultarse sin entrar en múltiples niveles de navegación." },
-  { title: "Sistema de diseño consistente", desc: "Paleta de marca, tipografía e iconografía SVG unificadas en catálogo, panel administrativo y dashboard, evitando emojis como iconos funcionales y manteniendo botones y tarjetas con un mismo lenguaje visual." },
-  { title: "Consistencia entre modo claro y oscuro", desc: "Auditoría dedicada de la interfaz para detectar colores que solo funcionaban en un tema, tintes de marca invisibles sobre fondo claro y anillos de foco mal alineados entre temas, corrigiendo cada caso encontrado." },
-  { title: "Estados y resiliencia del sistema", desc: "Las operaciones comunican estados de carga, confirmación, error y reintento, contemplando que algunas queden pendientes y se sincronicen cuando vuelva la conexión." },
-  { title: "Microinteracciones ajustadas con el cliente", desc: "Las animaciones de entrada del catálogo y las transiciones entre vistas del panel se refinaron después de que el cliente sintiera una animación de tabla como demasiado brusca." },
+  {
+    n: "01",
+    title: "Reducir errores de selección táctil",
+    desc: "El catálogo se usa principalmente desde un tótem, sin teclado ni mouse, así que diseñé tarjetas de producto grandes con buena separación entre ellas.",
+    why: "La hipótesis es que esto reduce errores de selección y facilita el reconocimiento visual rápido del producto.",
+  },
+  {
+    n: "02",
+    title: "Acelerar la comparación entre productos",
+    desc: "Abrir el detalle de cada producto agrega pasos innecesarios en un flujo de autoservicio, así que mostré nombre y precio directamente en la tarjeta.",
+    why: "La hipótesis de diseño es que esto acelera la comparación sin obligar a entrar a cada ficha.",
+  },
+  {
+    n: "03",
+    title: "Priorizar la búsqueda sobre la navegación",
+    desc: "Con muchos productos por categoría, obligar a navegar por menús agrega fricción, así que ubiqué el buscador como el elemento más visible de la pantalla.",
+    why: "Busca reducir la dependencia de la navegación por categorías cuando la persona ya sabe qué busca.",
+  },
+  {
+    n: "04",
+    title: "Eliminar la ambigüedad sobre el siguiente paso",
+    desc: "El flujo de autoservicio necesita una acción evidente para avanzar, así que definí un botón de \"agregar\" con alto contraste y tamaño táctil generoso en cada tarjeta.",
+    why: "Busca reducir la duda sobre cómo continuar la compra en un contexto sin asistencia presencial.",
+  },
+  {
+    n: "05",
+    title: "Reducir la carga cognitiva entre catálogo y panel",
+    desc: "Mezclar catálogo, inventario y ventas en una misma lógica visual puede saturar la interfaz, así que limité cada pantalla a una tarea principal con jerarquía clara entre título, precio y estado.",
+    why: "Busca que tanto el catálogo público como el panel administrativo se lean sin esfuerzo adicional.",
+  },
+  {
+    n: "06",
+    title: "Facilitar cambios futuros sin rehacer pantallas",
+    desc: "El catálogo y el panel de administración comparten patrones — tarjetas, botones, estados de stock — así que reutilicé los mismos componentes visuales en ambos.",
+    why: "Se validará con la iteración con el cliente; la hipótesis es que reduce el costo de futuros cambios.",
+  },
 ];
 
 const ITERATION_STEPS = [
@@ -595,16 +599,42 @@ const ITERATION_STEPS = [
 ];
 
 const ACCESSIBILITY_COMMITMENTS = [
+  "Jerarquía de encabezados.",
   "Contraste suficiente entre texto y fondo.",
+  "Tamaños legibles.",
   "Estados de foco visibles.",
-  "Navegación mediante teclado.",
-  "Tamaños de área interactiva adecuados.",
   "Etiquetas claras.",
+  "Áreas táctiles adecuadas para un tótem.",
+  "Mensajes de error comprensibles.",
+  "Navegación mediante teclado, cuando corresponde.",
   "No depender exclusivamente del color.",
-  "Jerarquía semántica correcta.",
-  "Estados de error comprensibles.",
-  "Formularios con labels asociados.",
-  "Uso de aria-live para mensajes importantes, cuando corresponde.",
+];
+
+const VALIDATION_TASKS = [
+  "Buscar un producto específico en el catálogo.",
+  "Revisar su disponibilidad.",
+  "Agregarlo al carro.",
+  "Completar una compra simulada.",
+];
+
+const VALIDATION_OBSERVATIONS = [
+  "Éxito o fracaso de la tarea.",
+  "Tiempo aproximado.",
+  "Errores de navegación.",
+  "Dudas o comentarios.",
+  "Elementos que no fueron comprendidos.",
+  "Pasos innecesarios.",
+  "Problemas de legibilidad o interacción con el tótem.",
+];
+
+const NEXT_STEPS = [
+  "Completar las pantallas pendientes en Figma.",
+  "Consolidar componentes y estados.",
+  "Realizar pruebas con usuarios.",
+  "Documentar hallazgos.",
+  "Iterar los flujos principales.",
+  "Preparar especificaciones para desarrollo.",
+  "Revisar accesibilidad y comportamiento responsive.",
 ];
 
 function SectionKicker({ index, title }: { index?: string; title: string }) {
@@ -616,8 +646,8 @@ function SectionKicker({ index, title }: { index?: string; title: string }) {
   );
 }
 
-const PROJECT_PHASES = ["Levantamiento", "Diseño UX/UI", "Implementación", "Iteración con el cliente"];
-const CURRENT_PHASE_INDEX = 3;
+const PROJECT_PHASES = ["Problema", "Levantamiento", "Arquitectura", "Wireframes", "UI", "Prototipo", "Iteración"];
+const CURRENT_PHASE_INDEX = 6;
 
 function PhaseStepper() {
   return (
@@ -642,7 +672,7 @@ function PhaseStepper() {
   );
 }
 
-const CASE_TABS = ["El negocio", "Usuarios y problema", "Proceso y decisiones", "Pantallas y cliente", "Técnico"];
+const CASE_TABS = ["El negocio", "Usuarios y problema", "Decisiones de diseño", "Pantallas y accesibilidad", "Estado, validación e IA"];
 
 function CaseTabs({ active, onChange }: { active: number; onChange: (i: number) => void }) {
   const onKeyDown = (e: KeyboardEvent) => {
@@ -725,19 +755,28 @@ function Work() {
         }`}
       >
         {/* Resumen del proyecto */}
-        <div className="mb-12 max-w-2xl">
+        <div className="mb-10 max-w-2xl">
           <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
-            Caso de estudio 01 — Software a medida, en construcción
+            Caso de estudio 01 — Proyecto real en desarrollo
           </p>
-          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-5 text-[clamp(2.2rem,5vw,4rem)]">
-            Ferretería CTM
+          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-2 text-[clamp(2.2rem,5vw,4rem)]">
+            Catálogo y sistema de gestión para una ferretería
           </h2>
-          <p className="inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-5">
-            <span aria-hidden className="w-1.5 h-1.5 bg-foreground inline-block animate-pulse" />
-            En desarrollo activo — iteración constante junto al cliente
+          <p className="font-['Barlow_Condensed'] font-700 text-base uppercase tracking-tight text-muted-foreground mb-5">
+            Ferretería CTM
           </p>
           <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl">
-            Sistema de punto de venta, inventario y facturación electrónica desarrollado para una ferretería real. El producto integra catálogo público, gestión administrativa, caja, inventario y documentos tributarios en una solución adaptada a la operación diaria del negocio.
+            Centraliza la consulta de productos y parte de la operación de un negocio que recién comienza: catálogo autoservicio pensado para un tótem, gestión de productos y stock, y apoyo al registro de ventas, ganancias y métodos de pago.
+          </p>
+        </div>
+
+        {/* Estado actual y limitaciones — siempre visible, no vive dentro de un tab */}
+        <div className="mb-12 max-w-2xl bg-[#f9f9f7] border border-border px-6 py-6 md:px-8 md:py-7">
+          <p className="font-['Barlow'] font-600 text-[11px] uppercase tracking-[0.16em] text-foreground mb-3">
+            Estado actual y limitaciones
+          </p>
+          <p className="font-['Barlow'] font-300 text-[13px] leading-[1.8] text-muted-foreground">
+            El proyecto continúa en desarrollo. Parte de las pantallas está documentada en Figma y también existe un prototipo funcional desplegado para facilitar la conversación con el cliente. Aún no se han realizado pruebas con usuarios finales, por lo que las decisiones actuales deben considerarse hipótesis de diseño pendientes de validación.
           </p>
         </div>
 
@@ -747,25 +786,41 @@ function Work() {
         {/* Tab 0 — El negocio */}
         <TabPanel index={0} active={activeTab}>
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
-            <InfoCell kicker="Contexto del negocio" title="Reducir dependencias y centralizar la operación">
-              El negocio utilizaba distintos servicios y suscripciones para resolver tareas operativas. El objetivo fue concentrar catálogo, inventario, ventas y facturación en una solución propia, reduciendo dependencias externas y adaptando el producto al funcionamiento real de la ferretería.
+            <InfoCell kicker="Contexto" title="Un negocio que recién comienza">
+              La ferretería está comenzando y compite con la atención informal de un mesón tradicional. Necesita un catálogo autoservicio pensado para un tótem que resuelva consultas de producto sin depender de que siempre haya alguien disponible para atender, además de apoyo para gestionar productos, controlar stock y registrar ventas, ganancias y métodos de pago.
             </InfoCell>
-            <InfoCell kicker="Estado actual" title="Estado actual y próximos pasos">
-              El producto está en desarrollo activo. Los próximos pasos incluyen afianzar la sincronización en escenarios de conexión inestable, ampliar los reportes para administración y dejar la arquitectura lista para una eventual segunda sucursal.
+            <InfoCell kicker="Alcance" title="Catálogo y gestión, no un sistema completo">
+              El proyecto cubre catálogo público, panel de administración de productos e inventario, y una pantalla de registro de venta. No incluye facturación electrónica, funcionamiento sin conexión garantizado ni gestión de múltiples sucursales.
             </InfoCell>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
             <div className="border-r border-b border-border px-8 py-10">
               <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Rol</p>
-              <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Diseño UX/UI y desarrollo de producto</h4>
-              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground mb-4">Levantamiento de necesidades, definición de flujos, diseño de interfaces, prototipado, validación iterativa con el cliente e implementación del producto.</p>
+              <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Diseño UX/UI</h4>
+              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground mb-4">
+                Mi responsabilidad fue conversar directamente con el dueño para comprender la operación, ordenar los requerimientos, definir flujos iniciales, diseñar la jerarquía de información y construir las interfaces del catálogo y del sistema de gestión.
+              </p>
+              <ul className="space-y-2 mb-4">
+                {[
+                  "Levantamiento de necesidades con el cliente.",
+                  "Organización de requerimientos.",
+                  "Flujos de usuario iniciales.",
+                  "Arquitectura de información.",
+                  "Wireframes e interfaz visual.",
+                  "Componentes reutilizables.",
+                  "Prototipo funcional para revisar decisiones con el cliente.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                    <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
               <span className="inline-block font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-1.5 text-muted-foreground">Proyecto independiente</span>
             </div>
-            <div className="border-r border-b border-border px-8 py-10">
-              <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Alcance</p>
-              <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">4 módulos principales</h4>
-              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">Catálogo público, administración, inventario y operación de caja integrados en una solución para un negocio real.</p>
-            </div>
+            <InfoCell kicker="Cómo trabajamos" title="Conversación con el cliente, no investigación con usuarios">
+              Las conversaciones con el dueño sirvieron para levantar requerimientos, ordenar prioridades y ajustar decisiones de diseño. Esa conversación es distinta de una validación con usuarios finales, y esa distinción se mantiene a lo largo de todo este caso.
+            </InfoCell>
           </div>
         </TabPanel>
 
@@ -791,12 +846,18 @@ function Work() {
           </div>
 
           <div>
-            <SectionKicker title="Problemas que el producto debía resolver" />
+            <SectionKicker title="Problemas que el proyecto debía resolver" />
             <div className="grid grid-cols-1 md:grid-cols-2 border-r border-b border-border">
               {PROBLEMS_DATA.map((p) => (
                 <PillarCell key={p.n} {...p} />
               ))}
             </div>
+          </div>
+
+          <div className="max-w-2xl border-l-2 border-foreground pl-6">
+            <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.8] text-foreground italic">
+              "El catálogo debía permitir que una persona encontrara productos y comprendiera rápidamente su nombre, precio y disponibilidad, evitando una navegación compleja en un contexto de autoservicio."
+            </p>
           </div>
 
           <div>
@@ -812,7 +873,7 @@ function Work() {
           </div>
         </TabPanel>
 
-        {/* Tab 2 — Proceso y decisiones */}
+        {/* Tab 2 — Decisiones de diseño */}
         <TabPanel index={2} active={activeTab}>
           <div>
             <SectionKicker title="Flujos principales" />
@@ -832,37 +893,34 @@ function Work() {
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
             <InfoCell kicker="Wireframes y prototipado" title="De la estructura a la interfaz">
               <p className="mb-4">
-                Las primeras decisiones se concentraron en organizar las tareas críticas de catálogo, inventario y venta. El proyecto ha evolucionado mediante revisiones periódicas con el cliente, ajustando jerarquías, acciones y estados de acuerdo con las necesidades reales de operación.
+                Las primeras decisiones se concentraron en organizar las tareas críticas de catálogo, inventario y venta. El proyecto ha evolucionado mediante conversaciones periódicas con el cliente, ajustando jerarquías, acciones y estados de acuerdo con las necesidades reales de operación.
               </p>
               <p className="text-[11px] uppercase tracking-[0.12em] border border-dashed border-border px-4 py-3">
                 Espacio reservado para incorporar capturas de iteraciones anteriores.
               </p>
             </InfoCell>
-            <InfoCell kicker="Validación e iteración" title="Iteración con el cliente">
+            <InfoCell kicker="Conversación con el cliente" title="Cómo se ajustaron las decisiones">
               <p className="mb-5">
-                El producto se ha desarrollado mediante revisiones periódicas con el cliente. Estas conversaciones permiten ajustar flujos, prioridades, terminología y comportamiento de las pantallas según la operación real del negocio.
+                El proyecto avanzó mediante conversaciones periódicas con el dueño del negocio. Estas conversaciones permitieron ajustar flujos, prioridades, terminología y comportamiento de las pantallas según la operación real de la ferretería.
               </p>
               <StepList steps={ITERATION_STEPS} />
             </InfoCell>
           </div>
 
           <div>
-            <SectionKicker title="Decisiones de UX/UI" />
+            <SectionKicker title="Decisiones de diseño" />
             <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
               {UX_DECISIONS.map((d) => (
-                <div key={d.title} className="border-r border-b border-border px-8 py-10">
-                  <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">{d.title}</h4>
-                  <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{d.desc}</p>
-                </div>
+                <PillarCell key={d.n} {...d} />
               ))}
             </div>
           </div>
         </TabPanel>
 
-        {/* Tab 3 — Pantallas y cliente */}
+        {/* Tab 3 — Pantallas y accesibilidad */}
         <TabPanel index={3} active={activeTab}>
           <div>
-            <SectionKicker title="Pantallas finales" />
+            <SectionKicker title="Pantallas" />
             <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
               Capturas reales — haz clic para ampliar
             </p>
@@ -873,8 +931,8 @@ function Work() {
           </div>
 
           <div>
-            <SectionKicker title="Accesibilidad y consistencia" />
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+            <SectionKicker title="Consideraciones de accesibilidad" />
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 mb-6">
               {ACCESSIBILITY_COMMITMENTS.map((a) => (
                 <li key={a} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
                   <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
@@ -882,54 +940,80 @@ function Work() {
                 </li>
               ))}
             </ul>
+            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground max-w-xl border-t border-border pt-5">
+              Estas consideraciones forman parte del diseño actual, pero todavía deben verificarse mediante una revisión de accesibilidad y pruebas de uso.
+            </p>
           </div>
         </TabPanel>
 
-        {/* Tab 4 — Técnico */}
+        {/* Tab 4 — Estado, validación e IA */}
         <TabPanel index={4} active={activeTab}>
           <div>
-            <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-8">
-              El producto corre sobre Supabase (base de datos, autenticación y sincronización en tiempo real) y Vercel (hosting y funciones serverless), con aislamiento de datos por organización a nivel de base de datos. La emisión de documentos tributarios electrónicos ante el SII está implementada y a la espera de aprobación para conectar con la API de OpenFactura en producción.
+            <SectionKicker title="Cómo validaría la solución" />
+            <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-6">
+              La siguiente etapa consiste en realizar pruebas moderadas con entre tres y cinco personas cercanas al público objetivo. Las tareas principales serían buscar un producto específico, revisar su disponibilidad, agregarlo al carro y completar una compra simulada.
             </p>
-
-            <div className="flex flex-wrap gap-2 mb-10">
-              {["Vite 6", "JavaScript (ES Modules)", "Tailwind CSS 4", "Supabase (Postgres, Auth, Realtime, RLS)", "RPCs (set_config)", "Vercel (hosting + serverless + cron)", "OpenFactura / Haulmer API", "Chart.js", "jsPDF", "html5-qrcode", "Vitest"].map((t) => (
-                <span
-                  key={t}
-                  className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.1em] border border-border px-3 py-2 text-muted-foreground"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border mb-10">
-              {PILLARS_DATA.map((p) => (
-                <PillarCell key={p.n} {...p} />
-              ))}
-            </div>
-
-            <div className="bg-foreground text-background grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-px bg-white/10 overflow-hidden">
-              <div className="bg-foreground px-8 py-10">
-                <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-background/50 mb-4">Caso de estudio — Ferretería CTM</p>
-                <p className="font-['Barlow'] font-300 text-sm leading-relaxed text-background/70 max-w-sm">
-                  La venta se cierra al instante; el documento tributario (boleta o factura) está diseñado para emitirse después, en segundo plano, vía función serverless — el token de API nunca toca el navegador. La conexión con el SII está a la espera de aprobación; mientras tanto, se aprovecharon capas gratuitas de infraestructura durante la etapa inicial.
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div>
+                <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">Tareas de la prueba</p>
+                <StepList steps={VALIDATION_TASKS} />
               </div>
-              {[
-                { n: "~$0", l: "Costo operativo inicial" },
-                { n: "RLS", l: "Datos aislados por organización" },
-                { n: "DTE", l: "Integración lista, en espera de aprobación SII" },
-                { n: "PWA", l: "Instalable y funciona sin conexión" },
-              ].map(({ n, l }) => (
-                <div key={l} className="bg-foreground px-8 py-10 flex flex-col justify-end">
-                  <p className="font-['Barlow_Condensed'] font-900 tracking-tight text-background text-[clamp(1.6rem,3vw,2.5rem)]">{n}</p>
-                  <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.18em] text-background/50 mt-1">{l}</p>
-                </div>
-              ))}
+              <div>
+                <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">Qué registraría</p>
+                <ul className="space-y-2">
+                  {VALIDATION_OBSERVATIONS.map((o) => (
+                    <li key={o} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                      <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
+
+          <div>
+            <SectionKicker title="Uso de inteligencia artificial" />
+            <div className="space-y-4 max-w-xl">
+              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
+                Utilizo herramientas de desarrollo asistido por inteligencia artificial para acelerar la construcción de demostraciones funcionales. Los requerimientos, los flujos, la jerarquía de información y las decisiones de interfaz permanecen bajo mi responsabilidad.
+              </p>
+              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
+                La implementación definitiva puede requerir la participación de un ingeniero o equipo de desarrollo.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <SectionKicker title="Próximos pasos" />
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+              {NEXT_STEPS.map((s) => (
+                <li key={s} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
+                  <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
         </TabPanel>
+
+        {/* Cierre — estado del proyecto como información, no como métricas */}
+        <div className="mt-16 bg-foreground text-background px-8 py-10 md:px-10 md:py-12">
+          <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-background/50 mb-6">Estado del proyecto</p>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 max-w-2xl">
+            {[
+              { k: "Documentación en Figma", v: "Parcial" },
+              { k: "Prototipo funcional", v: "Disponible" },
+              { k: "Pruebas con usuarios", v: "Pendientes" },
+              { k: "Etapa actual", v: "Revisión e iteración con el cliente" },
+            ].map(({ k, v }) => (
+              <div key={k} className="flex items-baseline justify-between gap-4 border-b border-background/10 pb-3">
+                <dt className="font-['Barlow'] font-300 text-[13px] text-background/60">{k}</dt>
+                <dd className="font-['Barlow'] font-500 text-[13px] text-background text-right">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );
@@ -1086,7 +1170,7 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
   },
 ];
 
-const FEATURED_SHOTS_COUNT = 10;
+const FEATURED_SHOTS_COUNT = 6;
 
 function Design() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -1124,8 +1208,11 @@ function Design() {
           </a>
         </div>
 
-        <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-10">
-          Selección de ejercicios de exploración visual y diseño de interfaces desarrollados para practicar composición, jerarquía, patrones de interacción y distintos contextos de producto. Haz clic en cualquiera para verla más grande.
+        <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
+          Ejercicios visuales desarrollados para practicar composición, jerarquía, componentes y patrones de interacción. Haz clic en cualquiera para verla más grande.
+        </p>
+        <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
+          No corresponden a productos validados ni a proyectos implementados para clientes.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -1184,9 +1271,9 @@ const CERTIFICATIONS_DATA = [
 ];
 
 const TOOLS_DATA = [
-  { cat: "Diseño y prototipado", items: ["Figma", "Auto Layout", "Componentes y variantes", "Prototipos interactivos", "Wireframes", "Photoshop", "Illustrator", "InDesign"] },
-  { cat: "UX/UI y producto", items: ["Flujos de usuario", "Arquitectura de información", "Diseño responsive", "Sistemas de diseño", "Handoff a desarrollo", "Principios de usabilidad", "Fundamentos de accesibilidad"] },
-  { cat: "Desarrollo web", items: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "Supabase", "PostgreSQL", "Vercel", "React — en formación", "TypeScript — en formación", "Python — en formación"] },
+  { cat: "Uso habitual", items: ["Figma", "Auto Layout", "Componentes y variantes", "Prototipos interactivos", "Wireframes", "Illustrator", "Photoshop", "HTML y CSS"] },
+  { cat: "Conocimientos aplicados o en desarrollo", items: ["JavaScript", "Tailwind CSS", "React", "TypeScript", "Python", "Supabase", "PostgreSQL"] },
+  { cat: "UX/UI y producto", items: ["Flujos de usuario", "Arquitectura de información", "Diseño responsive", "Fundamentos de sistemas de diseño", "Componentes reutilizables", "Handoff a desarrollo", "Principios de usabilidad", "Fundamentos de accesibilidad"] },
   { cat: "Comunicación visual", items: ["Branding", "Diseño editorial", "Comunicación gráfica", "Producción audiovisual"] },
   { cat: "IA y productividad", items: ["Desarrollo asistido por IA", "Automatización de tareas", "Documentación y exploración técnica"] },
 ];
@@ -1235,13 +1322,7 @@ function About() {
 
             <div className="space-y-5 max-w-md">
               <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-foreground">
-                Diseño interfaces con criterio visual, funcional y de producto. Soy Patricio Soto (Patgsj), diseñador gráfico con formación en Diseño de Productos UX/UI y más de diez años de experiencia en comunicación visual. Mi principal fortaleza está en transformar necesidades de negocio en interfaces claras, consistentes y técnicamente viables.
-              </p>
-              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                Actualmente complemento mi perfil con estudios de Ingeniería en Informática, lo que me permite colaborar con equipos de desarrollo, comprender restricciones técnicas y llevar decisiones de diseño a productos funcionales.
-              </p>
-              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                Mi experiencia más sólida está en diseño visual, UI, prototipado y construcción de interfaces. En UX he trabajado principalmente en levantamiento de necesidades, definición de flujos, organización de información e iteración con clientes.
+                Diseñador gráfico con más de diez años en comunicación visual, hoy en transición hacia UX/UI. Mi trabajo es traducir necesidades de negocio en flujos, jerarquías de información y prototipos claros — y sigo profundizando en validación con usuarios, accesibilidad y sistemas de diseño.
               </p>
             </div>
 
@@ -1253,9 +1334,11 @@ function About() {
                 {[
                   "Criterio visual y atención al detalle.",
                   "Diseño de interfaces y prototipos.",
-                  "Comprensión de componentes y sistemas de diseño.",
+                  "Fundamentos de sistemas de diseño.",
+                  "Construcción de componentes reutilizables.",
                   "Comunicación con perfiles técnicos.",
-                  "Capacidad de llevar una propuesta hasta su implementación.",
+                  "Organización de requerimientos y flujos.",
+                  "Preparación de entregables para handoff.",
                   "Aprendizaje continuo y adaptación.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
@@ -1266,12 +1349,8 @@ function About() {
               </ul>
             </div>
 
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.8] text-muted-foreground max-w-md border-t border-border pt-5">
-              Utilizo herramientas de desarrollo asistido por IA para acelerar tareas técnicas, manteniendo bajo mi responsabilidad las decisiones de diseño, arquitectura e implementación.
-            </p>
-
             <div className="flex flex-wrap gap-2 pt-2">
-              {["Figma", "Prototipado", "Sistemas de diseño", "Tailwind CSS", "Comunicación Visual"].map((t) => (
+              {["Figma", "Prototipado", "Fundamentos de sistemas de diseño", "Tailwind CSS", "Comunicación Visual"].map((t) => (
                 <span
                   key={t}
                   className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-all duration-200"
@@ -1350,9 +1429,10 @@ function About() {
 
 // ─── Experience ───────────────────────────────────────────────────────────────
 const EXP_DATA = [
-  { n: "01", role: "Diseñador UX/UI y Desarrollador de Producto Independiente", company: "Proyectos independientes y clientes", period: "2024 — Presente", type: "Independiente", desc: "Diseño e implementación de soluciones digitales para proyectos propios y clientes. Levantamiento de necesidades, definición de flujos, diseño de interfaces, prototipado, iteración con clientes y desarrollo de productos web funcionales." },
-  { n: "02", role: "Diseñador Gráfico y Comunicador Visual", company: "Branding y comunicación visual", period: "Trayectoria profesional", type: "Freelance", desc: "Más de diez años de experiencia en comunicación visual, diseño gráfico, branding y producción de piezas para distintos contextos y proyectos." },
-  { n: "03", role: "Técnico Topógrafo", company: "Medición y datos territoriales", period: "2015 — 2017", type: "Complementario", desc: "Experiencia en medición, representación de información territorial y trabajo con datos de precisión, fortaleciendo una metodología rigurosa y atención al detalle." },
+  { n: "01", role: "Diseñador UX/UI independiente", company: "Proyecto con cliente y exploraciones propias", period: "2024 — Presente", type: "Independiente", desc: "Participación en un proyecto con cliente y en exploraciones propias, realizando levantamiento de necesidades, definición de flujos, diseño de interfaces, prototipado y construcción de demostraciones funcionales." },
+  { n: "02", role: "Diseñador Gráfico y Comunicador Visual", company: "Branding y comunicación visual", period: "Trayectoria profesional", type: "Freelance", desc: "Más de diez años construyendo jerarquía visual, tipografía y consistencia de marca para distintos contextos y proyectos — la base de criterio visual que hoy aplico al diseño de interfaces." },
+  { n: "03", role: "Comunicación visual para seguridad industrial", company: "Teck Quebrada Blanca", period: "Colaboración puntual", type: "Habilidad transferible", desc: "Trabajé con profesionales de seguridad para transformar información técnica sobre incidentes y prevención en piezas visuales claras, alineadas con lineamientos corporativos. Por confidencialidad no puedo publicar esas piezas; la experiencia fortaleció mi capacidad para comprender información compleja, colaborar con especialistas y comunicarla de forma visual y precisa." },
+  { n: "04", role: "Técnico Topógrafo", company: "Medición y datos territoriales", period: "2015 — 2017", type: "Complementario", desc: "Experiencia en medición, representación de información territorial y trabajo con datos de precisión, fortaleciendo una metodología rigurosa y atención al detalle." },
 ];
 
 function Experience() {
@@ -1416,14 +1496,14 @@ function CTA() {
             <h2
               className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4rem,14vw,13rem)]"
             >
-              Hagamos<br />algo<br />
-              <em className="not-italic text-muted-foreground">grande.</em>
+              Hablemos<br />de tu<br />
+              <em className="not-italic text-muted-foreground">producto.</em>
             </h2>
           </div>
 
           <div className="space-y-7 md:pb-4 max-w-xs">
             <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-              ¿Tienes una idea o un problema que resolver? Conversemos. Estoy disponible para oportunidades en diseño UX/UI y productos digitales, y me gusta meterme desde el primer boceto hasta el producto que la gente termina usando.
+              Busco un rol de UX/UI donde mi criterio visual y mi forma de resolver problemas de interfaz aporten valor a un equipo de producto, mientras sigo creciendo en investigación, validación y sistemas de diseño.
             </p>
             <a
               href="https://wa.me/56966640562"
@@ -1431,7 +1511,7 @@ function CTA() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 font-['Barlow'] font-600 text-[13px] uppercase tracking-[0.12em] border border-foreground bg-foreground text-background px-7 py-4 hover:bg-transparent hover:text-foreground transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
             >
-              Escribirme <ArrowUpRight size={14} className="transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              Contactarme <ArrowUpRight size={14} className="transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
             <div className="flex gap-6 pt-1">
               {[
