@@ -1,1 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,700&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+/* Fonts (Syne, Manrope, DM Mono) are loaded via <link rel="preload"/"stylesheet"> in
+   index.html to avoid the extra request-chain latency of a CSS @import (browser must
+   fetch this stylesheet, parse it, then discover and fetch the Google Fonts CSS,
+   before it can even start downloading the woff2 files). See index.html <head>. */
