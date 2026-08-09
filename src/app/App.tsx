@@ -71,7 +71,7 @@ function Nav() {
       <div className="max-w-[1400px] mx-auto px-7 md:px-14 h-[60px] flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="font-['Barlow_Condensed'] font-900 text-[22px] uppercase tracking-[-0.01em] text-foreground leading-none"
+          className="font-['Syne'] font-800 text-[22px] uppercase tracking-[-0.01em] text-foreground leading-none"
         >
           Patgsj<span className="text-muted-foreground">.</span>
         </button>
@@ -83,7 +83,7 @@ function Nav() {
                 key={id}
                 onClick={() => scrollTo(id)}
                 aria-current={active === id ? "page" : undefined}
-                className={`font-['Barlow'] font-400 text-[11px] tracking-[0.14em] uppercase hover:text-foreground transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                className={`font-['Manrope'] font-400 text-[11px] tracking-[0.14em] uppercase hover:text-foreground transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
                   active === id ? "text-foreground" : "text-muted-foreground"
                 }`}
               >
@@ -101,7 +101,7 @@ function Nav() {
           <button
             onClick={() => scrollTo("contact")}
             aria-current={active === "contact" ? "page" : undefined}
-            className={`inline-flex items-center gap-2 font-['Barlow'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+            className={`inline-flex items-center gap-2 font-['Manrope'] font-600 text-[11px] tracking-[0.12em] uppercase px-5 py-2.5 border border-foreground hover:opacity-80 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
               active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
             }`}
           >
@@ -110,7 +110,7 @@ function Nav() {
         </div>
 
         <button
-          className="md:hidden font-['Barlow'] font-600 text-[11px] tracking-widest uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          className="md:hidden font-['Manrope'] font-600 text-[11px] tracking-widest uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -139,7 +139,7 @@ function Nav() {
                   transition={{ duration: 0.3, delay: 0.05 + i * 0.04, ease: "easeOut" }}
                   onClick={() => { scrollTo(id, "auto"); setOpen(false); }}
                   aria-current={active === id ? "page" : undefined}
-                  className={`flex items-center justify-end gap-3 font-['Barlow_Condensed'] font-800 text-4xl uppercase w-full text-right transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                  className={`flex items-center justify-end gap-3 font-['Syne'] font-800 text-4xl uppercase w-full text-right transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
                     active === id ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
@@ -158,7 +158,7 @@ function Nav() {
                 transition={{ duration: 0.3, delay: 0.05 + NAV_ITEMS.length * 0.04, ease: "easeOut" }}
                 onClick={() => { scrollTo("contact", "auto"); setOpen(false); }}
                 aria-current={active === "contact" ? "page" : undefined}
-                className={`inline-flex items-center gap-2 mt-4 font-['Barlow'] text-xs uppercase tracking-widest border border-foreground px-5 py-3 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+                className={`inline-flex items-center gap-2 mt-4 font-['Manrope'] text-xs uppercase tracking-widest border border-foreground px-5 py-3 transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
                   active === "contact" ? "bg-transparent text-foreground" : "bg-foreground text-background"
                 }`}
               >
@@ -209,7 +209,7 @@ function Hero() {
 
       {/* Top stripe */}
       <div className="relative z-10 max-w-[1400px] mx-auto w-full px-7 md:px-14 flex items-center justify-end py-5">
-        <span className="font-['Barlow'] font-300 text-[11px] tracking-[0.16em] uppercase text-muted-foreground text-right">
+        <span className="font-['Manrope'] font-300 text-[11px] tracking-[0.16em] uppercase text-muted-foreground text-right">
           <span className="md:hidden">Disponibilidad — 2026</span>
           <span className="hidden md:inline">Disponible para oportunidades UX/UI</span>
         </span>
@@ -219,45 +219,53 @@ function Hero() {
       <div className="relative z-10 flex-1 flex items-center">
         <div
           ref={ref}
-          className={`max-w-[1400px] mx-auto w-full px-7 md:px-14 py-16 md:py-20 transition-[opacity,transform] duration-[900ms] ease-[ease] ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-          }`}
+          className="max-w-[1400px] mx-auto w-full px-7 md:px-14 py-16 md:py-20"
         >
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
             {/* Big type */}
             <div>
               <h1
-                className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4.5rem,20vw,18rem)] whitespace-nowrap"
+                className={`font-['Syne'] font-800 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4rem,15vw,12.5rem)] whitespace-nowrap transition-[opacity,transform] duration-[900ms] ease-[ease] ${
+                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+                }`}
               >
                 Patgsj<span className="text-muted-foreground">.</span>
                 <span className="sr-only"> — Patricio Soto</span>
               </h1>
-              <p className="font-['Barlow'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5">
+              <p
+                className={`font-['Manrope'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5 transition-[opacity,transform] duration-[900ms] delay-[120ms] motion-reduce:delay-0 ease-[ease] ${
+                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+                }`}
+              >
                 Diseñador UX/UI con trayectoria en comunicación visual
               </p>
             </div>
 
             {/* Descriptor */}
-            <div className="space-y-7 md:pb-4 max-w-xs md:max-w-sm">
+            <div
+              className={`space-y-7 md:pb-4 max-w-xs md:max-w-sm transition-[opacity,transform] duration-[900ms] delay-[220ms] motion-reduce:delay-0 ease-[ease] ${
+                visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+              }`}
+            >
               <div className="space-y-4">
-                <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
+                <p className="font-['Manrope'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
                   Diseño interfaces digitales a partir de necesidades reales de negocio, organizándolas en flujos, jerarquías de información y prototipos claros.
                 </p>
-                <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
+                <p className="font-['Manrope'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
                   Aporto más de diez años de experiencia en comunicación visual y, desde 2023, estoy desarrollando mi práctica profesional en UX/UI junto con estudios de Ingeniería en Informática.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                 <button
                   onClick={() => scrollTo("work")}
-                  className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                  className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
                 >
-                  <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
+                  <span className="w-14 h-[1px] bg-foreground inline-block origin-left scale-x-[0.571] group-hover:scale-x-100 transition-transform duration-300" />
                   Ver caso de estudio
                 </button>
                 <button
                   onClick={() => scrollTo("experience")}
-                  className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors duration-200 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                  className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors duration-200 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
                 >
                   Conocer mi experiencia
                 </button>
@@ -275,12 +283,12 @@ function PillarCell({ n, title, desc, why }: { n: string; title: string; desc: s
   return (
     <div className="border-t border-l border-border px-8 py-10 [&:nth-child(2n)]:border-r [&:nth-child(-n+2)]:md:border-t-0">
       <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">{n}</p>
-      <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">{title}</h4>
-      <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{desc}</p>
+      <h4 className="font-['Syne'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-foreground mb-3">{title}</h4>
+      <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{desc}</p>
       {why && (
         <div className="mt-5 pt-5 border-t border-border">
-          <p className="font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] text-foreground/50 mb-1.5">Por qué</p>
-          <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-foreground">{why}</p>
+          <p className="font-['Manrope'] font-500 text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1.5">Por qué</p>
+          <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-foreground">{why}</p>
         </div>
       )}
     </div>
@@ -352,6 +360,8 @@ function CaseCarousel({ onSelect }: { onSelect: (index: number) => void }) {
       className="relative mb-14"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex -ml-5">
@@ -368,9 +378,9 @@ function CaseCarousel({ onSelect }: { onSelect: (index: number) => void }) {
                   decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 transition-opacity duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center px-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="font-['Barlow_Condensed'] font-700 text-4xl md:text-5xl uppercase tracking-tight text-background leading-none">{s.title}</p>
+                <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 group-focus-visible:opacity-90 transition-opacity duration-500" />
+                <div className="absolute inset-0 flex items-center justify-center px-6 text-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+                  <p className="font-['Syne'] font-700 text-4xl md:text-5xl uppercase tracking-tight text-background leading-none">{s.title}</p>
                 </div>
               </button>
             </div>
@@ -488,9 +498,9 @@ function Lightbox({
             <p className="font-['DM_Mono'] text-[10px] text-background/50 mb-2">
               {String(index + 1).padStart(2, "0")} / {String(shots.length).padStart(2, "0")}
             </p>
-            <h4 className={`font-['Barlow_Condensed'] font-700 text-2xl uppercase tracking-tight text-background ${showDesc ? "mb-2" : ""}`}>{shot.title}</h4>
+            <h4 className={`font-['Syne'] font-700 text-2xl uppercase tracking-tight text-background ${showDesc ? "mb-2" : ""}`}>{shot.title}</h4>
             {showDesc && (
-              <p className="font-['Barlow'] font-300 text-sm leading-[1.7] text-background/70 max-w-xl">{shot.desc}</p>
+              <p className="font-['Manrope'] font-300 text-sm leading-[1.7] text-background/70 max-w-xl">{shot.desc}</p>
             )}
           </div>
           {shot.href && (
@@ -499,7 +509,7 @@ function Lightbox({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.12em] text-background/70 hover:text-background transition-colors shrink-0"
+              className="inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.12em] text-background/70 hover:text-background transition-colors shrink-0"
             >
               Ver en Dribbble <ArrowUpRight size={13} />
             </a>
@@ -644,7 +654,7 @@ function SectionKicker({ index, title }: { index?: string; title: string }) {
   return (
     <div className="flex items-baseline gap-3 mb-6 pb-4 border-b border-border">
       {index && <span className="font-['DM_Mono'] text-[10px] text-muted-foreground">{index}</span>}
-      <h3 className="font-['Barlow_Condensed'] font-800 text-xl md:text-2xl uppercase tracking-tight text-foreground">{title}</h3>
+      <h3 className="font-['Syne'] font-800 text-xl md:text-2xl uppercase tracking-tight text-foreground">{title}</h3>
     </div>
   );
 }
@@ -661,7 +671,7 @@ function PhaseStepper() {
             <span aria-hidden className={`w-2 h-2 shrink-0 ${i <= CURRENT_PHASE_INDEX ? "bg-foreground" : "bg-border"}`} />
             <span
               aria-label={i === CURRENT_PHASE_INDEX ? `${phase} — fase actual` : undefined}
-              className={`font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.12em] whitespace-nowrap ${
+              className={`font-['Manrope'] font-500 text-[10px] uppercase tracking-[0.12em] whitespace-nowrap ${
                 i === CURRENT_PHASE_INDEX ? "text-foreground" : "text-muted-foreground"
               }`}
             >
@@ -694,7 +704,7 @@ function CaseTabs({ active, onChange }: { active: number; onChange: (i: number) 
           aria-controls={`case-panel-${i}`}
           tabIndex={active === i ? 0 : -1}
           onClick={() => onChange(i)}
-          className={`font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.12em] px-4 py-2.5 border transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+          className={`font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.12em] px-4 py-2.5 border transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
             active === i
               ? "bg-foreground text-background border-foreground"
               : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
@@ -720,8 +730,8 @@ function InfoCell({ kicker, title, children }: { kicker: string; title: string; 
   return (
     <div className="border-r border-b border-border px-8 py-10">
       <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">{kicker}</p>
-      <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">{title}</h4>
-      <div className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{children}</div>
+      <h4 className="font-['Syne'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-foreground mb-3">{title}</h4>
+      <div className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground">{children}</div>
     </div>
   );
 }
@@ -731,7 +741,7 @@ function StepList({ steps }: { steps: string[] }) {
     <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
       {steps.map((s, i) => (
         <li key={s} className="flex items-center gap-2">
-          <span className="font-['Barlow'] font-300 text-[13px] text-muted-foreground border border-border px-3 py-2">
+          <span className="font-['Manrope'] font-300 text-[13px] text-muted-foreground border border-border px-3 py-2">
             {s}
           </span>
           {i < steps.length - 1 && <ArrowRight aria-hidden size={14} className="text-muted-foreground shrink-0" />}
@@ -758,27 +768,31 @@ function Work() {
         }`}
       >
         {/* Resumen del proyecto */}
-        <div className="mb-10 max-w-2xl">
-          <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
+        <div className="mb-10">
+          <p className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
             Caso de estudio 01 — Proyecto real en desarrollo
           </p>
-          <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground mb-2 text-[clamp(2.2rem,5vw,4rem)]">
-            Catálogo y sistema de gestión para una ferretería
-          </h2>
-          <p className="font-['Barlow_Condensed'] font-700 text-base uppercase tracking-tight text-muted-foreground mb-5">
-            Ferretería CTM
-          </p>
-          <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl">
-            Busca centralizar la consulta de productos y parte de la operación de un negocio que recién comienza: catálogo autoservicio pensado para un tótem, gestión de productos y stock, y apoyo al registro de ventas, ganancias y métodos de pago.
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-8 md:gap-12">
+            <h2 className="font-['Syne'] font-800 uppercase leading-[0.9] tracking-[-0.02em] text-foreground text-[clamp(2.5rem,7vw,5.5rem)]">
+              Catálogo y sistema de gestión para una ferretería
+            </h2>
+            <div className="max-w-xs md:max-w-sm md:pb-2">
+              <p className="font-['Syne'] font-700 text-base uppercase tracking-tight text-muted-foreground mb-3">
+                Ferretería CTM
+              </p>
+              <p className="font-['Manrope'] font-300 text-[14px] leading-[1.8] text-muted-foreground">
+                Busca centralizar la consulta de productos y parte de la operación de un negocio que recién comienza: catálogo autoservicio pensado para un tótem, gestión de productos y stock, y apoyo al registro de ventas, ganancias y métodos de pago.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Estado actual y limitaciones — siempre visible, no vive dentro de un tab */}
         <div className="mb-12 max-w-2xl bg-[#f9f9f7] border border-border px-6 py-6 md:px-8 md:py-7">
-          <p className="font-['Barlow'] font-600 text-[11px] uppercase tracking-[0.16em] text-foreground mb-3">
+          <p className="font-['Manrope'] font-600 text-[11px] uppercase tracking-[0.16em] text-foreground mb-3">
             Estado actual y limitaciones
           </p>
-          <p className="font-['Barlow'] font-300 text-[13px] leading-[1.8] text-muted-foreground">
+          <p className="font-['Manrope'] font-300 text-[13px] leading-[1.8] text-muted-foreground">
             El proyecto continúa en desarrollo. Parte de las pantallas está documentada en Figma y también existe un prototipo funcional desplegado para facilitar la conversación con el cliente. Aún no se han realizado pruebas con usuarios finales, por lo que las decisiones actuales deben considerarse hipótesis de diseño pendientes de validación.
           </p>
         </div>
@@ -799,8 +813,8 @@ function Work() {
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
             <div className="border-r border-b border-border px-8 py-10">
               <p className="font-['DM_Mono'] text-[10px] text-muted-foreground mb-5">Rol</p>
-              <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-3">Diseño UX/UI</h4>
-              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground mb-4">
+              <h4 className="font-['Syne'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-foreground mb-3">Diseño UX/UI</h4>
+              <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground mb-4">
                 Mi responsabilidad fue conversar directamente con el dueño para comprender la operación, ordenar los requerimientos, definir flujos iniciales, diseñar la jerarquía de información y construir las interfaces del catálogo y del sistema de gestión.
               </p>
               <ul className="space-y-2 mb-4">
@@ -813,13 +827,13 @@ function Work() {
                   "Componentes reutilizables.",
                   "Prototipo funcional para revisar decisiones con el cliente.",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                  <li key={item} className="flex items-start gap-2.5 font-['Manrope'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
                     <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <span className="inline-block font-['Barlow'] font-500 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-1.5 text-muted-foreground">Proyecto independiente</span>
+              <span className="inline-block font-['Manrope'] font-500 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-1.5 text-muted-foreground">Proyecto independiente</span>
             </div>
             <InfoCell kicker="Cómo trabajamos" title="Conversación con el cliente, no investigación con usuarios">
               Las conversaciones con el dueño permitieron levantar requerimientos, ordenar prioridades y revisar decisiones de diseño. Esta instancia no reemplaza la validación con usuarios finales.
@@ -834,10 +848,10 @@ function Work() {
             <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
               {USER_TASKS.map((u) => (
                 <div key={u.title} className="border-r border-b border-border px-8 py-10">
-                  <h4 className="font-['Barlow_Condensed'] font-700 text-xl uppercase tracking-tight text-foreground mb-4">{u.title}</h4>
+                  <h4 className="font-['Syne'] font-700 text-xl uppercase tracking-tight text-foreground mb-4">{u.title}</h4>
                   <ul className="space-y-2.5">
                     {u.tasks.map((t) => (
-                      <li key={t} className="flex items-start gap-3 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                      <li key={t} className="flex items-start gap-3 font-['Manrope'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
                         <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
                         {t}
                       </li>
@@ -858,8 +872,8 @@ function Work() {
           </div>
 
           <div className="max-w-2xl border-l-2 border-foreground pl-6">
-            <p className="font-['Barlow'] font-300 text-[15px] md:text-base leading-[1.8] text-foreground italic">
-              "El catálogo debía permitir que una persona encontrara productos y comprendiera rápidamente su nombre, precio y disponibilidad, evitando una navegación compleja en un contexto de autoservicio."
+            <p className="font-['Manrope'] font-300 text-[15px] md:text-base leading-[1.8] text-foreground italic">
+              “El catálogo debía permitir que una persona encontrara productos y comprendiera rápidamente su nombre, precio y disponibilidad, evitando una navegación compleja en un contexto de autoservicio.”
             </p>
           </div>
 
@@ -867,7 +881,7 @@ function Work() {
             <SectionKicker title="Objetivos de diseño" />
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
               {DESIGN_GOALS.map((g) => (
-                <li key={g} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
+                <li key={g} className="flex items-start gap-3 font-['Manrope'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
                   <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
                   {g}
                 </li>
@@ -886,7 +900,7 @@ function Work() {
                   key={f.title}
                   className={`border-r border-b border-border px-8 py-10 ${i === FLOWS_DATA.length - 1 ? "md:col-span-2" : ""}`}
                 >
-                  <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">{f.title}</p>
+                  <p className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">{f.title}</p>
                   <StepList steps={f.steps} />
                 </div>
               ))}
@@ -924,7 +938,7 @@ function Work() {
         <TabPanel index={3} active={activeTab}>
           <div>
             <SectionKicker title="Pantallas" />
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
+            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
               Capturas reales — haz clic para ampliar
             </p>
             <CaseCarousel onSelect={setLightboxIndex} />
@@ -937,13 +951,13 @@ function Work() {
             <SectionKicker title="Consideraciones de accesibilidad" />
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 mb-6">
               {ACCESSIBILITY_COMMITMENTS.map((a) => (
-                <li key={a} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
+                <li key={a} className="flex items-start gap-3 font-['Manrope'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
                   <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
                   {a}
                 </li>
               ))}
             </ul>
-            <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground max-w-xl border-t border-border pt-5">
+            <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground max-w-xl border-t border-border pt-5">
               Estas consideraciones forman parte del diseño actual, pero todavía deben verificarse mediante una revisión de accesibilidad y pruebas de uso.
             </p>
           </div>
@@ -953,19 +967,19 @@ function Work() {
         <TabPanel index={4} active={activeTab}>
           <div>
             <SectionKicker title="Cómo validaría la solución" />
-            <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-6">
+            <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-6">
               La siguiente etapa consiste en realizar pruebas moderadas con entre tres y cinco personas cercanas al público objetivo. Las tareas principales serían buscar un producto específico, revisar su disponibilidad, agregarlo al carro y completar una compra simulada.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div>
-                <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">Tareas de la prueba</p>
+                <p className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">Tareas de la prueba</p>
                 <StepList steps={VALIDATION_TASKS} />
               </div>
               <div>
-                <p className="font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">Qué registraría</p>
+                <p className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground mb-4">Qué registraría</p>
                 <ul className="space-y-2">
                   {VALIDATION_OBSERVATIONS.map((o) => (
-                    <li key={o} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                    <li key={o} className="flex items-start gap-2.5 font-['Manrope'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
                       <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
                       {o}
                     </li>
@@ -978,10 +992,10 @@ function Work() {
           <div>
             <SectionKicker title="Uso de inteligencia artificial" />
             <div className="space-y-4 max-w-xl">
-              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
+              <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
                 Utilizo herramientas de desarrollo asistido por inteligencia artificial para acelerar la construcción de demostraciones funcionales. Los requerimientos, los flujos, la jerarquía de información y las decisiones de interfaz permanecen bajo mi responsabilidad.
               </p>
-              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
+              <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
                 La implementación definitiva puede requerir la participación de un ingeniero o equipo de desarrollo.
               </p>
             </div>
@@ -991,7 +1005,7 @@ function Work() {
             <SectionKicker title="Próximos pasos" />
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
               {NEXT_STEPS.map((s) => (
-                <li key={s} className="flex items-start gap-3 font-['Barlow'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
+                <li key={s} className="flex items-start gap-3 font-['Manrope'] font-300 text-[14px] leading-[1.6] text-muted-foreground">
                   <span aria-hidden className="w-1.5 h-1.5 mt-1.5 bg-foreground shrink-0" />
                   {s}
                 </li>
@@ -1002,7 +1016,7 @@ function Work() {
 
         {/* Cierre — estado del proyecto como información, no como métricas */}
         <div className="mt-16 bg-foreground text-background px-8 py-10 md:px-10 md:py-12">
-          <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-background/50 mb-6">Estado del proyecto</p>
+          <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-background/50 mb-6">Estado del proyecto</p>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 max-w-2xl">
             {[
               { k: "Documentación en Figma", v: "Parcial" },
@@ -1011,8 +1025,8 @@ function Work() {
               { k: "Etapa actual", v: "Revisión e iteración con el cliente" },
             ].map(({ k, v }) => (
               <div key={k} className="flex items-baseline justify-between gap-4 border-b border-background/10 pb-3">
-                <dt className="font-['Barlow'] font-300 text-[13px] text-background/60">{k}</dt>
-                <dd className="font-['Barlow'] font-500 text-[13px] text-background text-right">{v}</dd>
+                <dt className="font-['Manrope'] font-300 text-[13px] text-background/60">{k}</dt>
+                <dd className="font-['Manrope'] font-500 text-[13px] text-background text-right">{v}</dd>
               </div>
             ))}
           </dl>
@@ -1194,10 +1208,11 @@ function Design() {
       >
         <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-8">
           <div>
-            <h2 className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.92] tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
+            <h2 className="font-['Syne'] font-800 uppercase leading-[0.88] tracking-[-0.02em] text-foreground text-[clamp(3rem,9vw,7rem)]">
               Diseño UI
             </h2>
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
+            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
+              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">02</span>
               Exploraciones visuales
             </p>
           </div>
@@ -1205,16 +1220,16 @@ function Design() {
             href="https://dribbble.com/PatGsj"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            className="inline-flex items-center gap-1 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           >
             Perfil en Dribbble <ArrowUpRight size={13} />
           </a>
         </div>
 
-        <p className="font-['Barlow'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
+        <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
           Ejercicios visuales desarrollados para practicar composición, jerarquía, componentes y patrones de interacción. Haz clic en cualquiera para verla más grande.
         </p>
-        <p className="font-['Barlow'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
+        <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
           No corresponden a productos validados ni a proyectos implementados para clientes.
         </p>
 
@@ -1226,20 +1241,24 @@ function Design() {
               initial={i >= FEATURED_SHOTS_COUNT ? { opacity: 0, y: 16 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: Math.min(Math.max(i - FEATURED_SHOTS_COUNT, 0) * 0.05, 0.4), ease: [0.25, 0.1, 0.25, 1] }}
-              className="group relative aspect-square overflow-hidden bg-muted border border-border cursor-pointer text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+              className={`group relative overflow-hidden bg-muted border border-border cursor-pointer text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+                i === 0 ? "col-span-2 aspect-[2/1]" : "aspect-square"
+              }`}
             >
               <img
                 src={s.img}
-                alt=""
+                alt={s.title}
                 loading="lazy"
                 decoding="async"
                 width={600}
                 height={600}
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 transition-opacity duration-500" />
-              <div className="absolute inset-0 flex items-center justify-center px-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="font-['Barlow_Condensed'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-background leading-none">{s.title}</p>
+              <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 group-focus-visible:opacity-90 transition-opacity duration-500" />
+              <div className="absolute inset-0 flex items-center justify-center px-4 text-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+                <p className={`font-['Syne'] font-700 uppercase tracking-tight text-background leading-none ${
+                  i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"
+                }`}>{s.title}</p>
               </div>
             </motion.button>
           ))}
@@ -1249,9 +1268,9 @@ function Design() {
           <div className="mt-10 flex justify-center">
             <button
               onClick={() => setExpanded(true)}
-              className="group inline-flex items-center gap-2 font-['Barlow'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+              className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
             >
-              <span className="w-8 h-[1px] bg-foreground inline-block group-hover:w-14 transition-all duration-300" />
+              <span className="w-14 h-[1px] bg-foreground inline-block origin-left scale-x-[0.571] group-hover:scale-x-100 transition-transform duration-300" />
               Ver más ejercicios
             </button>
           </div>
@@ -1290,12 +1309,16 @@ function About() {
       <div className="max-w-[1400px] mx-auto px-7 md:px-14">
         <div
           ref={ref}
-          className={`grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          className={`grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-16 md:gap-24 items-center transition-[opacity,transform] duration-[800ms] ease-[ease] ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
           }`}
         >
           {/* Left */}
           <div className="relative">
+            <span aria-hidden className="absolute -top-2.5 -left-2.5 w-5 h-5 border-t border-l border-foreground/40" />
+            <span aria-hidden className="absolute -top-2.5 -right-2.5 w-5 h-5 border-t border-r border-foreground/40" />
+            <span aria-hidden className="absolute -bottom-2.5 -left-2.5 w-5 h-5 border-b border-l border-foreground/40" />
+            <span aria-hidden className="absolute -bottom-2.5 -right-2.5 w-5 h-5 border-b border-r border-foreground/40" />
             <img
               src="/yo.webp"
               alt="Patricio Soto (Patgsj), diseñador UX/UI — retrato"
@@ -1305,35 +1328,38 @@ function About() {
             />
             {/* floating label */}
             <div className="absolute bottom-6 left-6 bg-background px-4 py-3">
-              <p className="font-['Barlow_Condensed'] font-700 text-base uppercase tracking-tight text-foreground">Patgsj<span className="text-muted-foreground">.</span></p>
-              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground">San Carlos, Ñuble</p>
+              <p className="font-['Syne'] font-700 text-base uppercase tracking-tight text-foreground">Patgsj<span className="text-muted-foreground">.</span></p>
+              <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground">San Carlos, Ñuble</p>
             </div>
           </div>
 
           {/* Right */}
           <div className="space-y-8">
             <div className="space-y-3">
-              <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Sobre mí</p>
+              <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">03</span>
+                Sobre mí
+              </p>
               <h2
-                className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.94] tracking-[-0.01em] text-foreground text-[clamp(2.5rem,5.5vw,4.25rem)]"
+                className="font-['Syne'] font-800 uppercase leading-[0.9] tracking-[-0.02em] text-foreground text-[clamp(3rem,7vw,5.75rem)]"
               >
                 Diseño de interfaces<br />
                 orientado a producto<span className="text-muted-foreground">.</span>
               </h2>
-              <p className="font-['Barlow_Condensed'] font-700 text-lg uppercase tracking-tight text-muted-foreground">Patricio Gustavo Soto Jofré</p>
+              <p className="font-['Syne'] font-700 text-lg uppercase tracking-tight text-muted-foreground">Patricio Gustavo Soto Jofré</p>
             </div>
 
             <div className="space-y-5 max-w-md">
-              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-foreground">
+              <p className="font-['Manrope'] font-300 text-[15px] leading-[1.9] text-foreground">
                 Soy diseñador gráfico con más de diez años de experiencia en comunicación visual y desde 2023 estoy orientando mi carrera profesional hacia UX/UI.
               </p>
-              <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
+              <p className="font-['Manrope'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
                 Mi fortaleza está en organizar información, construir jerarquías visuales y traducir necesidades de negocio en flujos, interfaces y prototipos. Actualmente complemento mi experiencia con formación en diseño de productos digitales y estudios de Ingeniería en Informática, mientras profundizo en validación con usuarios, accesibilidad y sistemas de diseño.
               </p>
             </div>
 
             <div>
-              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
                 Mi aporte a un equipo de producto
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 max-w-md">
@@ -1347,7 +1373,7 @@ function About() {
                   "Preparación de entregables para handoff.",
                   "Aprendizaje continuo y adaptación.",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 font-['Barlow'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                  <li key={item} className="flex items-start gap-2.5 font-['Manrope'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
                     <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
                     {item}
                   </li>
@@ -1359,7 +1385,7 @@ function About() {
               {["Figma", "Prototipado", "Arquitectura de información", "Fundamentos de sistemas de diseño", "Comunicación visual"].map((t) => (
                 <span
                   key={t}
-                  className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-all duration-200"
+                  className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors duration-200"
                 >
                   {t}
                 </span>
@@ -1376,26 +1402,26 @@ function About() {
           }`}
         >
           <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-12">
-            <h3 className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.01em] text-foreground text-[clamp(2.2rem,5vw,4rem)]">
+            <h3 className="font-['Syne'] font-800 uppercase leading-none tracking-[-0.02em] text-foreground text-[clamp(2.75rem,6.5vw,5.5rem)]">
               Formación
             </h3>
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
               Certificaciones y herramientas
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-16 md:gap-20">
             {/* Certifications */}
             <div>
-              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-6 pb-4 border-b border-border">
+              <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-6 pb-4 border-b border-border">
                 Certificaciones y estudios
               </p>
               <div className="divide-y divide-border">
                 {CERTIFICATIONS_DATA.map((c) => (
                   <div key={c.title} className="py-4 flex items-baseline justify-between gap-4">
                     <div>
-                      <p className="font-['Barlow_Condensed'] font-700 text-base uppercase tracking-tight text-foreground leading-snug">{c.title}</p>
-                      <p className="font-['Barlow'] font-300 text-[12px] text-muted-foreground mt-0.5">{c.org}</p>
+                      <p className="font-['Syne'] font-700 text-base uppercase tracking-tight text-foreground leading-snug">{c.title}</p>
+                      <p className="font-['Manrope'] font-300 text-[12px] text-muted-foreground mt-0.5">{c.org}</p>
                     </div>
                     <span className="font-['DM_Mono'] text-[10px] text-muted-foreground whitespace-nowrap shrink-0">{c.period}</span>
                   </div>
@@ -1405,18 +1431,18 @@ function About() {
 
             {/* Tools */}
             <div>
-              <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-6 pb-4 border-b border-border">
+              <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-6 pb-4 border-b border-border">
                 Herramientas
               </p>
               <div className="space-y-8">
                 {TOOLS_DATA.map(({ cat, items }) => (
                   <div key={cat}>
-                    <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground mb-3">{cat}</p>
+                    <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground mb-3">{cat}</p>
                     <div className="flex flex-wrap gap-2">
                       {items.map((t) => (
                         <span
                           key={t}
-                          className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.1em] border border-border px-3 py-2 text-muted-foreground"
+                          className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.1em] border border-border px-3 py-2 text-muted-foreground"
                         >
                           {t}
                         </span>
@@ -1455,26 +1481,46 @@ function Experience() {
         {/* Header */}
         <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between mb-16">
           <h2
-            className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.01em] text-background text-[clamp(3rem,8vw,7rem)]"
+            className="font-['Syne'] font-800 uppercase leading-none tracking-[-0.01em] text-background text-[clamp(3rem,8vw,7rem)]"
           >
             Experiencia
           </h2>
-          <span className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.16em] text-background/50">Enfoque UX/UI desde 2023</span>
+          <span className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.16em] text-background/50">
+            <span className="font-['DM_Mono'] normal-case tracking-normal text-background/40 mr-2">04</span>
+            Enfoque UX/UI desde 2023
+          </span>
         </div>
 
         {/* Entries */}
         <div className="space-y-0 divide-y divide-background/10">
-          {EXP_DATA.map(({ n, role, company, period, type, desc }) => (
-            <div key={n} className="grid grid-cols-1 md:grid-cols-[60px_1fr_1fr_180px] gap-4 py-10 group hover:pl-2 transition-all duration-300">
+          {EXP_DATA.map(({ n, role, company, period, type, desc }, i) => (
+            <div
+              key={n}
+              className={`grid grid-cols-1 md:grid-cols-[60px_1fr_1fr_180px] gap-4 group hover:translate-x-2 transition-transform duration-300 ${
+                i === 0 ? "py-14" : "py-10"
+              }`}
+            >
               <span className="font-['DM_Mono'] text-[10px] text-background/50 pt-1">{n}</span>
               <div>
-                <h3 className="font-['Barlow_Condensed'] font-700 text-2xl md:text-3xl uppercase tracking-tight text-background leading-tight">{role}</h3>
-                <p className="font-['Barlow'] font-300 text-[13px] text-background/50 mt-1">{company}</p>
+                <h3
+                  className={`font-['Syne'] font-700 uppercase tracking-tight text-background leading-tight ${
+                    i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"
+                  }`}
+                >
+                  {role}
+                </h3>
+                <p className="font-['Manrope'] font-300 text-[13px] text-background/50 mt-1">{company}</p>
               </div>
-              <p className="font-['Barlow'] font-300 text-[13px] leading-[1.9] text-background/55 max-w-sm">{desc}</p>
+              <p className="font-['Manrope'] font-300 text-[13px] leading-[1.9] text-background/55 max-w-sm">{desc}</p>
               <div className="flex md:flex-col md:items-end gap-3 md:gap-2">
                 <span className="font-['DM_Mono'] text-[10px] text-background/50 tracking-wide">{period}</span>
-                <span className="font-['DM_Mono'] text-[9px] uppercase tracking-[0.15em] border border-background/30 px-2.5 py-1 text-background/50">{type}</span>
+                <span
+                  className={`font-['DM_Mono'] text-[9px] uppercase tracking-[0.15em] px-2.5 py-1 ${
+                    i === 0 ? "bg-background text-foreground" : "border border-background/30 text-background/50"
+                  }`}
+                >
+                  {type}
+                </span>
               </div>
             </div>
           ))}
@@ -1498,9 +1544,12 @@ function CTA() {
       >
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
           <div>
-            <p className="font-['Barlow'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">Disponible para oportunidades UX/UI</p>
+            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">
+              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">05</span>
+              Disponible para oportunidades UX/UI
+            </p>
             <h2
-              className="font-['Barlow_Condensed'] font-900 uppercase leading-[0.94] tracking-[-0.01em] text-foreground text-[clamp(1.9rem,8vw,7.5rem)] max-w-3xl"
+              className="font-['Syne'] font-800 uppercase leading-[0.94] tracking-[-0.01em] text-foreground text-[clamp(1.9rem,8vw,7.5rem)] max-w-3xl"
             >
               Conversemos<br />sobre cómo puedo<br />
               <em className="not-italic text-muted-foreground">aportar a tu equipo.</em>
@@ -1508,14 +1557,14 @@ function CTA() {
           </div>
 
           <div className="space-y-7 md:pb-4 max-w-xs">
-            <p className="font-['Barlow'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
+            <p className="font-['Manrope'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
               Busco integrarme a un equipo de producto donde pueda aportar mi experiencia visual, mi capacidad para organizar información y mi formación en UX/UI, mientras continúo creciendo en validación, accesibilidad y sistemas de diseño.
             </p>
             <a
               href="https://wa.me/56966640562"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 font-['Barlow'] font-600 text-[13px] uppercase tracking-[0.12em] border border-foreground bg-foreground text-background px-7 py-4 hover:bg-transparent hover:text-foreground transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+              className="group inline-flex items-center gap-2.5 font-['Manrope'] font-600 text-[13px] uppercase tracking-[0.12em] border border-foreground bg-foreground text-background px-7 py-4 hover:bg-transparent hover:text-foreground transition-[background-color,color] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
             >
               Contactarme <ArrowUpRight size={14} className="transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
@@ -1530,7 +1579,7 @@ function CTA() {
                   href={href}
                   target={href !== "#" ? "_blank" : undefined}
                   rel={href !== "#" ? "noopener noreferrer" : undefined}
-                  className="font-['Barlow'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                  className="font-['Manrope'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
                   {label}
                 </a>
@@ -1557,7 +1606,7 @@ function Footer() {
       {/* Big name */}
       <div className="max-w-[1400px] mx-auto px-7 md:px-14 py-10">
         <div
-          className="font-['Barlow_Condensed'] font-900 uppercase leading-none tracking-[-0.02em] text-background select-none text-[clamp(3rem,10vw,9rem)]"
+          className="font-['Syne'] font-800 uppercase leading-none tracking-[-0.02em] text-background select-none text-[clamp(2.5rem,7vw,6.5rem)]"
         >
           Patgsj<span className="text-background/40">.</span>
         </div>
@@ -1566,13 +1615,13 @@ function Footer() {
       {/* Navigation + contact */}
       <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-14 grid grid-cols-2 gap-10">
         <div>
-          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/50 mb-4">Navegación</p>
+          <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/50 mb-4">Navegación</p>
           <div className="flex flex-col items-start gap-2.5">
             {NAV_ITEMS.map(([label, id]) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+                className="font-['Manrope'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
               >
                 {label}
               </button>
@@ -1580,7 +1629,7 @@ function Footer() {
           </div>
         </div>
         <div>
-          <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/50 mb-4">Contacto</p>
+          <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-background/50 mb-4">Contacto</p>
           <div className="flex flex-col items-start gap-2.5">
             {[
               { label: "WhatsApp", href: "https://wa.me/56966640562" },
@@ -1594,7 +1643,7 @@ function Footer() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="font-['Barlow'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+                className="font-['Manrope'] font-300 text-[13px] text-background/70 hover:text-background transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
               >
                 {label}
               </a>
@@ -1605,15 +1654,15 @@ function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-background/10 max-w-[1400px] mx-auto px-7 md:px-14 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
+        <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
           © 2026 Patricio Soto. Diseño y desarrollo propio.
         </p>
-        <p className="font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
+        <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50">
           San Carlos, Ñuble, Chile
         </p>
         <button
           onClick={() => scrollTo("hero")}
-          className="inline-flex items-center gap-1 font-['Barlow'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+          className="inline-flex items-center gap-1 font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.16em] text-background/50 hover:text-background transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
         >
           <ArrowUp size={12} /> Inicio
         </button>
@@ -1627,9 +1676,10 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+        <div aria-hidden className="grain-overlay" />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] font-['Barlow'] font-600 text-[11px] uppercase tracking-[0.12em] bg-foreground text-background px-5 py-3"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] font-['Manrope'] font-600 text-[11px] uppercase tracking-[0.12em] bg-foreground text-background px-5 py-3"
         >
           Saltar al contenido
         </a>
