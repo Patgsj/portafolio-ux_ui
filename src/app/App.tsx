@@ -787,6 +787,33 @@ function Work() {
           </div>
         </div>
 
+        {/* Demo en vivo — CTA destacada, primero para que se vea de inmediato */}
+        <a
+          href="https://ferreteria-ctm-demo.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8 bg-foreground text-background px-7 py-6 md:px-10 md:py-7 hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+        >
+          <div className="flex items-center gap-4">
+            <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden>
+              <span className="absolute inset-0 bg-background animate-ping opacity-60" />
+              <span className="relative inline-flex h-2.5 w-2.5 bg-background" />
+            </span>
+            <div>
+              <p className="font-['Manrope'] font-600 text-[10px] uppercase tracking-[0.16em] text-background/60 mb-1">
+                Prototipo funcional
+              </p>
+              <p className="font-['Syne'] font-800 uppercase text-2xl md:text-3xl tracking-tight leading-none">
+                Prueba el demo en vivo
+              </p>
+            </div>
+          </div>
+          <span className="inline-flex items-center gap-2 font-['Manrope'] font-600 text-[12px] uppercase tracking-[0.14em] shrink-0 pl-[38px] md:pl-0">
+            Ver demo
+            <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </span>
+        </a>
+
         {/* Estado actual y limitaciones — siempre visible, no vive dentro de un tab */}
         <div className="mb-12 max-w-2xl bg-[#f9f9f7] border border-border px-6 py-6 md:px-8 md:py-7">
           <p className="font-['Manrope'] font-600 text-[11px] uppercase tracking-[0.16em] text-foreground mb-3">
