@@ -207,14 +207,6 @@ function Hero() {
         </span>
       </div>
 
-      {/* Top stripe */}
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-7 md:px-14 flex items-center justify-end py-5">
-        <span className="font-['Manrope'] font-300 text-[11px] tracking-[0.16em] uppercase text-muted-foreground text-right">
-          <span className="md:hidden">Disponibilidad — 2026</span>
-          <span className="hidden md:inline">Disponible para oportunidades UX/UI</span>
-        </span>
-      </div>
-
       {/* Main headline */}
       <div className="relative z-10 flex-1 flex items-center">
         <div
@@ -252,7 +244,7 @@ function Hero() {
                   Diseño interfaces digitales a partir de necesidades reales de negocio, organizándolas en flujos, jerarquías de información y prototipos claros.
                 </p>
                 <p className="font-['Manrope'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
-                  Aporto más de diez años de experiencia en comunicación visual y, desde 2023, estoy desarrollando mi práctica profesional en UX/UI junto con estudios de Ingeniería en Informática.
+                  Aporto más de diez años de experiencia en comunicación visual y, desde 2023, he ampliado mi perfil hacia UX/UI mediante proyectos independientes, formación continua y estudios de Ingeniería en Informática.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
