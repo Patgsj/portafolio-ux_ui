@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portafolio-ux-ui-sable.vercel.app/sitemap.xml
+Sitemap: https://patgsj.cl/sitemap.xml
