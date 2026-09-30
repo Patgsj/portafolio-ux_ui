@@ -1248,7 +1248,7 @@ function UiKit() {
           Fundamentos, componentes y pantallas para una app bancaria móvil, construidos con auto layout para adaptarse al contenido y al ancho de pantalla. Se actualiza a medida que avanzo.
         </p>
         <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
-          Ejercicio conceptual de diseño. No es un producto oficial ni está asociado a ningún banco.
+          Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
         </p>
 
         <div className="relative w-full aspect-[4/5] md:aspect-[16/10] border border-border bg-muted">
