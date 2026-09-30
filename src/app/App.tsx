@@ -27,7 +27,7 @@ function useInView(threshold = 0.1) {
 }
 
 // ─── Nav ─────────────────────────────────────────────────────────────────────
-const NAV_ITEMS: [string, string][] = [["Proyectos", "work"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
+const NAV_ITEMS: [string, string][] = [["Proyectos", "work"], ["UI Kit", "uikit"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
 
 function Nav() {
   const [pinned, setPinned] = useState(false);
@@ -1208,6 +1208,63 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
 
 const FEATURED_SHOTS_COUNT = 6;
 
+// ─── UI Kit ───────────────────────────────────────────────────────────────────
+const UI_KIT_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/UI-Kit-Banca-Digital---Patgsj?node-id=1-2";
+const UI_KIT_EMBED_URL =
+  "https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/UI-Kit-Banca-Digital---Patgsj?node-id=1-2&embed-host=share&footer=true&viewport-controls=true";
+
+function UiKit() {
+  const { ref, visible } = useInView(0.1);
+
+  return (
+    <section id="uikit" className="border-t border-border py-20 md:py-32">
+      <div
+        ref={ref}
+        className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
+        }`}
+      >
+        <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-8">
+          <div>
+            <h2 className="font-['Syne'] font-800 uppercase leading-[0.88] tracking-[-0.02em] text-foreground text-[clamp(3rem,9vw,7rem)]">
+              UI Kit
+            </h2>
+            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
+              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">02</span>
+              Banca digital · en construcción
+            </p>
+          </div>
+          <a
+            href={UI_KIT_FILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          >
+            Abrir en Figma <ArrowUpRight size={13} />
+          </a>
+        </div>
+
+        <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
+          Fundamentos, componentes y pantallas para una app bancaria móvil, construidos con auto layout para adaptarse al contenido y al ancho de pantalla. Se actualiza a medida que avanzo.
+        </p>
+        <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
+          Ejercicio conceptual de diseño. No es un producto oficial ni está asociado a ningún banco.
+        </p>
+
+        <div className="relative w-full aspect-[4/5] md:aspect-[16/10] border border-border bg-muted">
+          <iframe
+            src={UI_KIT_EMBED_URL}
+            title="UI Kit de banca digital en Figma"
+            loading="lazy"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Design() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [expanded, setExpanded] = useState(false);
@@ -1231,7 +1288,7 @@ function Design() {
               Diseño UI
             </h2>
             <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
-              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">02</span>
+              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">03</span>
               Exploraciones visuales
             </p>
           </div>
@@ -1356,7 +1413,7 @@ function About() {
           <div className="space-y-8">
             <div className="space-y-3">
               <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">03</span>
+                <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">04</span>
                 Sobre mí
               </p>
               <h2
@@ -1505,7 +1562,7 @@ function Experience() {
             Experiencia
           </h2>
           <span className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.16em] text-background/50">
-            <span className="font-['DM_Mono'] normal-case tracking-normal text-background/40 mr-2">04</span>
+            <span className="font-['DM_Mono'] normal-case tracking-normal text-background/40 mr-2">05</span>
             Enfoque UX/UI desde 2023
           </span>
         </div>
@@ -1564,7 +1621,7 @@ function CTA() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
           <div>
             <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-8">
-              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">05</span>
+              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">06</span>
               Disponible para oportunidades UX/UI
             </p>
             <h2
@@ -1706,6 +1763,7 @@ export default function App() {
         <main id="main">
           <Hero />
           <Work />
+          <UiKit />
           <Design />
           <About />
           <Experience />
