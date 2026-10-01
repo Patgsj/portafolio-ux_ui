@@ -6,7 +6,7 @@ Sitio personal publicado en [patgsj.cl](https://patgsj.cl): casos de estudio, de
 
 - **Ferretería CTM:** caso de estudio de un catálogo digital y tótem de autoservicio con cliente real, desde el problema hasta el prototipo funcional desplegado.
 - **Design System Banca Digital:** fundamentos como tokens (color con contraste WCAG, tipografía, espaciado en múltiplos de 4, radios y elevación), componentes con variantes en una librería de Figma publicada, y changelog por versión. Cada pestaña muestra una imagen exportada desde Figma; el archivo interactivo se abre a pedido.
-- **Diseño UI:** una selección de ejercicios de interfaz; seleccionados por cercanía a producto.
+- **Diseño UI:** seis ejercicios de interfaz elegidos por su cercanía a producto.
 
 ## Stack
 
