@@ -27,7 +27,7 @@ function useInView(threshold = 0.1) {
 }
 
 // ─── Nav ─────────────────────────────────────────────────────────────────────
-const NAV_ITEMS: [string, string][] = [["Proyectos", "work"], ["UI Kit", "uikit"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
+const NAV_ITEMS: [string, string][] = [["Proyectos", "work"], ["Design System", "design-system"], ["Diseño UI", "design"], ["Sobre mí", "about"], ["Experiencia", "experience"]];
 
 function Nav() {
   const [pinned, setPinned] = useState(false);
@@ -1208,16 +1208,16 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
 
 const FEATURED_SHOTS_COUNT = 6;
 
-// ─── UI Kit ───────────────────────────────────────────────────────────────────
-const UI_KIT_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/UI-Kit-Banca-Digital---Patgsj?node-id=1-2";
-const UI_KIT_EMBED_URL =
-  "https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/UI-Kit-Banca-Digital---Patgsj?node-id=1-2&embed-host=share&footer=true&viewport-controls=true";
+// ─── Design System ────────────────────────────────────────────────────────────
+const DESIGN_SYSTEM_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2";
+const DESIGN_SYSTEM_EMBED_URL =
+  "https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2&embed-host=share&footer=true&viewport-controls=true";
 
-function UiKit() {
+function DesignSystem() {
   const { ref, visible } = useInView(0.1);
 
   return (
-    <section id="uikit" className="border-t border-border py-20 md:py-32">
+    <section id="design-system" className="border-t border-border py-20 md:py-32">
       <div
         ref={ref}
         className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
@@ -1227,15 +1227,15 @@ function UiKit() {
         <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-8">
           <div>
             <h2 className="font-['Syne'] font-800 uppercase leading-[0.88] tracking-[-0.02em] text-foreground text-[clamp(3rem,9vw,7rem)]">
-              UI Kit
+              Design System
             </h2>
             <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
               <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">02</span>
-              Banca digital · en construcción
+              Banca digital · v0.3
             </p>
           </div>
           <a
-            href={UI_KIT_FILE_URL}
+            href={DESIGN_SYSTEM_FILE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
@@ -1245,16 +1245,16 @@ function UiKit() {
         </div>
 
         <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
-          Fundamentos, componentes y pantallas para una app bancaria móvil, construidos con auto layout para adaptarse al contenido y al ancho de pantalla. Se actualiza a medida que avanzo.
+          Fundamentos, componentes y patrones para una app bancaria móvil. Los componentes viven en una librería publicada, con variantes por tipo y estado, y cada versión queda registrada en el changelog.
         </p>
         <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
           Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
         </p>
 
-        <div className="relative w-full aspect-[4/5] md:aspect-[16/10] border border-border bg-muted">
+        <div className="relative w-full aspect-[16/10] border border-border bg-muted">
           <iframe
-            src={UI_KIT_EMBED_URL}
-            title="UI Kit de banca digital en Figma"
+            src={DESIGN_SYSTEM_EMBED_URL}
+            title="Design System de banca digital en Figma"
             loading="lazy"
             allowFullScreen
             className="absolute inset-0 w-full h-full"
@@ -1763,7 +1763,7 @@ export default function App() {
         <main id="main">
           <Hero />
           <Work />
-          <UiKit />
+          <DesignSystem />
           <Design />
           <About />
           <Experience />
