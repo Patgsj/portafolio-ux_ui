@@ -1210,33 +1210,38 @@ const FEATURED_SHOTS_COUNT = 6;
 
 // ─── Design System ────────────────────────────────────────────────────────────
 const DESIGN_SYSTEM_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2";
-// Cada pestaña abre un marco del archivo. El selector de páginas de Figma va oculto: al usarlo dentro
-// del iframe el navegador saltaba de posición en la página.
-const DESIGN_SYSTEM_TABS: [string, string][] = [
-  ["Portada", "1-2"],
-  ["Color", "147-15"],
-  ["Tipografía", "147-119"],
-  ["Espaciado", "147-164"],
-  ["Componentes", "44-3"],
-  ["Patrones", "44-5"],
-  ["Changelog", "44-109"],
+// Cada pestaña muestra una imagen exportada de Figma (2x, en public/design-system): cambia al instante.
+// El embed de Figma, que tarda varios segundos en cargar, queda como opción "interactiva" por pestaña.
+// [etiqueta, imagen, nodo de Figma]
+const DESIGN_SYSTEM_TABS: [string, string, string][] = [
+  ["Portada", "portada", "1-2"],
+  ["Color", "color", "147-15"],
+  ["Tipografía", "tipografia", "147-119"],
+  ["Espaciado", "espaciado", "147-164"],
+  ["Componentes", "componentes", "44-3"],
+  ["Patrones", "patrones", "44-5"],
+  ["Changelog", "changelog", "44-109"],
 ];
+const designSystemImage = (name: string) => `/design-system/${name}.webp`;
 const designSystemEmbedUrl = (nodeId: string) =>
   `https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=${nodeId}&embed-host=share&footer=false&page-selector=false&viewport-controls=true`;
 
 function DesignSystem() {
   const { ref, visible } = useInView(0.1);
   const [tab, setTab] = useState(0);
-  // Si el iframe mueve el scroll al recargar, se vuelve a donde estaba la persona.
-  const scrollAlCambiar = useRef<number | null>(null);
+  const [interactivo, setInteractivo] = useState(false);
+  const [label, imagen, nodo] = DESIGN_SYSTEM_TABS[tab];
   const cambiarTab = (i: number) => {
-    scrollAlCambiar.current = window.scrollY;
     setTab(i);
+    setInteractivo(false);
   };
-  const alCargar = () => {
-    if (scrollAlCambiar.current !== null) window.scrollTo({ top: scrollAlCambiar.current, behavior: "instant" });
-    scrollAlCambiar.current = null;
-  };
+  // Cuando la sección se ve, se precargan las demás imágenes para que cada pestaña aparezca sin espera.
+  useEffect(() => {
+    if (!visible) return;
+    DESIGN_SYSTEM_TABS.forEach(([, name]) => {
+      new Image().src = designSystemImage(name);
+    });
+  }, [visible]);
 
   return (
     <section id="design-system" className="border-t border-border py-20 md:py-32">
@@ -1290,17 +1295,38 @@ function DesignSystem() {
           ))}
         </div>
 
-        <div className="relative w-full aspect-[16/10] border border-border bg-muted">
-          <iframe
-            key={tab}
-            src={designSystemEmbedUrl(DESIGN_SYSTEM_TABS[tab][1])}
-            title={`Design System de banca digital en Figma: ${DESIGN_SYSTEM_TABS[tab][0]}`}
-            loading="lazy"
-            allowFullScreen
-            onLoad={alCargar}
-            className="absolute inset-0 w-full h-full"
-          />
-        </div>
+        {interactivo ? (
+          <div className="relative w-full aspect-[16/10] border border-border bg-muted">
+            <iframe
+              src={designSystemEmbedUrl(nodo)}
+              title={`Design System de banca digital en Figma: ${label}`}
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        ) : (
+          <a
+            href={designSystemImage(imagen)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block border border-border bg-[#F5F5F5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          >
+            <img
+              src={designSystemImage(imagen)}
+              alt={`Design System de banca digital: ${label}`}
+              loading="lazy"
+              decoding="async"
+              className="block w-full h-auto"
+            />
+          </a>
+        )}
+        <button
+          type="button"
+          onClick={() => setInteractivo((v) => !v)}
+          className="mt-3 inline-flex items-center gap-1 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+        >
+          {interactivo ? "Volver a la imagen" : "Ver interactivo en Figma"} <ArrowUpRight size={13} />
+        </button>
       </div>
     </section>
   );
