@@ -1061,52 +1061,10 @@ function Work() {
 // disponible detrás de "Ver más ejercicios".
 const DRIBBBLE_SHOTS: LightboxShot[] = [
   {
-    img: "https://cdn.dribbble.com/userupload/13093471/file/original-95ddb6674818e7f0f3b2be3fb28849ab.jpg",
-    title: "Daily UI 021 — Home Monitoring",
-    desc: "Dashboard de monitoreo para smart home, con control circular de temperatura y accesos rápidos por habitación.",
-    href: "https://dribbble.com/shots/23656753-Daily-UI-021-Home-Monitoring-Dashboard",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12686920/file/original-deaa0fbe6bdb6dd69529e465719dc647.jpg",
-    title: "Daily UI 018 — Analytics Chart",
-    desc: "Panel de analítica con gráficos de barra y de tendencia, priorizando la lectura rápida de métricas clave.",
-    href: "https://dribbble.com/shots/23516410-Daily-UI-018-Analytics-Chart",
-  },
-  {
     img: "https://cdn.dribbble.com/userupload/11519616/file/original-ca0b34287992efd36891f778353a8d38.jpg",
     title: "Daily UI 003 — Safe Bank",
     desc: "Landing page de banca online, con hero de gran formato y llamado a abrir cuenta.",
     href: "https://dribbble.com/shots/23097117-Landing-page-Daily-UI-003-100uichallenge-dailyui",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11431967/file/original-20563c9839f90343bda0eb8e96b42af0.jpg",
-    title: "Credit Card Checkout",
-    desc: "Pantalla de checkout con formulario de tarjeta y tarjeta visual del producto.",
-    href: "https://dribbble.com/shots/23065326-Credit-Card-Checkoutor-Daily-UI-100uichallenge-dailyui",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12246714/file/original-6b94e09236ef6e5dd62f0b7e04d40d9f.jpg",
-    title: "Daily UI 017 — Purchase Receipt",
-    desc: "Boleta de compra digital con desglose de ítems, totales y confirmación de pago.",
-    href: "https://dribbble.com/shots/23360851-Reto-UI-de-100-di-as-DailyUI-017-PURCHASE-RECEIPT",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11944881/file/original-987d7527000349a7dd6558030e55d755.jpg",
-    title: "Daily UI 012 — E-commerce Shop",
-    desc: "Catálogo de tienda online con grilla de productos y filtros.",
-    href: "https://dribbble.com/shots/23252077-Reto-UI-de-100-d-as-DailyUI-012-E-commerce-Shop",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12883246/file/original-a44c2142aaa5511f2d33729e775f678a.jpg",
-    title: "Daily UI 020 — Location Tracker",
-    desc: "Interfaz de rastreo de ubicación en tiempo real sobre un mapa, con tarjeta de estado flotante.",
-    href: "https://dribbble.com/shots/23584148-DailyUI-020-Location-Tracker",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12948966/file/original-16a3f6838fd5382721e55729f9c9ea59.jpg",
-    title: "App Ticket Cine",
-    desc: "App de compra de entradas de cine, con selección de asientos, horarios y confirmación de reserva.",
-    href: "https://dribbble.com/shots/23607309-App-Ticket-Cine",
   },
   {
     img: "https://cdn.dribbble.com/userupload/13902756/file/original-a58b51d3e797d69ac72f43f68b99e10e.png",
@@ -1115,70 +1073,10 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     href: "https://dribbble.com/shots/23938922-Daily-UI-023-Onboarding",
   },
   {
-    img: "https://cdn.dribbble.com/userupload/12027216/file/original-269490e535af57b8a04a787073acd148.jpg",
-    title: "Daily UI 013 — Direct Message",
-    desc: "Bandeja de mensajería directa con lista de conversaciones y vista de chat activo.",
-    href: "https://dribbble.com/shots/23282244-Reto-UI-de-100-d-as-DailyUI-013-Direct-Message",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/13186247/file/original-8fbe1eccf4ef8102bc5799bf6b892350.jpg",
-    title: "Daily UI 022 — Search",
-    desc: "Pantalla de búsqueda con foco en el estado del input y sugerencias contextuales sobre un fondo ilustrado.",
-    href: "https://dribbble.com/shots/23688627--DailyUI-022-Search",
-  },
-  {
     img: "https://cdn.dribbble.com/userupload/12859002/file/original-e759d7b10e19c78b41ab3c984c7b496e.jpg",
     title: "Daily UI 019 — Leaderboard",
     desc: "Tabla de posiciones gamificada, con ranking, avatares y puntaje destacado para el primer lugar.",
     href: "https://dribbble.com/shots/23575917-Daily-UI-019-LEADERBOARD",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12161792/file/original-b98536159473c787d89b50539a9691ce.jpg",
-    title: "Daily UI 016 — Pop-Up Overlay",
-    desc: "Overlay de anuncio de nueva versión, con imagen ilustrada y CTA de descarga.",
-    href: "https://dribbble.com/shots/23330436-Reto-UI-de-100-di-as-DailyUI-016-Pop-Up-Overlay",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12100270/file/original-4e69d11ee821f02f2574598766954e32.jpg",
-    title: "Daily UI 015 — On/Off Switch",
-    desc: "Exploración de un control switch en sus dos estados, encendido y apagado.",
-    href: "https://dribbble.com/shots/23308779-Reto-UI-de-100-di-as-DailyUI-015-On-Off-Switch",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/12088683/file/original-b0d1cbd3e58efe9aa50ed5e932be8317.jpg",
-    title: "Daily UI 014 — Countdown Timer",
-    desc: "Temporizador de cuenta regresiva sobre una interfaz mobile de estilo oscuro.",
-    href: "https://dribbble.com/shots/23304450-Reto-UI-de-100-d-as-DailyUI-014-Countdown-Timer",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11902113/file/original-03ae52debb14defd79bc7f83fd9e87df.jpg",
-    title: "Daily UI 011 — Flash Message",
-    desc: "Sistema de notificaciones flash para estados de éxito, error y advertencia.",
-    href: "https://dribbble.com/shots/23236392-Reto-UI-de-100-d-as-DailyUI-011-Flash-Message",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11885778/file/original-0f94cfd4c7301ddb337ea853c82fd45d.jpg",
-    title: "Daily UI 010",
-    desc: "Ejercicio de interfaz dentro del reto Daily UI de 100 días.",
-    href: "https://dribbble.com/shots/23230180-Reto-de-Interfaz-de-Usuario-UI-de-100-d-as-DailyUI-010",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11837185/file/original-1e324e1e6c0990bf1794594c7f84f6a0.jpg",
-    title: "Daily UI 009 — Music Player",
-    desc: "Reproductor de música con portada de álbum, controles y línea de progreso.",
-    href: "https://dribbble.com/shots/23212883-Reto-de-Interfaz-de-Usuario-009-Music-player-DayliUI",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11820075/file/original-ee8c1541415d59e6715bca6b070bd545.jpg",
-    title: "Daily UI 008 — 404",
-    desc: "Pantalla de error 404 con ilustración y camino de vuelta claro para el usuario.",
-    href: "https://dribbble.com/shots/23206415-Reto-de-Interfaz-de-Usuario-UI-de-100-d-as-Daily-UI-008-404",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11814841/file/original-2be9d366c39567145c8be34c85278d15.jpg",
-    title: "Daily UI 007",
-    desc: "Ejercicio de interfaz dentro del reto Daily UI de 100 días.",
-    href: "https://dribbble.com/shots/23204514-Reto-de-Interfaz-de-Usuario-UI-de-100-d-as-Daily-UI-007",
   },
   {
     img: "https://cdn.dribbble.com/userupload/11564475/file/original-25e535d76392b44480981c1b13a0a4b8.jpg",
@@ -1187,16 +1085,10 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     href: "https://dribbble.com/shots/23113292-UI-006-User-Profile-UI-UX-Figma-Designer-DailyUI",
   },
   {
-    img: "https://cdn.dribbble.com/userupload/11563606/file/original-866388b26568509d7479bf0669a5c489.jpg",
-    title: "Daily UI 004 — Calculadora (v2)",
-    desc: "Segunda exploración de la calculadora del reto, con otra paleta y disposición de teclas.",
-    href: "https://dribbble.com/shots/23112967-UI-004-Calculadora-UI-UX-Figma-Designer-DailyUI",
-  },
-  {
-    img: "https://cdn.dribbble.com/userupload/11521159/file/original-16932c07c409dc5748f14fa8d3e941cf.jpg",
-    title: "Daily UI 004 — Calculadora",
-    desc: "Interfaz de calculadora con teclado numérico y visor de resultado.",
-    href: "https://dribbble.com/shots/23097648-Calculadora-Daily-UI-004",
+    img: "https://cdn.dribbble.com/userupload/11814841/file/original-2be9d366c39567145c8be34c85278d15.jpg",
+    title: "Daily UI 007",
+    desc: "Ejercicio de interfaz dentro del reto Daily UI de 100 días.",
+    href: "https://dribbble.com/shots/23204514-Reto-de-Interfaz-de-Usuario-UI-de-100-d-as-Daily-UI-007",
   },
   {
     img: "https://cdn.dribbble.com/userupload/11429428/file/original-6c2efb888e82276173d0e1a40a4ee414.jpg",
@@ -1205,8 +1097,6 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     href: "https://dribbble.com/shots/23064380-My-sign-up-modal-example-for-Daily-UI-001uichallenge-dailyui",
   },
 ];
-
-const FEATURED_SHOTS_COUNT = 6;
 
 // ─── Design System ────────────────────────────────────────────────────────────
 const DESIGN_SYSTEM_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2";
@@ -1334,12 +1224,10 @@ function DesignSystem() {
 
 function Design() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [expanded, setExpanded] = useState(false);
   const navLightbox = useCallback((dir: 1 | -1) => {
     setLightboxIndex((cur) => (cur === null ? cur : (cur + dir + DRIBBBLE_SHOTS.length) % DRIBBBLE_SHOTS.length));
   }, []);
   const { ref, visible } = useInView(0.1);
-  const visibleShots = expanded ? DRIBBBLE_SHOTS : DRIBBBLE_SHOTS.slice(0, FEATURED_SHOTS_COUNT);
 
   return (
     <section id="design" className="border-t border-border py-20 md:py-32">
@@ -1377,15 +1265,12 @@ function Design() {
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {visibleShots.map((s, i) => (
-            <motion.button
+          {DRIBBBLE_SHOTS.map((s, i) => (
+            <button
               key={s.img}
               onClick={() => setLightboxIndex(i)}
-              initial={i >= FEATURED_SHOTS_COUNT ? { opacity: 0, y: 16 } : false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: Math.min(Math.max(i - FEATURED_SHOTS_COUNT, 0) * 0.05, 0.4), ease: [0.25, 0.1, 0.25, 1] }}
               className={`group relative overflow-hidden bg-muted border border-border cursor-pointer text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
-                i === 0 ? "col-span-2 aspect-[2/1]" : "aspect-square"
+                i < 2 ? "col-span-2 aspect-[2/1]" : "aspect-square"
               }`}
             >
               <img
@@ -1400,27 +1285,28 @@ function Design() {
               <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-90 group-focus-visible:opacity-90 transition-opacity duration-500" />
               <div className="absolute inset-0 flex items-center justify-center px-4 text-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
                 <p className={`font-['Syne'] font-700 uppercase tracking-tight text-background leading-none ${
-                  i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"
+                  i < 2 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"
                 }`}>{s.title}</p>
               </div>
-            </motion.button>
+            </button>
           ))}
         </div>
 
-        {!expanded && DRIBBBLE_SHOTS.length > FEATURED_SHOTS_COUNT && (
-          <div className="mt-10 flex justify-center">
-            <button
-              onClick={() => setExpanded(true)}
-              className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-            >
-              <span className="w-14 h-[1px] bg-foreground inline-block origin-left scale-x-[0.571] group-hover:scale-x-100 transition-transform duration-300" />
-              Ver más ejercicios
-            </button>
-          </div>
-        )}
+        {/* Solo los ejercicios más cercanos a producto; el resto vive en Dribbble. */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href="https://dribbble.com/PatGsj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+          >
+            <span className="w-14 h-[1px] bg-foreground inline-block origin-left scale-x-[0.571] group-hover:scale-x-100 transition-transform duration-300" />
+            Ver más ejercicios en Dribbble
+          </a>
+        </div>
 
         {lightboxIndex !== null && (
-          <Lightbox shots={visibleShots} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} showDesc={false} />
+          <Lightbox shots={DRIBBBLE_SHOTS} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} showDesc={false} />
         )}
       </div>
     </section>
