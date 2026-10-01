@@ -928,11 +928,8 @@ function Work() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
             <InfoCell kicker="Wireframes y prototipado" title="De la estructura a la interfaz">
-              <p className="mb-4">
+              <p>
                 Las primeras decisiones se concentraron en organizar las tareas críticas de catálogo, inventario y venta. El proyecto ha evolucionado mediante conversaciones periódicas con el cliente, ajustando jerarquías, acciones y estados de acuerdo con las necesidades reales de operación.
-              </p>
-              <p className="text-[11px] uppercase tracking-[0.12em] border border-dashed border-border px-4 py-3">
-                Espacio reservado para incorporar capturas de iteraciones anteriores.
               </p>
             </InfoCell>
             <InfoCell kicker="Conversación con el cliente" title="Cómo se ajustaron las decisiones">
