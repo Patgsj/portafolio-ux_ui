@@ -398,7 +398,7 @@ function CaseCarousel({ onSelect }: { onSelect: (index: number) => void }) {
   );
 }
 
-type LightboxShot = { img: string; title: string; desc: string; href?: string };
+type LightboxShot = { img: string; title: string; desc: string };
 
 function Lightbox({
   shots, index, onClose, onNav, showDesc = true,
@@ -495,17 +495,6 @@ function Lightbox({
               <p className="font-['Manrope'] font-300 text-sm leading-[1.7] text-background/70 max-w-xl">{shot.desc}</p>
             )}
           </div>
-          {shot.href && (
-            <a
-              href={shot.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.12em] text-background/70 hover:text-background transition-colors shrink-0"
-            >
-              Ver en Dribbble <ArrowUpRight size={13} />
-            </a>
-          )}
         </div>
       </motion.div>
     </motion.div>,
@@ -1061,37 +1050,31 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     img: "https://cdn.dribbble.com/userupload/11519616/file/original-ca0b34287992efd36891f778353a8d38.jpg",
     title: "Daily UI 003 — Safe Bank",
     desc: "Landing page de banca online, con hero de gran formato y llamado a abrir cuenta.",
-    href: "https://dribbble.com/shots/23097117-Landing-page-Daily-UI-003-100uichallenge-dailyui",
   },
   {
     img: "https://cdn.dribbble.com/userupload/13902756/file/original-a58b51d3e797d69ac72f43f68b99e10e.png",
     title: "Daily UI 023 — Onboarding",
     desc: "Flujo de onboarding para una app de fitness: carrusel de tarjetas con imagen a página completa y CTA claro en cada paso.",
-    href: "https://dribbble.com/shots/23938922-Daily-UI-023-Onboarding",
   },
   {
     img: "https://cdn.dribbble.com/userupload/12859002/file/original-e759d7b10e19c78b41ab3c984c7b496e.jpg",
     title: "Daily UI 019 — Leaderboard",
     desc: "Tabla de posiciones gamificada, con ranking, avatares y puntaje destacado para el primer lugar.",
-    href: "https://dribbble.com/shots/23575917-Daily-UI-019-LEADERBOARD",
   },
   {
     img: "https://cdn.dribbble.com/userupload/11564475/file/original-25e535d76392b44480981c1b13a0a4b8.jpg",
     title: "Daily UI 006 — User Profile",
     desc: "Perfil de usuario con foto, datos y estadísticas de actividad.",
-    href: "https://dribbble.com/shots/23113292-UI-006-User-Profile-UI-UX-Figma-Designer-DailyUI",
   },
   {
     img: "https://cdn.dribbble.com/userupload/11814841/file/original-2be9d366c39567145c8be34c85278d15.jpg",
     title: "Daily UI 007",
     desc: "Ejercicio de interfaz dentro del reto Daily UI de 100 días.",
-    href: "https://dribbble.com/shots/23204514-Reto-de-Interfaz-de-Usuario-UI-de-100-d-as-Daily-UI-007",
   },
   {
     img: "https://cdn.dribbble.com/userupload/11429428/file/original-6c2efb888e82276173d0e1a40a4ee414.jpg",
     title: "Daily UI 001 — Sign Up",
     desc: "Modal de registro de usuario, primer ejercicio del reto de 100 días de UI.",
-    href: "https://dribbble.com/shots/23064380-My-sign-up-modal-example-for-Daily-UI-001uichallenge-dailyui",
   },
 ];
 
@@ -1244,14 +1227,6 @@ function Design() {
               Exploraciones visuales
             </p>
           </div>
-          <a
-            href="https://dribbble.com/PatGsj"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-          >
-            Perfil en Dribbble <ArrowUpRight size={13} />
-          </a>
         </div>
 
         <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
@@ -1289,18 +1264,6 @@ function Design() {
           ))}
         </div>
 
-        {/* Solo los ejercicios más cercanos a producto; el resto vive en Dribbble. */}
-        <div className="mt-10 flex justify-center">
-          <a
-            href="https://dribbble.com/PatGsj"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
-          >
-            <span className="w-14 h-[1px] bg-foreground inline-block origin-left scale-x-[0.571] group-hover:scale-x-100 transition-transform duration-300" />
-            Ver más ejercicios en Dribbble
-          </a>
-        </div>
 
         {lightboxIndex !== null && (
           <Lightbox shots={DRIBBBLE_SHOTS} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onNav={navLightbox} showDesc={false} />
@@ -1598,7 +1561,6 @@ function CTA() {
               {[
                 { label: "Ver LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
                 { label: "GitHub", href: "https://github.com/Patgsj" },
-                { label: "Dribbble", href: "https://dribbble.com/PatGsj" },
               ].map(({ label, href }) => (
                 <a
                   key={label}
@@ -1662,7 +1624,6 @@ function Footer() {
               { label: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=patricio.gsj@gmail.com" },
               { label: "LinkedIn", href: "https://www.linkedin.com/in/patgsj/" },
               { label: "GitHub", href: "https://github.com/Patgsj" },
-              { label: "Dribbble", href: "https://dribbble.com/PatGsj" },
             ].map(({ label, href }) => (
               <a
                 key={label}
