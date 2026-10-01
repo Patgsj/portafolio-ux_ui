@@ -1210,11 +1210,33 @@ const FEATURED_SHOTS_COUNT = 6;
 
 // ─── Design System ────────────────────────────────────────────────────────────
 const DESIGN_SYSTEM_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2";
-const DESIGN_SYSTEM_EMBED_URL =
-  "https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2&embed-host=share&footer=true&viewport-controls=true";
+// Cada pestaña abre un marco del archivo. El selector de páginas de Figma va oculto: al usarlo dentro
+// del iframe el navegador saltaba de posición en la página.
+const DESIGN_SYSTEM_TABS: [string, string][] = [
+  ["Portada", "1-2"],
+  ["Color", "147-15"],
+  ["Tipografía", "147-119"],
+  ["Espaciado", "147-164"],
+  ["Componentes", "44-3"],
+  ["Patrones", "44-5"],
+  ["Changelog", "44-109"],
+];
+const designSystemEmbedUrl = (nodeId: string) =>
+  `https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=${nodeId}&embed-host=share&footer=false&page-selector=false&viewport-controls=true`;
 
 function DesignSystem() {
   const { ref, visible } = useInView(0.1);
+  const [tab, setTab] = useState(0);
+  // Si el iframe mueve el scroll al recargar, se vuelve a donde estaba la persona.
+  const scrollAlCambiar = useRef<number | null>(null);
+  const cambiarTab = (i: number) => {
+    scrollAlCambiar.current = window.scrollY;
+    setTab(i);
+  };
+  const alCargar = () => {
+    if (scrollAlCambiar.current !== null) window.scrollTo({ top: scrollAlCambiar.current, behavior: "instant" });
+    scrollAlCambiar.current = null;
+  };
 
   return (
     <section id="design-system" className="border-t border-border py-20 md:py-32">
@@ -1251,12 +1273,31 @@ function DesignSystem() {
           Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
         </p>
 
+        <div role="tablist" aria-label="Secciones del design system" className="flex flex-wrap gap-x-6 gap-y-2 mb-4">
+          {DESIGN_SYSTEM_TABS.map(([label], i) => (
+            <button
+              key={label}
+              type="button"
+              role="tab"
+              aria-selected={tab === i}
+              onClick={() => cambiarTab(i)}
+              className={`font-['Manrope'] font-400 text-[11px] uppercase tracking-[0.14em] pb-1 border-b transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                tab === i ? "text-foreground border-foreground" : "text-muted-foreground border-transparent hover:text-foreground"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
         <div className="relative w-full aspect-[16/10] border border-border bg-muted">
           <iframe
-            src={DESIGN_SYSTEM_EMBED_URL}
-            title="Design System de banca digital en Figma"
+            key={tab}
+            src={designSystemEmbedUrl(DESIGN_SYSTEM_TABS[tab][1])}
+            title={`Design System de banca digital en Figma: ${DESIGN_SYSTEM_TABS[tab][0]}`}
             loading="lazy"
             allowFullScreen
+            onLoad={alCargar}
             className="absolute inset-0 w-full h-full"
           />
         </div>
