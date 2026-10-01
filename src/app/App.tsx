@@ -1253,7 +1253,7 @@ function DesignSystem() {
             </h2>
             <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
               <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">02</span>
-              Banca digital · v0.3 · en construcción
+              Banca digital · v0.4 · en construcción
             </p>
           </div>
           <a
