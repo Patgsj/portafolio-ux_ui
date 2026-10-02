@@ -1096,6 +1096,45 @@ const designSystemImage = (name: string) => `/design-system/${name}.webp`;
 const designSystemEmbedUrl = (nodeId: string) =>
   `https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=${nodeId}&embed-host=share&footer=false&page-selector=false&viewport-controls=true`;
 
+// Las animaciones de componentes que se publicaron en LinkedIn (sin música: en la web parte silenciado).
+// Solo se reproduce mientras está en pantalla; con "reducir movimiento" no parte solo y muestra controles.
+function DesignSystemVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [reduced] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || reduced) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); },
+      { threshold: 0.25 }
+    );
+    obs.observe(video);
+    return () => obs.disconnect();
+  }, [reduced]);
+
+  return (
+    <figure className="w-full max-w-[380px] justify-self-start md:justify-self-end">
+      <div className="border border-border bg-[#F5F5F5]">
+        <video
+          ref={videoRef}
+          src="/design-system/animaciones.mp4"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          controls={reduced}
+          aria-label="Animaciones de los componentes del design system: botón, campo de monto, tarjeta de cuenta y lista de movimientos"
+          className="block w-full aspect-square"
+        />
+      </div>
+      <figcaption className="mt-3 flex items-baseline justify-between gap-4 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span>Componentes en movimiento</span>
+        <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60">1:21</span>
+      </figcaption>
+    </figure>
+  );
+}
+
 function DesignSystem() {
   const { ref, visible } = useInView(0.1);
   const [tab, setTab] = useState(0);
@@ -1141,12 +1180,17 @@ function DesignSystem() {
           </a>
         </div>
 
-        <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
-          Fundamentos, componentes y patrones para una app bancaria móvil. Los componentes viven en una librería publicada, con variantes por tipo y estado, y cada versión queda registrada en el changelog.
-        </p>
-        <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl mb-10">
-          Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
-        </p>
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,380px)] md:gap-14 md:items-center mb-12">
+          <div>
+            <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
+              Fundamentos, componentes y patrones para una app bancaria móvil. Los componentes viven en una librería publicada, con variantes por tipo y estado, y cada versión queda registrada en el changelog.
+            </p>
+            <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl">
+              Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
+            </p>
+          </div>
+          <DesignSystemVideo />
+        </div>
 
         <div role="tablist" aria-label="Secciones del design system" className="flex flex-wrap gap-x-6 gap-y-2 mb-4">
           {DESIGN_SYSTEM_TABS.map(([label], i) => (
