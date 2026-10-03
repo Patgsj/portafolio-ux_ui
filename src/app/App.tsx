@@ -1092,6 +1092,12 @@ const DESIGN_SYSTEM_TABS: [string, string, string][] = [
   ["Patrones", "patrones", "44-5"],
   ["Changelog", "changelog", "44-109"],
 ];
+const DESIGN_SYSTEM_DATOS: [string, string][] = [
+  ["Versión", "v0.4 · en construcción"],
+  ["Base", "Tokens de color, tipo y espacio"],
+  ["Librería", "Publicada, con variantes"],
+  ["Registro", "Changelog por versión"],
+];
 const designSystemImage = (name: string) => `/design-system/${name}.webp`;
 const designSystemEmbedUrl = (nodeId: string) =>
   `https://embed.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=${nodeId}&embed-host=share&footer=false&page-selector=false&viewport-controls=true`;
@@ -1113,7 +1119,7 @@ function DesignSystemVideo() {
   }, [reduced]);
 
   return (
-    <figure className="w-full max-w-[380px] justify-self-start md:justify-self-end">
+    <figure className="w-full max-w-[600px] justify-self-start md:justify-self-end">
       <div className="border border-border bg-[#F5F5F5]">
         <video
           ref={videoRef}
@@ -1153,41 +1159,49 @@ function DesignSystem() {
   }, [visible]);
 
   return (
-    <section id="design-system" className="border-t border-border py-20 md:py-32">
+    <section id="design-system" className="border-t border-border pt-16 pb-20 md:pt-20 md:pb-32">
       <div
         ref={ref}
         className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
         }`}
       >
-        <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between mb-8">
-          <div>
-            <h2 className="font-['Syne'] font-800 uppercase leading-[0.88] tracking-[-0.02em] text-foreground text-[clamp(3rem,9vw,7rem)]">
-              Design System
-            </h2>
-            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
-              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">02</span>
-              Banca digital · v0.4 · en construcción
-            </p>
-          </div>
-          <a
-            href={DESIGN_SYSTEM_FILE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-          >
-            Abrir en Figma <ArrowUpRight size={13} />
-          </a>
+        <div className="mb-6 md:mb-8">
+          <p className="font-['DM_Mono'] text-[13px] text-muted-foreground mb-3">02 — Banca digital</p>
+          <h2 className="font-['Syne'] font-bold uppercase leading-[0.88] tracking-[-0.03em] text-foreground text-[clamp(3rem,9vw,7rem)]">
+            Design System
+          </h2>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,380px)] md:gap-14 md:items-center mb-12">
-          <div>
-            <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground max-w-xl mb-2">
-              Fundamentos, componentes y patrones para una app bancaria móvil. Los componentes viven en una librería publicada, con variantes por tipo y estado, y cada versión queda registrada en el changelog.
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,600px)] md:gap-14 md:items-start mb-12">
+          <div className="flex flex-col gap-8 max-w-xl">
+            <p className="font-['Manrope'] font-normal text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.4] text-foreground">
+              Un sistema de diseño para una app bancaria móvil, construido como librería en Figma.
             </p>
-            <p className="font-['Manrope'] font-300 text-[13px] leading-[1.7] text-muted-foreground/80 max-w-xl">
-              Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
+            <p className="font-['Manrope'] font-normal text-[15px] leading-[1.8] text-muted-foreground">
+              Fundamentos, componentes y patrones. Los componentes viven en una librería publicada, con variantes por tipo y estado, y cada versión queda registrada en el changelog.
             </p>
+            <dl className="grid grid-cols-2 border-t border-border">
+              {DESIGN_SYSTEM_DATOS.map(([dato, valor]) => (
+                <div key={dato} className="border-b border-border py-4 pr-4">
+                  <dt className="font-['Manrope'] font-normal text-[11px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{dato}</dt>
+                  <dd className="font-['Manrope'] font-medium text-[15px] text-foreground">{valor}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="flex flex-col items-start gap-4">
+              <a
+                href={DESIGN_SYSTEM_FILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-foreground px-5 py-3 font-['Manrope'] font-medium text-[12px] uppercase tracking-[0.14em] text-foreground hover:bg-foreground hover:text-background transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+              >
+                Abrir en Figma <ArrowUpRight size={14} />
+              </a>
+              <p className="font-['Manrope'] font-light text-[12px] leading-[1.7] text-muted-foreground/80">
+                Proyecto personal de diseño. No es un producto oficial ni está asociado a ningún banco.
+              </p>
+            </div>
           </div>
           <DesignSystemVideo />
         </div>
