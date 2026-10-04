@@ -741,7 +741,7 @@ function Work() {
   const { ref, visible } = useInView(0.1);
 
   return (
-    <section id="work" className="border-t border-border py-20 md:py-32">
+    <section id="work" className="border-t border-border pt-16 pb-20 md:pt-20 md:pb-32">
       <div
         ref={ref}
         className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
@@ -1268,7 +1268,7 @@ function Design() {
   const { ref, visible } = useInView(0.1);
 
   return (
-    <section id="design" className="border-t border-border py-20 md:py-32">
+    <section id="design" className="border-t border-border pt-16 pb-20 md:pt-20 md:pb-32">
       <div
         ref={ref}
         className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
@@ -1352,91 +1352,92 @@ function About() {
   const { ref: formacionRef, visible: formacionVisible } = useInView(0.1);
 
   return (
-    <section id="about" className="border-t border-border py-20 md:py-32">
+    <section id="about" className="border-t border-border pt-16 pb-20 md:pt-20 md:pb-32">
       <div className="max-w-[1400px] mx-auto px-7 md:px-14">
         <div
           ref={ref}
-          className={`grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-16 md:gap-24 items-center transition-[opacity,transform] duration-[800ms] ease-[ease] ${
+          className={`transition-[opacity,transform] duration-[800ms] ease-[ease] ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
           }`}
         >
-          {/* Left */}
-          <div className="relative">
-            <span aria-hidden className="absolute -top-2.5 -left-2.5 w-5 h-5 border-t border-l border-foreground/40" />
-            <span aria-hidden className="absolute -top-2.5 -right-2.5 w-5 h-5 border-t border-r border-foreground/40" />
-            <span aria-hidden className="absolute -bottom-2.5 -left-2.5 w-5 h-5 border-b border-l border-foreground/40" />
-            <span aria-hidden className="absolute -bottom-2.5 -right-2.5 w-5 h-5 border-b border-r border-foreground/40" />
-            <img
-              src="/yo.webp"
-              alt="Patricio Soto (Patgsj), diseñador UX/UI — retrato"
-              loading="lazy"
-              decoding="async"
-              className="w-full object-cover aspect-[5/6] object-top"
-            />
-            {/* floating label */}
-            <div className="absolute bottom-6 left-6 bg-background px-4 py-3">
-              <p className="font-['Syne'] font-700 text-base uppercase tracking-tight text-foreground">Patgsj<span className="text-muted-foreground">.</span></p>
-              <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground">San Carlos, Ñuble</p>
-            </div>
+          {/* Header — mismo patrón que las demás secciones: título a lo ancho y kicker debajo */}
+          <div className="mb-12 md:mb-16">
+            <h2 className="font-['Syne'] font-800 uppercase leading-[0.9] tracking-[-0.02em] text-foreground text-[clamp(2.25rem,5.5vw,4.5rem)]">
+              Diseño de interfaces<br />
+              orientado a producto<span className="text-muted-foreground">.</span>
+            </h2>
+            <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-3">
+              <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">04</span>
+              Sobre mí
+            </p>
           </div>
 
-          {/* Right */}
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <p className="font-['Manrope'] font-300 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="font-['DM_Mono'] normal-case tracking-normal text-muted-foreground/60 mr-2">04</span>
-                Sobre mí
-              </p>
-              <h2
-                className="font-['Syne'] font-800 uppercase leading-[0.9] tracking-[-0.02em] text-foreground text-[clamp(3rem,7vw,5.75rem)]"
-              >
-                Diseño de interfaces<br />
-                orientado a producto<span className="text-muted-foreground">.</span>
-              </h2>
-              <p className="font-['Syne'] font-700 text-lg uppercase tracking-tight text-muted-foreground">Patricio Gustavo Soto Jofré</p>
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16 lg:gap-24 items-start">
+            {/* Left */}
+            <div className="relative md:sticky md:top-28 max-w-md md:max-w-none">
+              <span aria-hidden className="absolute -top-2.5 -left-2.5 w-5 h-5 border-t border-l border-foreground/40" />
+              <span aria-hidden className="absolute -top-2.5 -right-2.5 w-5 h-5 border-t border-r border-foreground/40" />
+              <span aria-hidden className="absolute -bottom-2.5 -left-2.5 w-5 h-5 border-b border-l border-foreground/40" />
+              <span aria-hidden className="absolute -bottom-2.5 -right-2.5 w-5 h-5 border-b border-r border-foreground/40" />
+              <img
+                src="/yo.webp"
+                alt="Patricio Soto (Patgsj), diseñador UX/UI — retrato"
+                loading="lazy"
+                decoding="async"
+                className="w-full object-cover aspect-[4/5] object-top"
+              />
+              {/* floating label */}
+              <div className="absolute bottom-6 left-6 bg-background px-4 py-3">
+                <p className="font-['Syne'] font-700 text-base uppercase tracking-tight text-foreground">Patgsj<span className="text-muted-foreground">.</span></p>
+                <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-widest text-muted-foreground">San Carlos, Ñuble</p>
+              </div>
             </div>
 
-            <div className="space-y-5 max-w-md">
-              <p className="font-['Manrope'] font-300 text-[15px] leading-[1.9] text-foreground">
-                Soy diseñador gráfico con más de diez años de experiencia en comunicación visual y desde 2023 estoy orientando mi carrera profesional hacia UX/UI.
-              </p>
-              <p className="font-['Manrope'] font-300 text-[15px] leading-[1.9] text-muted-foreground">
-                Mi fortaleza está en organizar información, construir jerarquías visuales y traducir necesidades de negocio en flujos, interfaces y prototipos. Actualmente complemento mi experiencia con formación en diseño de productos digitales y estudios de Ingeniería en Informática, mientras profundizo en validación con usuarios, accesibilidad y sistemas de diseño.
-              </p>
-            </div>
+            {/* Right */}
+            <div className="flex flex-col gap-10">
+              <div className="space-y-6 max-w-xl">
+                <p className="font-['Syne'] font-700 text-lg uppercase tracking-tight text-muted-foreground pb-6 border-b border-border">Patricio Gustavo Soto Jofré</p>
+                <p className="font-['Manrope'] font-normal text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.4] text-foreground">
+                  Soy diseñador gráfico con más de diez años de experiencia en comunicación visual y desde 2023 estoy orientando mi carrera profesional hacia UX/UI.
+                </p>
+                <p className="font-['Manrope'] font-300 text-[15px] leading-[1.8] text-muted-foreground">
+                  Mi fortaleza está en organizar información, construir jerarquías visuales y traducir necesidades de negocio en flujos, interfaces y prototipos. Actualmente complemento mi experiencia con formación en diseño de productos digitales y estudios de Ingeniería en Informática, mientras profundizo en validación con usuarios, accesibilidad y sistemas de diseño.
+                </p>
+              </div>
 
-            <div>
-              <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
-                Mi aporte a un equipo de producto
-              </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 max-w-md">
-                {[
-                  "Criterio visual y atención al detalle.",
-                  "Diseño de interfaces y prototipos.",
-                  "Fundamentos de sistemas de diseño.",
-                  "Construcción de componentes reutilizables.",
-                  "Comunicación con perfiles técnicos.",
-                  "Organización de requerimientos y flujos.",
-                  "Preparación de entregables para handoff.",
-                  "Aprendizaje continuo y adaptación.",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 font-['Manrope'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
-                    <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
-                    {item}
-                  </li>
+              <div>
+                <p className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4 pb-4 border-b border-border">
+                  Mi aporte a un equipo de producto
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                  {[
+                    "Criterio visual y atención al detalle.",
+                    "Diseño de interfaces y prototipos.",
+                    "Fundamentos de sistemas de diseño.",
+                    "Construcción de componentes reutilizables.",
+                    "Comunicación con perfiles técnicos.",
+                    "Organización de requerimientos y flujos.",
+                    "Preparación de entregables para handoff.",
+                    "Aprendizaje continuo y adaptación.",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 font-['Manrope'] font-300 text-[13px] leading-[1.6] text-muted-foreground">
+                      <span aria-hidden className="w-1 h-1 mt-2 bg-foreground/50 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {["Figma", "Prototipado", "Arquitectura de información", "Fundamentos de sistemas de diseño", "Comunicación visual"].map((t) => (
+                  <span
+                    key={t}
+                    className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors duration-200"
+                  >
+                    {t}
+                  </span>
                 ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              {["Figma", "Prototipado", "Arquitectura de información", "Fundamentos de sistemas de diseño", "Comunicación visual"].map((t) => (
-                <span
-                  key={t}
-                  className="font-['Manrope'] font-300 text-[10px] uppercase tracking-[0.14em] border border-border px-3 py-2 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors duration-200"
-                >
-                  {t}
-                </span>
-              ))}
+              </div>
             </div>
           </div>
         </div>
@@ -1518,7 +1519,7 @@ function Experience() {
   const { ref, visible } = useInView(0.1);
 
   return (
-    <section id="experience" className="border-t border-border bg-foreground text-background py-20 md:py-32">
+    <section id="experience" className="border-t border-border bg-foreground text-background pt-16 pb-20 md:pt-20 md:pb-32">
       <div
         ref={ref}
         className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
@@ -1582,7 +1583,7 @@ function CTA() {
   const { ref, visible } = useInView(0.1);
 
   return (
-    <section id="contact" className="border-t border-border py-24 md:py-36">
+    <section id="contact" className="border-t border-border pt-16 pb-24 md:pt-20 md:pb-36">
       <div
         ref={ref}
         className={`max-w-[1400px] mx-auto px-7 md:px-14 transition-[opacity,transform] duration-[800ms] ease-[ease] ${
