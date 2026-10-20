@@ -735,6 +735,7 @@ function StepList({ steps }: { steps: string[] }) {
 function Work() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [caso, setCaso] = useState(0);
   const navLightbox = useCallback((dir: 1 | -1) => {
     setLightboxIndex((cur) => (cur === null ? cur : (cur + dir + CASE_SHOTS.length) % CASE_SHOTS.length));
   }, []);
@@ -748,6 +749,9 @@ function Work() {
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[24px]"
         }`}
       >
+        <CaseSwitcher active={caso} onChange={setCaso} />
+
+        {caso === 1 ? <CasoUx /> : (<>
         {/* Resumen del proyecto */}
         <div className="mb-10">
           <p className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
@@ -1036,6 +1040,7 @@ function Work() {
             ))}
           </dl>
         </div>
+        </>)}
       </div>
     </section>
   );
@@ -1077,6 +1082,144 @@ const DRIBBBLE_SHOTS: LightboxShot[] = [
     desc: "Modal de registro de usuario, primer ejercicio del reto de 100 días de UI.",
   },
 ];
+
+// ─── Caso UX (IPLACEX) ────────────────────────────────────────────────────────
+// Caso académico que crece con cada evaluación del ramo. El emprendimiento es real,
+// por eso no se nombra: las láminas salen de una copia sin el nombre.
+const CASO_UX_LAMINAS: [string, string, string][] = [
+  ["Customer Journey Map", "cjm", "Customer Journey Map: las seis etapas de Marcela, de buscar en Google a esperar respuesta, con su curva de emoción, los puntos críticos y las mejoras propuestas."],
+  ["Mapa de empatía", "mapa-empatia", "Mapa de empatía de Marcela: lo que piensa y siente, ve, oye, dice y hace, con sus esfuerzos y los resultados que busca."],
+];
+const casoUxImagen = (name: string) => `/caso-ux/${name}.webp`;
+const CASO_UX_DATOS: [string, string][] = [
+  ["Contexto", "Diseño UX · IPLACEX · 2026"],
+  ["Equipo", "Equipo 9 · líder de equipo"],
+  ["Métodos", "Usabilidad, CJM, mapa de empatía"],
+  ["Estado", "Etapa 1 · en curso"],
+];
+const CASO_UX_HALLAZGOS: [string, string][] = [
+  ["Símbolos rotos en la portada", "Íconos SVG y logo bien aplicado"],
+  ["Ningún precio de referencia y redes que no abren", "Precio «desde» y enlaces a redes que funcionan"],
+  ["El formulario depende de WhatsApp", "Envío por correo"],
+  ["No hay aviso de que la solicitud llegó", "Mensaje de confirmación en pantalla"],
+];
+
+const CASOS: [string, string][] = [["01", "Ferretería CTM"], ["02", "Bienestar corporativo"]];
+
+// Pestañas para ver un caso a la vez dentro de Proyectos.
+function CaseSwitcher({ active, onChange }: { active: number; onChange: (i: number) => void }) {
+  return (
+    <div role="tablist" aria-label="Casos de estudio" className="flex flex-wrap gap-x-8 gap-y-3 mb-10 border-b border-border">
+      {CASOS.map(([n, nombre], i) => (
+        <button
+          key={n}
+          type="button"
+          role="tab"
+          aria-selected={active === i}
+          onClick={() => onChange(i)}
+          className={`-mb-px flex items-baseline gap-2 pb-3 border-b-2 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+            active === i ? "text-foreground border-foreground" : "text-muted-foreground border-transparent hover:text-foreground"
+          }`}
+        >
+          <span className="font-['DM_Mono'] text-[11px]">Caso {n}</span>
+          <span className="font-['Syne'] font-700 text-base md:text-lg uppercase tracking-tight">{nombre}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function CasoUx() {
+  const [tab, setTab] = useState(0);
+  const [label, imagen, alt] = CASO_UX_LAMINAS[tab];
+
+  return (
+    <>
+        <div className="mb-10">
+          <p className="font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-4">
+            Caso de estudio 02 — Proyecto académico en curso
+          </p>
+          <h2 className="font-['Syne'] font-800 uppercase leading-[0.9] tracking-[-0.02em] text-foreground text-[clamp(2.5rem,7vw,5.5rem)]">
+            Auditoría de usabilidad para un sitio de bienestar corporativo
+          </h2>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-2 md:gap-14 md:items-start mb-12">
+          <div className="flex flex-col gap-8 max-w-xl">
+            <p className="font-['Manrope'] font-normal text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.4] text-foreground">
+              Cómo vive una encargada de RR.HH. el camino de buscar a cotizar una pausa activa para su equipo.
+            </p>
+            <p className="font-['Manrope'] font-normal text-[15px] leading-[1.8] text-muted-foreground">
+              Recorrimos el sitio con los ojos de Marcela, encargada de RR.HH. que debe cotizar una actividad para su equipo. Mapeamos su experiencia de la búsqueda a la respuesta, marcamos dónde se frustra y propusimos una mejora para cada punto crítico. El caso se irá completando con cada etapa del ramo.
+            </p>
+            <dl className="grid grid-cols-2 border-t border-border">
+              {CASO_UX_DATOS.map(([dato, valor]) => (
+                <div key={dato} className="border-b border-border py-4 pr-4">
+                  <dt className="font-['Manrope'] font-normal text-[11px] uppercase tracking-[0.14em] text-muted-foreground mb-1">{dato}</dt>
+                  <dd className="font-['Manrope'] font-medium text-[15px] text-foreground">{valor}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div>
+            <p className="font-['Manrope'] font-normal text-[11px] uppercase tracking-[0.14em] text-muted-foreground mb-4">
+              Puntos críticos → mejora propuesta
+            </p>
+            <ol className="border-t border-border">
+              {CASO_UX_HALLAZGOS.map(([problema, mejora], i) => (
+                <li key={problema} className="grid grid-cols-[2rem_1fr] gap-x-2 border-b border-border py-4">
+                  <span className="font-['DM_Mono'] text-[11px] text-muted-foreground pt-1">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <p className="font-['Manrope'] font-medium text-[15px] text-foreground">{problema}</p>
+                    <p className="font-['Manrope'] font-normal text-[14px] leading-[1.6] text-muted-foreground mt-1">→ {mejora}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+
+        <div role="tablist" aria-label="Láminas del caso UX" className="flex flex-wrap gap-x-6 gap-y-2 mb-4">
+          {CASO_UX_LAMINAS.map(([nombre], i) => (
+            <button
+              key={nombre}
+              type="button"
+              role="tab"
+              aria-selected={tab === i}
+              onClick={() => setTab(i)}
+              className={`font-['Manrope'] font-400 text-[11px] uppercase tracking-[0.14em] pb-1 border-b transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground ${
+                tab === i ? "text-foreground border-foreground" : "text-muted-foreground border-transparent hover:text-foreground"
+              }`}
+            >
+              {nombre}
+            </button>
+          ))}
+        </div>
+
+        <a
+          href={casoUxImagen(imagen)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Abrir ${label} en tamaño completo`}
+          className="block border border-border bg-[#F5F5F5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+        >
+          <img
+            src={casoUxImagen(imagen)}
+            alt={alt}
+            width={2400}
+            height={1350}
+            loading="lazy"
+            decoding="async"
+            className="block w-full h-auto"
+          />
+        </a>
+        <p className="mt-3 font-['Manrope'] font-light text-[12px] leading-[1.7] text-muted-foreground/80 max-w-2xl">
+          Trabajo del Equipo 9 en Diseño UX (IPLACEX). Láminas rediseñadas por mí para este portafolio. El sitio analizado es de un emprendimiento real, por eso se omite su nombre. Marcela es una persona ficticia; su foto es de Unsplash.
+        </p>
+    </>
+  );
+}
 
 // ─── Design System ────────────────────────────────────────────────────────────
 const DESIGN_SYSTEM_FILE_URL = "https://www.figma.com/design/GRDlWOnJDslHUtuA1wAonb/Design-System-Banca-Digital---Patgsj?node-id=1-2";
