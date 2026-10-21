@@ -226,14 +226,14 @@ function Hero() {
       </div>
 
       {/* Grilla de diseño (figura hairline): la protagonista del hero */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-7 md:px-14 pt-6 pb-10 gap-8 md:gap-10">
+      <div className="relative flex-1 flex flex-col items-center justify-center px-7 md:px-14 pt-6 pb-10 gap-8 md:gap-10">
         <h1 className="sr-only">Patgsj — Patricio Soto, diseñador UX/UI</h1>
         <iframe
           ref={figRef}
           src="/hairline/grilla.html?play=0"
           title="Animación: una pantalla armada en bloques que se levanta alrededor del cursor"
           tabIndex={-1}
-          className="block w-full max-w-[min(1400px,calc((100svh-40px)*1.6))] aspect-[5/4] -mt-[12%] -mb-[8%] border-0 bg-transparent relative z-30 pointer-events-none"
+          className={`block w-full max-w-[min(1400px,calc((100svh-40px)*1.6))] aspect-[5/4] -mt-[12%] -mb-[8%] border-0 bg-transparent relative pointer-events-none ${gridOffset < 2 ? "z-[60]" : "z-30"}`}
         />
         <div
           ref={ref}
