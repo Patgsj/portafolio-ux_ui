@@ -772,7 +772,7 @@ const falloff = (u) => (u <= 0 ? 1 : u <= 0.417 ? 1 - (u / 0.417) * 0.6875 : u <
 function mount({ stage, svg, read }, value) {
   const bag = disposer();
   let R = value, over = null;
-  const C = Cam(45, 0.5, 1.9);
+  const C = Cam(45, 0.5, 2.1);
   fit(C, [[-6, -6, -PB], [EXT + 6, EXT + 6, -PB], [EXT + 6, -6, -PB], [-6, EXT + 6, -PB], [0, 0, HMAX]], 200, 170);
   const P = proj(C), front = facing(C);
 
@@ -783,7 +783,7 @@ function mount({ stage, svg, read }, value) {
   const blocks = BLOCKS.map(([name, a, b, c, d, marks]) => {
     const x0 = a * U + M, y0 = b * U + M, x1 = c * U - M, y1 = d * U - M;
     const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
-    const h0 = 3 + 14 * Math.exp(-(((cx / EXT) - 0.62) ** 2 + ((cy / EXT) - 0.3) ** 2) / 0.09) + 8 * Math.exp(-(((cx / EXT) - 0.15) ** 2 + ((cy / EXT) - 0.85) ** 2) / 0.05);
+    const h0 = 3; // en reposo todo queda plano; solo se levanta con el cursor encima
     const [ring, inner] = rings(x0, y0, x1, y1, 3.2, 1);
     return { name, x0, y0, x1, y1, cx, cy, h0, ring, inner, marks, sp: spring(h0, { eps: 0.04 }), drawn: NaN };
   });
@@ -836,6 +836,12 @@ function mount({ stage, svg, read }, value) {
     }
     return best <= 8 ? pick : null;
   }
+  /** Only react when the cursor is over the drawing itself: a block, or the artboard under them. */
+  function onFigure(p) {
+    for (const B of blocks) { const [bx, by] = unproj(C, p[0], p[1], B.h0); if (dist(B, bx, by) === 0) return true; }
+    const [x, y] = unproj(C, p[0], p[1], 0);
+    return x >= -6 && x <= EXT + 6 && y >= -6 && y <= EXT + 6;
+  }
   function retarget() {
     let pick = null;
     if (over) {
@@ -849,7 +855,7 @@ function mount({ stage, svg, read }, value) {
   }
 
   bag.add(pointer(stage, {
-    move: (p) => { over = p; retarget(); },
+    move: (p) => { over = onFigure(p) ? p : null; retarget(); },
     leave: () => { over = null; retarget(); },
   }));
   bag.add(() => svg.replaceChildren());

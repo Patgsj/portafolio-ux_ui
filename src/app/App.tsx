@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import type { ReactNode, KeyboardEvent } from "react";
+import type { ReactNode, KeyboardEvent, PointerEvent as ReactPointerEvent } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUp, ArrowUpRight, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -179,6 +179,18 @@ function Hero() {
   const { ref, visible } = useInView(0);
   const sectionRef = useRef<HTMLElement>(null);
   const [gridOffset, setGridOffset] = useState(0);
+  const figRef = useRef<HTMLIFrameElement>(null);
+
+  // La figura va delante del título pero no captura el mouse (así los botones siguen funcionando):
+  // la página le pasa la posición del cursor.
+  const toFigure = (type: "pointermove" | "pointerleave", e: ReactPointerEvent) => {
+    const f = figRef.current;
+    const win = f?.contentWindow as (Window & typeof globalThis) | null | undefined;
+    const stage = f?.contentDocument?.getElementById("stage");
+    if (!f || !win || !stage) return;
+    const r = f.getBoundingClientRect();
+    stage.dispatchEvent(new win.PointerEvent(type, { clientX: e.clientX - r.left, clientY: e.clientY - r.top, pointerType: e.pointerType, bubbles: true }));
+  };
 
   useEffect(() => {
     const h = () => setGridOffset(window.scrollY * HERO_GRID_PARALLAX_FACTOR);
@@ -187,7 +199,13 @@ function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="hero" className="relative min-h-screen flex flex-col pt-[60px] overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="hero"
+      onPointerMove={(e) => toFigure("pointermove", e)}
+      onPointerLeave={(e) => toFigure("pointerleave", e)}
+      className="relative min-h-screen flex flex-col pt-[60px] overflow-hidden"
+    >
       {/* Background precision grid */}
       <div
         aria-hidden
@@ -208,24 +226,25 @@ function Hero() {
       </div>
 
       {/* Grilla de diseño (figura hairline): la protagonista del hero */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-5 md:px-14 pt-6 pb-10 gap-8 md:gap-10">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-7 md:px-14 pt-6 pb-10 gap-8 md:gap-10">
         <h1 className="sr-only">Patgsj — Patricio Soto, diseñador UX/UI</h1>
         <iframe
-          src="/hairline/grilla.html"
+          ref={figRef}
+          src="/hairline/grilla.html?play=0"
           title="Animación: una pantalla armada en bloques que se levanta alrededor del cursor"
           tabIndex={-1}
-          className="block w-full max-w-[min(1100px,calc((100svh-120px)*1.35))] aspect-[5/4] -mt-[10%] -mb-[5%] border-0 bg-transparent"
+          className="block w-full max-w-[min(1400px,calc((100svh-40px)*1.6))] aspect-[5/4] -mt-[12%] -mb-[8%] border-0 bg-transparent relative z-30 pointer-events-none"
         />
         <div
           ref={ref}
-          className={`flex flex-col items-center gap-5 text-center transition-[opacity,transform] duration-[900ms] ease-[ease] ${
+          className={`relative z-20 order-first self-stretch md:self-auto md:absolute md:top-24 md:left-[max(3.5rem,calc((100%-1400px)/2+3.5rem))] md:max-w-[440px] flex flex-col items-start gap-4 text-left transition-[opacity,transform] duration-[900ms] ease-[ease] ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
           }`}
         >
           <p className="font-['Manrope'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground">
             Diseñador UX/UI con trayectoria en comunicación visual
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <div className="flex flex-wrap items-center justify-start gap-x-6 gap-y-3">
                 <button
                   onClick={() => scrollTo("work")}
                   className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
