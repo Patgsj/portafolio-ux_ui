@@ -207,47 +207,25 @@ function Hero() {
         </span>
       </div>
 
-      {/* Main headline */}
-      <div className="relative z-10 flex-1 flex items-center">
+      {/* Grilla de diseño (figura hairline): la protagonista del hero */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-5 md:px-14 pt-6 pb-10 gap-8 md:gap-10">
+        <h1 className="sr-only">Patgsj — Patricio Soto, diseñador UX/UI</h1>
+        <iframe
+          src="/hairline/grilla.html"
+          title="Animación: una pantalla armada en bloques que se levanta alrededor del cursor"
+          tabIndex={-1}
+          className="block w-full max-w-[min(1100px,calc((100svh-120px)*1.35))] aspect-[5/4] -mt-[10%] -mb-[5%] border-0 bg-transparent"
+        />
         <div
           ref={ref}
-          className="max-w-[1400px] mx-auto w-full px-7 md:px-14 py-16 md:py-20"
+          className={`flex flex-col items-center gap-5 text-center transition-[opacity,transform] duration-[900ms] ease-[ease] ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+          }`}
         >
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-end gap-12">
-            {/* Big type */}
-            <div>
-              <h1
-                className={`font-['Syne'] font-800 uppercase leading-[0.86] tracking-[-0.02em] text-foreground text-[clamp(4rem,15vw,12.5rem)] whitespace-nowrap transition-[opacity,transform] duration-[900ms] ease-[ease] ${
-                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-                }`}
-              >
-                Patgsj<span className="text-muted-foreground">.</span>
-                <span className="sr-only"> — Patricio Soto</span>
-              </h1>
-              <p
-                className={`font-['Manrope'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground mt-3 md:mt-5 transition-[opacity,transform] duration-[900ms] delay-[120ms] motion-reduce:delay-0 ease-[ease] ${
-                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-                }`}
-              >
-                Diseñador UX/UI con trayectoria en comunicación visual
-              </p>
-            </div>
-
-            {/* Descriptor */}
-            <div
-              className={`space-y-7 md:pb-4 max-w-xs md:max-w-sm transition-[opacity,transform] duration-[900ms] delay-[220ms] motion-reduce:delay-0 ease-[ease] ${
-                visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-              }`}
-            >
-              <div className="space-y-4">
-                <p className="font-['Manrope'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
-                  Diseño interfaces digitales a partir de necesidades reales de negocio, organizándolas en flujos, jerarquías de información y prototipos claros.
-                </p>
-                <p className="font-['Manrope'] font-300 text-[15px] md:text-base leading-[1.75] text-muted-foreground">
-                  Aporto más de diez años de experiencia en comunicación visual y, desde 2023, he ampliado mi perfil hacia UX/UI mediante proyectos independientes, formación continua y estudios de Ingeniería en Informática.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <p className="font-['Manrope'] font-500 text-[13px] md:text-base uppercase tracking-[0.2em] text-muted-foreground">
+            Diseñador UX/UI con trayectoria en comunicación visual
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
                 <button
                   onClick={() => scrollTo("work")}
                   className="group inline-flex items-center gap-2 font-['Manrope'] font-500 text-[11px] uppercase tracking-[0.14em] text-foreground py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
@@ -261,8 +239,6 @@ function Hero() {
                 >
                   Conocer mi experiencia
                 </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
