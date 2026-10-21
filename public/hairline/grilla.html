@@ -753,7 +753,7 @@ const {
   mk, pointer, put, register, disposer, solid,
 } = HL;
 
-const U = 10, HMAX = 44, PB = 4, M = 1.2;
+const U = 10, HMAX = 32, PB = 4, M = 1.2;
 /** Blocks in grid units: [name, x0, y0, x1, y1, lid marks]. */
 const BLOCKS = [
   ["header", 0, 0, 12, 1.6, "nav"],
@@ -786,7 +786,14 @@ function mount({ stage, svg, read }, value) {
     const h0 = 3 + 14 * Math.exp(-(((cx / EXT) - 0.62) ** 2 + ((cy / EXT) - 0.3) ** 2) / 0.09) + 8 * Math.exp(-(((cx / EXT) - 0.15) ** 2 + ((cy / EXT) - 0.85) ** 2) / 0.05);
     const [ring, inner] = rings(x0, y0, x1, y1, 3.2, 1);
     return { name, x0, y0, x1, y1, cx, cy, h0, ring, inner, marks, sp: spring(h0, { eps: 0.04 }), drawn: NaN };
-  }).sort((p, q) => (p.x1 + p.y1) - (q.x1 + q.y1));
+  });
+  // Paint order: a block goes after every block wholly behind it (smaller x or smaller y), not by its corner.
+  const behind = (a, b) => a.x1 <= b.x0 || a.y1 <= b.y0;
+  for (let rest = blocks.splice(0); rest.length;) {
+    const free = rest.filter((b) => !rest.some((r) => r !== b && behind(r, b)));
+    const next = (free.length ? free : rest).reduce((a, b) => (a.cx + a.cy <= b.cx + b.cy ? a : b));
+    blocks.push(next); rest.splice(rest.indexOf(next), 1);
+  }
   for (const B of blocks) { B.el = solid(g); B.lid = mk("path", { class: "nf lo" }, B.el.g); }
   const button = blocks.find((B) => B.name === "botón");
 
@@ -820,12 +827,21 @@ function mount({ stage, svg, read }, value) {
 
   /** The block whose footprint is nearest the point on the artboard. */
   const dist = (B, x, y) => Math.hypot(Math.max(B.x0 - x, 0, x - B.x1), Math.max(B.y0 - y, 0, y - B.y1));
+  /** The block under a screen point, each tested at its own rest top (rule 01): the front-most that holds it, else the nearest. */
+  function hit(sx, sy) {
+    let pick = null, best = Infinity;
+    for (const B of blocks) {
+      const [x, y] = unproj(C, sx, sy, B.h0), d = dist(B, x, y);
+      if (d === 0 || d < best - 1e-9) { pick = B; best = Math.min(best, d); }
+    }
+    return best <= 8 ? pick : null;
+  }
   function retarget() {
     let pick = null;
     if (over) {
-      const [x, y] = over, inside = x > -6 && y > -6 && x < EXT + 6 && y < EXT + 6;
+      pick = hit(over[0], over[1]);
+      const [x, y] = unproj(C, over[0], over[1], pick ? pick.h0 : 0);
       for (const B of blocks) B.sp.t = HMAX * falloff(dist(B, x, y) / R);
-      if (inside) pick = blocks.reduce((a, b) => (dist(b, x, y) < dist(a, x, y) ? b : a));
     } else for (const B of blocks) B.sp.t = B.h0;
     for (const B of blocks) B.el.sil.classList.toggle("hi", over ? B === pick : B === button);
     read.textContent = pick ? pick.name : "rest";
@@ -833,7 +849,7 @@ function mount({ stage, svg, read }, value) {
   }
 
   bag.add(pointer(stage, {
-    move: (p) => { over = unproj(C, p[0], p[1], 0); retarget(); },
+    move: (p) => { over = p; retarget(); },
     leave: () => { over = null; retarget(); },
   }));
   bag.add(() => svg.replaceChildren());
